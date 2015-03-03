@@ -57,6 +57,7 @@
     "less"
   ],
   "dependencies": {
-    "rc-util": "^1.0.0"
+    "rc-util": "^1.0.0",
+    "rc-style": "^1.0.0"
   }
 }
