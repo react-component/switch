@@ -1,10 +1,7 @@
 # rc-switch
 ---
 
-
 switch ui component for react
-
-[GBG控件库](http://demo.alibaba-inc.com/categories/1977/projects/11855)
 
 [![NPM version][npm-image]][npm-url]
 [![SPM version](http://spmjs.io/badge/rc-switch)](http://spmjs.io/package/rc-switch)
@@ -66,17 +63,17 @@ npm start
 
 ## Example
 
-http://localhost:8000/examples/index.md
+http://localhost:8001/examples/
 
-online example: http://spmjs.io/docs/rc-switch/examples/
+online example: http://react-component.github.io/switch/build/examples/
 
 ## Test Case
 
-http://localhost:8000/tests/runner.html?coverage
+http://localhost:8001/tests/runner.html?coverage
 
 ## Coverage
 
-http://localhost:8000/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8000/tests/runner.html?coverage
+http://localhost:8001/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8001/tests/runner.html?coverage
 
 ## License
 
