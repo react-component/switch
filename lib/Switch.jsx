@@ -4,8 +4,15 @@ var rcUtil = require('rc-util');
 
 var Switch = React.createClass({
     getInitialState() {
+      var props = this.props;
+      var checked = false;
+      if ('checked' in props) {
+        checked = !!this.props.checked;
+      } else {
+        checked = !!this.props.defaultChecked;
+      }
       return {
-        checked: !!this.props.checked
+        checked: checked
       };
     },
     getDefaultProps() {

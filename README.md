@@ -53,6 +53,35 @@ React.render(<Switch />, container);
 
 ### props
 
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th style="width: 50px;">default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>checked</td>
+          <td>boolean</td>
+          <td>false</td>
+          <td>whether switch is checked</td>
+        </tr>
+        <tr>
+          <td>defaultChecked</td>
+          <td>boolean</td>
+          <td>false</td>
+          <td>whether switch is checked on init</td>
+        <tr>
+          <td>onChange</td>
+          <td>Function</td>
+          <td></td>
+          <td>called when switch is checked or unchecked</td>
+        </tr>
+    </tbody>
+</table>
 
 ## Development
 
