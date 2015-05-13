@@ -10,9 +10,6 @@ switch ui component for react
 [![gemnasium deps][gemnasium-image]][gemnasium-url]
 [![node version][node-image]][node-url]
 [![npm download][download-image]][download-url]
-[![Sauce Test Status](https://saucelabs.com/buildstatus/rc-switch)](https://saucelabs.com/u/rc-switch)
-
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/rc-switch.svg)](https://saucelabs.com/u/rc-switch)
 
 [npm-image]: http://img.shields.io/npm/v/rc-switch.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-switch
