@@ -1,15 +1,19 @@
-/** @jsx React.DOM */
+'use strict';
+
 var React = require('react');
 var rcUtil = require('rc-util');
+
+function noop() {
+}
 
 var Switch = React.createClass({
     getInitialState() {
       var props = this.props;
       var checked = false;
       if ('checked' in props) {
-        checked = !!this.props.checked;
+        checked = !!props.checked;
       } else {
-        checked = !!this.props.defaultChecked;
+        checked = !!props.defaultChecked;
       }
       return {
         checked: checked
@@ -17,8 +21,11 @@ var Switch = React.createClass({
     },
     getDefaultProps() {
       return {
-        onChange() {
-        }
+        prefixCls: 'rc-switch',
+        style: {},
+        className: '',
+        defaultChecked: false,
+        onChange: noop
       };
     },
     componentWillReceiveProps(nextProps) {
@@ -29,27 +36,28 @@ var Switch = React.createClass({
       }
     },
     render() {
+      var props = this.props;
+      var prefixCls = props.prefixCls;
       return (
         <span className={rcUtil.classSet({
-          "rc-switch": 1,
-          "rc-switch-checked": this.state.checked,
-          "rc-switch-disabled": this.props.disabled
+          [props.className]: !!props.className,
+          [prefixCls]: 1,
+          [`${prefixCls}-checked`]: this.state.checked,
+          [`${prefixCls}-disabled`]: props.disabled
         })}
-          onClick = {this.toggleEvent}
+          onClick = {props.disabled ? noop : this.toggle}
+          style={props.style}
         > </span>
       );
     },
-    toggleEvent() {
-      if (this.props.disabled) {
-        return;
-      }
-      var self = this;
+    toggle() {
+      var checked = !this.state.checked;
       this.setState({
-        checked: !this.state.checked
-      }, function () {
-        self.props.onChange(self.state.checked);
+        checked: checked
       });
+      this.props.onChange(checked);
     }
   }
 );
+
 module.exports = Switch;

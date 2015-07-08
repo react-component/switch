@@ -8,6 +8,5 @@ function onChange(value) {
 
 React.render(
   <div>
-    <h1>rc-switch</h1>
     <Switch onChange={onChange}></Switch>
   </div>, document.getElementById("__react-content"));

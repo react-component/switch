@@ -31,8 +31,6 @@ switch ui component for react
 
 * support ie8,ie8+,chrome,firefox,safari
 
-### Keyboard
-
 
 ## install
 
@@ -60,6 +58,18 @@ React.render(<Switch />, container);
     </tr>
     </thead>
     <tbody>
+        <tr>
+          <td>prefixCls</td>
+          <td>String</td>
+          <td>rc-switch</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>className</td>
+          <td>String</td>
+          <td>''</td>
+          <td>additional class name of root node</td>
+        </tr>
         <tr>
           <td>checked</td>
           <td>boolean</td>
@@ -91,7 +101,7 @@ npm start
 
 http://localhost:8001/examples/
 
-online example: http://react-component.github.io/switch/build/examples/
+online example: http://react-component.github.io/switch/examples/
 
 ## Test Case
 
