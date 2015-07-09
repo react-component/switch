@@ -9,45 +9,64 @@ webpackJsonp([0,1],[
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(4);
-	var React = __webpack_require__(2);
-	var Switch = __webpack_require__(3);
-
+	'use strict';
+	
+	__webpack_require__(2);
+	var React = __webpack_require__(6);
+	var Switch = __webpack_require__(7);
+	
 	function onChange(value) {
-	  console.log(value);
+	  console.log('switch checked:' + value);
 	}
-
-	React.render(
-	  React.createElement("div", null, 
-	    React.createElement("h1", null, "rc-switch"), 
-	    React.createElement(Switch, {onChange: onChange})
-	  ), document.getElementById("__react-content"));
-
+	
+	var Test = React.createClass({
+	  displayName: 'Test',
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      disabled: false
+	    };
+	  },
+	  toggle: function toggle() {
+	    this.setState({
+	      disabled: !this.state.disabled
+	    });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { style: { margin: 20 } },
+	      React.createElement(Switch, { onChange: onChange,
+	        disabled: this.state.disabled,
+	        checkedChildren: '开',
+	        unCheckedChildren: '关'
+	      }),
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'button',
+	          { onClick: this.toggle },
+	          'toggle disabled'
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	React.render(React.createElement(Test, null), document.getElementById('__react-content'));
 
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = React;
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(6);
-
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// style-loader: Adds some css to the DOM by adding a <style> tag
-
+	
 	// load the styles
-	var content = __webpack_require__(5);
+	var content = __webpack_require__(3);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(7)(content, {});
+	var update = __webpack_require__(5)(content, {});
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
@@ -61,68 +80,35 @@ webpackJsonp([0,1],[
 	}
 
 /***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(4)();
+	exports.push([module.id, ".rc-switch {\n  position: relative;\n  display: inline-block;\n  box-sizing: border-box;\n  width: 44px;\n  height: 22px;\n  line-height: 20px;\n  vertical-align: middle;\n  border-radius: 20px 20px;\n  border: 1px solid #ccc;\n  background-color: #ccc;\n  cursor: pointer;\n  transition: all 0.3s cubic-bezier(0.35, 0, 0.25, 1);\n}\n.rc-switch-inner {\n  color: #fff;\n  font-size: 12px;\n  position: absolute;\n  left: 24px;\n}\n.rc-switch:after {\n  position: absolute;\n  width: 18px;\n  height: 18px;\n  left: 2px;\n  top: 1px;\n  border-radius: 50% 50%;\n  background-color: #ffffff;\n  content: \" \";\n  cursor: pointer;\n  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);\n  -webkit-transform: scale(1);\n      -ms-transform: scale(1);\n          transform: scale(1);\n  transition: left 0.3s cubic-bezier(0.35, 0, 0.25, 1);\n  -webkit-animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);\n          animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);\n  -webkit-animation-duration: 0.3s;\n          animation-duration: 0.3s;\n  -webkit-animation-name: rcSwitchOff;\n          animation-name: rcSwitchOff;\n}\n.rc-switch:hover:after {\n  -webkit-transform: scale(1.1);\n      -ms-transform: scale(1.1);\n          transform: scale(1.1);\n  -webkit-animation-name: rcSwitchOn;\n          animation-name: rcSwitchOn;\n}\n.rc-switch-checked {\n  border: 1px solid #87d068;\n  background-color: #87d068;\n}\n.rc-switch-checked .rc-switch-inner {\n  left: 6px;\n}\n.rc-switch-checked:after {\n  left: 22px;\n}\n.rc-switch-disabled {\n  cursor: no-drop;\n  background: #ccc;\n  border-color: #ccc;\n}\n.rc-switch-disabled:after {\n  background: #9e9e9e;\n  -webkit-animation-name: none;\n          animation-name: none;\n  cursor: no-drop;\n}\n.rc-switch-disabled:hover:after {\n  -webkit-transform: scale(1);\n      -ms-transform: scale(1);\n          transform: scale(1);\n  -webkit-animation-name: none;\n          animation-name: none;\n}\n.rc-switch-label {\n  display: inline-block;\n  line-height: 20px;\n  font-size: 14px;\n  padding-left: 10px;\n  vertical-align: middle;\n  white-space: normal;\n  pointer-events: none;\n  -webkit-user-select: text;\n     -moz-user-select: text;\n      -ms-user-select: text;\n          user-select: text;\n}\n@-webkit-keyframes rcSwitchOn {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n  }\n  50% {\n    -webkit-transform: scale(1.25);\n            transform: scale(1.25);\n  }\n  100% {\n    -webkit-transform: scale(1.1);\n            transform: scale(1.1);\n  }\n}\n@keyframes rcSwitchOn {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n  }\n  50% {\n    -webkit-transform: scale(1.25);\n            transform: scale(1.25);\n  }\n  100% {\n    -webkit-transform: scale(1.1);\n            transform: scale(1.1);\n  }\n}\n@-webkit-keyframes rcSwitchOff {\n  0% {\n    -webkit-transform: scale(1.1);\n            transform: scale(1.1);\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n  }\n}\n@keyframes rcSwitchOff {\n  0% {\n    -webkit-transform: scale(1.1);\n            transform: scale(1.1);\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n  }\n}\n", ""]);
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	module.exports = function() {
+		var list = [];
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+		return list;
+	}
+
+/***/ },
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(8)();
-	exports.push([module.id, "[bg-color=\"red\"] {\n  background-color: #f44336;\n}\n[bg-color=\"red 100\"] {\n  background-color: #fcc7c3;\n}\n[bg-color=\"red 200\"] {\n  background-color: #faa29b;\n}\n[bg-color=\"red 300\"] {\n  background-color: #f87c73;\n}\n[bg-color=\"red 400\"] {\n  background-color: #f55f54;\n}\n[bg-color=\"red 500\"] {\n  background-color: #f44336;\n}\n[bg-color=\"red 600\"] {\n  background-color: #dc3c31;\n}\n[bg-color=\"red 700\"] {\n  background-color: #c3362b;\n}\n[bg-color=\"red 800\"] {\n  background-color: #ab2f26;\n}\n[bg-color=\"red 900\"] {\n  background-color: #922820;\n}\n[bg-color=\"red 1000\"] {\n  background-color: #7a221b;\n}\n[bg-color=\"pink\"] {\n  background-color: #e91e63;\n}\n[bg-color=\"pink 100\"] {\n  background-color: #f9bcd1;\n}\n[bg-color=\"pink 200\"] {\n  background-color: #f58fb2;\n}\n[bg-color=\"pink 300\"] {\n  background-color: #f06292;\n}\n[bg-color=\"pink 400\"] {\n  background-color: #ec407a;\n}\n[bg-color=\"pink 500\"] {\n  background-color: #e91e63;\n}\n[bg-color=\"pink 600\"] {\n  background-color: #d21b59;\n}\n[bg-color=\"pink 700\"] {\n  background-color: #ba184f;\n}\n[bg-color=\"pink 800\"] {\n  background-color: #a31545;\n}\n[bg-color=\"pink 900\"] {\n  background-color: #8c123b;\n}\n[bg-color=\"pink 1000\"] {\n  background-color: #750f32;\n}\n[bg-color=\"orange\"] {\n  background-color: #ff9800;\n}\n[bg-color=\"orange 100\"] {\n  background-color: #ffe1b3;\n}\n[bg-color=\"orange 200\"] {\n  background-color: #ffcc80;\n}\n[bg-color=\"orange 300\"] {\n  background-color: #ffb74d;\n}\n[bg-color=\"orange 400\"] {\n  background-color: #ffa726;\n}\n[bg-color=\"orange 500\"] {\n  background-color: #ff9800;\n}\n[bg-color=\"orange 600\"] {\n  background-color: #e68900;\n}\n[bg-color=\"orange 700\"] {\n  background-color: #cc7a00;\n}\n[bg-color=\"orange 800\"] {\n  background-color: #b36a00;\n}\n[bg-color=\"orange 900\"] {\n  background-color: #995b00;\n}\n[bg-color=\"orange 1000\"] {\n  background-color: #804c00;\n}\n[bg-color=\"yellow\"] {\n  background-color: #ffeb3b;\n}\n[bg-color=\"yellow 100\"] {\n  background-color: #fffac5;\n}\n[bg-color=\"yellow 200\"] {\n  background-color: #fff69e;\n}\n[bg-color=\"yellow 300\"] {\n  background-color: #fff276;\n}\n[bg-color=\"yellow 400\"] {\n  background-color: #ffee58;\n}\n[bg-color=\"yellow 500\"] {\n  background-color: #ffeb3b;\n}\n[bg-color=\"yellow 600\"] {\n  background-color: #e6d435;\n}\n[bg-color=\"yellow 700\"] {\n  background-color: #ccbc2f;\n}\n[bg-color=\"yellow 800\"] {\n  background-color: #b3a529;\n}\n[bg-color=\"yellow 900\"] {\n  background-color: #998d23;\n}\n[bg-color=\"yellow 1000\"] {\n  background-color: #80761e;\n}\n[bg-color=\"green\"] {\n  background-color: #4caf50;\n}\n[bg-color=\"green 100\"] {\n  background-color: #cae8cb;\n}\n[bg-color=\"green 200\"] {\n  background-color: #a6d8a8;\n}\n[bg-color=\"green 300\"] {\n  background-color: #82c785;\n}\n[bg-color=\"green 400\"] {\n  background-color: #67bb6a;\n}\n[bg-color=\"green 500\"] {\n  background-color: #4caf50;\n}\n[bg-color=\"green 600\"] {\n  background-color: #449e48;\n}\n[bg-color=\"green 700\"] {\n  background-color: #3d8c40;\n}\n[bg-color=\"green 800\"] {\n  background-color: #357a38;\n}\n[bg-color=\"green 900\"] {\n  background-color: #2e6930;\n}\n[bg-color=\"green 1000\"] {\n  background-color: #265828;\n}\n[bg-color=\"cyan\"] {\n  background-color: #00bcd4;\n}\n[bg-color=\"cyan 100\"] {\n  background-color: #b3ebf3;\n}\n[bg-color=\"cyan 200\"] {\n  background-color: #80deea;\n}\n[bg-color=\"cyan 300\"] {\n  background-color: #4dd1e1;\n}\n[bg-color=\"cyan 400\"] {\n  background-color: #26c6da;\n}\n[bg-color=\"cyan 500\"] {\n  background-color: #00bcd4;\n}\n[bg-color=\"cyan 600\"] {\n  background-color: #00a9bf;\n}\n[bg-color=\"cyan 700\"] {\n  background-color: #0096aa;\n}\n[bg-color=\"cyan 800\"] {\n  background-color: #008494;\n}\n[bg-color=\"cyan 900\"] {\n  background-color: #00717f;\n}\n[bg-color=\"cyan 1000\"] {\n  background-color: #005e6a;\n}\n[bg-color=\"blue\"] {\n  background-color: #2196f3;\n}\n[bg-color=\"blue 100\"] {\n  background-color: #bde0fc;\n}\n[bg-color=\"blue 200\"] {\n  background-color: #91cbfa;\n}\n[bg-color=\"blue 300\"] {\n  background-color: #64b6f7;\n}\n[bg-color=\"blue 400\"] {\n  background-color: #42a6f5;\n}\n[bg-color=\"blue 500\"] {\n  background-color: #2196f3;\n}\n[bg-color=\"blue 600\"] {\n  background-color: #1e87db;\n}\n[bg-color=\"blue 700\"] {\n  background-color: #1a78c2;\n}\n[bg-color=\"blue 800\"] {\n  background-color: #1769aa;\n}\n[bg-color=\"blue 900\"] {\n  background-color: #145a92;\n}\n[bg-color=\"blue 1000\"] {\n  background-color: #114b7a;\n}\n[bg-color=\"indigo\"] {\n  background-color: #3f51b5;\n}\n[bg-color=\"indigo 100\"] {\n  background-color: #c6cbe9;\n}\n[bg-color=\"indigo 200\"] {\n  background-color: #a0a9db;\n}\n[bg-color=\"indigo 300\"] {\n  background-color: #7986cc;\n}\n[bg-color=\"indigo 400\"] {\n  background-color: #5c6bc0;\n}\n[bg-color=\"indigo 500\"] {\n  background-color: #3f51b5;\n}\n[bg-color=\"indigo 600\"] {\n  background-color: #3949a3;\n}\n[bg-color=\"indigo 700\"] {\n  background-color: #324191;\n}\n[bg-color=\"indigo 800\"] {\n  background-color: #2c397f;\n}\n[bg-color=\"indigo 900\"] {\n  background-color: #26316d;\n}\n[bg-color=\"indigo 1000\"] {\n  background-color: #20295b;\n}\n[bg-color=\"purple\"] {\n  background-color: #9c27b0;\n}\n[bg-color=\"purple 100\"] {\n  background-color: #e2bfe8;\n}\n[bg-color=\"purple 200\"] {\n  background-color: #ce94d8;\n}\n[bg-color=\"purple 300\"] {\n  background-color: #ba68c8;\n}\n[bg-color=\"purple 400\"] {\n  background-color: #ab47bc;\n}\n[bg-color=\"purple 500\"] {\n  background-color: #9c27b0;\n}\n[bg-color=\"purple 600\"] {\n  background-color: #8c239e;\n}\n[bg-color=\"purple 700\"] {\n  background-color: #7d1f8d;\n}\n[bg-color=\"purple 800\"] {\n  background-color: #6d1b7b;\n}\n[bg-color=\"purple 900\"] {\n  background-color: #5e176a;\n}\n[bg-color=\"purple 1000\"] {\n  background-color: #4e1458;\n}\n[bg-color=\"brown\"] {\n  background-color: #795548;\n}\n[bg-color=\"brown 100\"] {\n  background-color: #d7cdc9;\n}\n[bg-color=\"brown 200\"] {\n  background-color: #bdaba4;\n}\n[bg-color=\"brown 300\"] {\n  background-color: #a2887f;\n}\n[bg-color=\"brown 400\"] {\n  background-color: #8d6e63;\n}\n[bg-color=\"brown 500\"] {\n  background-color: #795548;\n}\n[bg-color=\"brown 600\"] {\n  background-color: #6d4d41;\n}\n[bg-color=\"brown 700\"] {\n  background-color: #61443a;\n}\n[bg-color=\"brown 800\"] {\n  background-color: #553b32;\n}\n[bg-color=\"brown 900\"] {\n  background-color: #49332b;\n}\n[bg-color=\"brown 1000\"] {\n  background-color: #3d2b24;\n}\n[bg-color=\"grey\"] {\n  background-color: #9e9e9e;\n}\n[bg-color=\"grey 100\"] {\n  background-color: #e2e2e2;\n}\n[bg-color=\"grey 200\"] {\n  background-color: #cfcfcf;\n}\n[bg-color=\"grey 300\"] {\n  background-color: #bcbcbc;\n}\n[bg-color=\"grey 400\"] {\n  background-color: #acacac;\n}\n[bg-color=\"grey 500\"] {\n  background-color: #9e9e9e;\n}\n[bg-color=\"grey 600\"] {\n  background-color: #8e8e8e;\n}\n[bg-color=\"grey 700\"] {\n  background-color: #7e7e7e;\n}\n[bg-color=\"grey 800\"] {\n  background-color: #6f6f6f;\n}\n[bg-color=\"grey 900\"] {\n  background-color: #5f5f5f;\n}\n[bg-color=\"grey 1000\"] {\n  background-color: #4f4f4f;\n}\n[bg-color=\"blue-grey\"] {\n  background-color: #607d8b;\n}\n[bg-color=\"blue-grey 100\"] {\n  background-color: #d0d9dd;\n}\n[bg-color=\"blue-grey 200\"] {\n  background-color: #b0bfc6;\n}\n[bg-color=\"blue-grey 300\"] {\n  background-color: #90a5ae;\n}\n[bg-color=\"blue-grey 400\"] {\n  background-color: #78909c;\n}\n[bg-color=\"blue-grey 500\"] {\n  background-color: #607d8b;\n}\n[bg-color=\"blue-grey 600\"] {\n  background-color: #56717d;\n}\n[bg-color=\"blue-grey 700\"] {\n  background-color: #4d646f;\n}\n[bg-color=\"blue-grey 800\"] {\n  background-color: #435861;\n}\n[bg-color=\"blue-grey 900\"] {\n  background-color: #3a4b53;\n}\n[bg-color=\"blue-grey 1000\"] {\n  background-color: #303f46;\n}\n[bg-color=\"dark\"] {\n  background-color: #404040;\n}\n[bg-color=\"dark 100\"] {\n  background-color: #707070;\n}\n[bg-color=\"dark 200\"] {\n  background-color: #666666;\n}\n[bg-color=\"dark 300\"] {\n  background-color: #5c5c5c;\n}\n[bg-color=\"dark 400\"] {\n  background-color: #4a4a4a;\n}\n[bg-color=\"dark 500\"] {\n  background-color: #404040;\n}\n[bg-color=\"dark 600\"] {\n  background-color: #3a3a3a;\n}\n[bg-color=\"dark 700\"] {\n  background-color: #303030;\n}\n[bg-color=\"dark 800\"] {\n  background-color: #202020;\n}\n[bg-color=\"dark 900\"] {\n  background-color: #161616;\n}\n[bg-color=\"dark 1000\"] {\n  background-color: #0d0d0d;\n}\n/* ------ Base & Require ------ */\n.rc-switch {\n  position: relative;\n  display: inline-block;\n  width: 38px;\n  height: 20px;\n  line-height: 20px;\n  vertical-align: middle;\n  border-radius: 20px 20px;\n  border: 1px solid #bcbcbc;\n  background-color: #bcbcbc;\n  cursor: pointer;\n  transition: all 0.3s cubic-bezier(0.35, 0, 0.25, 1);\n}\n.rc-switch:after {\n  display: block;\n  position: absolute;\n  top: -1px;\n  left: -1px;\n  width: 20px;\n  height: 20px;\n  border-radius: 50% 50%;\n  background-color: #ffffff;\n  content: \" \";\n  cursor: pointer;\n  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.26);\n  -webkit-transform: scale(1);\n  transition: left 0.3s cubic-bezier(0.35, 0, 0.25, 1);\n  -webkit-animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);\n  -webkit-animation-duration: 0.3s;\n  -webkit-animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);\n          animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);\n  -webkit-animation-duration: 0.3s;\n          animation-duration: 0.3s;\n  -webkit-animation-name: amSwitchOff;\n  animation-name: amSwitchOff;\n}\n.rc-switch:hover:after {\n  -webkit-transform: scale(1.1);\n  -ms-transform: scale(1.1);\n      transform: scale(1.1);\n  -webkit-animation-name: amSwitchOn;\n  animation-name: amSwitchOn;\n}\n.rc-switch-checked {\n  border: 1px solid #64b6f7;\n  background-color: #64b6f7;\n}\n.rc-switch-checked:after {\n  left: 18px;\n}\n.rc-switch-disabled {\n  cursor: no-drop;\n}\n.rc-switch-disabled:after {\n  background: #9e9e9e;\n  -webkit-animation-name: none;\n  animation-name: none;\n  cursor: no-drop;\n}\n.rc-switch-disabled:hover:after {\n  -webkit-transform: scale(1);\n  -ms-transform: scale(1);\n      transform: scale(1);\n  -webkit-animation-name: none;\n  animation-name: none;\n}\n.rc-switch-label {\n  display: inline-block;\n  line-height: 20px;\n  font-size: 14px;\n  padding-left: 10px;\n  vertical-align: middle;\n  white-space: normal;\n  pointer-events: none;\n  -webkit-user-select: text;\n  -moz-user-select: text;\n   -ms-user-select: text;\n       user-select: text;\n}\n@-webkit-keyframes amSwitchOn {\n  0% {\n    -webkit-transform: scale(1);\n  }\n  50% {\n    -webkit-transform: scale(1.25);\n  }\n  100% {\n    -webkit-transform: scale(1.1);\n  }\n}\n@keyframes amSwitchOn {\n  0% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n  }\n  50% {\n    -webkit-transform: scale(1.25);\n            transform: scale(1.25);\n  }\n  100% {\n    -webkit-transform: scale(1.1);\n            transform: scale(1.1);\n  }\n}\n@-webkit-keyframes amSwitchOff {\n  0% {\n    -webkit-transform: scale(1.1);\n  }\n  100% {\n    -webkit-transform: scale(1);\n  }\n}\n@keyframes amSwitchOff {\n  0% {\n    -webkit-transform: scale(1.1);\n            transform: scale(1.1);\n  }\n  100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n  }\n}\n", ""]);
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/** @jsx React.DOM */
-	var React = __webpack_require__(2);
-	var rcUtil = __webpack_require__(9);
-
-	var Switch = React.createClass({displayName: "Switch",
-	    getInitialState:function() {
-	      return {
-	        checked: !!this.props.checked
-	      };
-	    },
-	    getDefaultProps:function() {
-	      return {
-	        onChange:function() {
-	        }
-	      };
-	    },
-	    componentWillReceiveProps:function(nextProps) {
-	      if ('checked' in nextProps) {
-	        this.setState({
-	          checked: !!nextProps.checked
-	        });
-	      }
-	    },
-	    render:function() {
-	      return (
-	        React.createElement("span", {className: rcUtil.classSet({
-	          "rc-switch": 1,
-	          "rc-switch-checked": this.state.checked,
-	          "rc-switch-disabled": this.props.disabled
-	        }), 
-	          onClick: this.toggleEvent
-	        }, " ")
-	      );
-	    },
-	    toggleEvent:function() {
-	      if (this.props.disabled) {
-	        return;
-	      }
-	      var self = this;
-	      this.setState({
-	        checked: !this.state.checked
-	      }, function () {
-	        self.props.onChange(self.state.checked);
-	      });
-	    }
-	  }
-	);
-	module.exports = Switch;
-
-
-/***/ },
-/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -145,20 +131,20 @@ webpackJsonp([0,1],[
 		}),
 		singletonElement = null,
 		singletonCounter = 0;
-
+	
 	module.exports = function(list, options) {
 		if(false) {
 			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
 		}
-
+	
 		options = options || {};
 		// Force single-tag solution on IE9, which has a hard limit on the # of <style>
 		// tags it will allow on a page
 		if (typeof options.singleton === "undefined") options.singleton = isIE9();
-
+	
 		var styles = listToStyles(list);
 		addStylesToDom(styles, options);
-
+	
 		return function update(newList) {
 			var mayRemove = [];
 			for(var i = 0; i < styles.length; i++) {
@@ -181,7 +167,7 @@ webpackJsonp([0,1],[
 			}
 		};
 	}
-
+	
 	function addStylesToDom(styles, options) {
 		for(var i = 0; i < styles.length; i++) {
 			var item = styles[i];
@@ -203,7 +189,7 @@ webpackJsonp([0,1],[
 			}
 		}
 	}
-
+	
 	function listToStyles(list) {
 		var styles = [];
 		var newStyles = {};
@@ -221,7 +207,7 @@ webpackJsonp([0,1],[
 		}
 		return styles;
 	}
-
+	
 	function createStyleElement() {
 		var styleElement = document.createElement("style");
 		var head = getHeadElement();
@@ -229,10 +215,10 @@ webpackJsonp([0,1],[
 		head.appendChild(styleElement);
 		return styleElement;
 	}
-
+	
 	function addStyle(obj, options) {
 		var styleElement, update, remove;
-
+	
 		if (options.singleton) {
 			var styleIndex = singletonCounter++;
 			styleElement = singletonElement || (singletonElement = createStyleElement());
@@ -245,9 +231,9 @@ webpackJsonp([0,1],[
 				styleElement.parentNode.removeChild(styleElement);
 			};
 		}
-
+	
 		update(obj);
-
+	
 		return function updateStyle(newObj) {
 			if(newObj) {
 				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
@@ -258,7 +244,7 @@ webpackJsonp([0,1],[
 			}
 		};
 	}
-
+	
 	function replaceText(source, id, replacement) {
 		var boundaries = ["/** >>" + id + " **/", "/** " + id + "<< **/"];
 		var start = source.lastIndexOf(boundaries[0]);
@@ -272,10 +258,10 @@ webpackJsonp([0,1],[
 			return source + wrappedReplacement;
 		}
 	}
-
+	
 	function applyToSingletonTag(styleElement, index, remove, obj) {
 		var css = remove ? "" : obj.css;
-
+	
 		if(styleElement.styleSheet) {
 			styleElement.styleSheet.cssText = replaceText(styleElement.styleSheet.cssText, index, css);
 		} else {
@@ -289,23 +275,23 @@ webpackJsonp([0,1],[
 			}
 		}
 	}
-
+	
 	function applyToTag(styleElement, obj) {
 		var css = obj.css;
 		var media = obj.media;
 		var sourceMap = obj.sourceMap;
-
+	
 		if(sourceMap && typeof btoa === "function") {
 			try {
 				css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(JSON.stringify(sourceMap)) + " */";
 				css = "@import url(\"data:text/css;base64," + btoa(css) + "\")";
 			} catch(e) {}
 		}
-
+	
 		if(media) {
 			styleElement.setAttribute("media", media)
 		}
-
+	
 		if(styleElement.styleSheet) {
 			styleElement.styleSheet.cssText = css;
 		} else {
@@ -318,25 +304,91 @@ webpackJsonp([0,1],[
 
 
 /***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	module.exports = React;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = __webpack_require__(8);
+
+/***/ },
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function() {
-		var list = [];
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-		return list;
+	'use strict';
+	
+	function _defineProperty(obj, key, value) {
+	  if (key in obj) {
+	    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+	  } else {
+	    obj[key] = value;
+	  }return obj;
 	}
+	
+	var React = __webpack_require__(6);
+	var rcUtil = __webpack_require__(9);
+	
+	function noop() {}
+	
+	var Switch = React.createClass({
+	  displayName: 'Switch',
+	
+	  getInitialState: function getInitialState() {
+	    var props = this.props;
+	    var checked = false;
+	    if ('checked' in props) {
+	      checked = !!props.checked;
+	    } else {
+	      checked = !!props.defaultChecked;
+	    }
+	    return {
+	      checked: checked
+	    };
+	  },
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      prefixCls: 'rc-switch',
+	      style: {},
+	      checkedChildren: null,
+	      unCheckedChildren: null,
+	      className: '',
+	      defaultChecked: false,
+	      onChange: noop
+	    };
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    if ('checked' in nextProps) {
+	      this.setState({
+	        checked: !!nextProps.checked
+	      });
+	    }
+	  },
+	  render: function render() {
+	    var _rcUtil$classSet;
+	
+	    var props = this.props;
+	    var prefixCls = props.prefixCls;
+	    return React.createElement('span', { className: rcUtil.classSet((_rcUtil$classSet = {}, _defineProperty(_rcUtil$classSet, props.className, !!props.className), _defineProperty(_rcUtil$classSet, prefixCls, 1), _defineProperty(_rcUtil$classSet, prefixCls + '-checked', this.state.checked), _defineProperty(_rcUtil$classSet, prefixCls + '-disabled', props.disabled), _rcUtil$classSet)),
+	      onClick: props.disabled ? noop : this.toggle,
+	      style: props.style
+	    }, React.createElement('span', { className: prefixCls + '-inner' }, this.state.checked ? props.checkedChildren : props.unCheckedChildren));
+	  },
+	  toggle: function toggle() {
+	    var checked = !this.state.checked;
+	    this.setState({
+	      checked: checked
+	    });
+	    this.props.onChange(checked);
+	  }
+	});
+	
+	module.exports = Switch;
 
 /***/ },
 /* 9 */
@@ -355,14 +407,15 @@ webpackJsonp([0,1],[
 	    contains: __webpack_require__(18)
 	  },
 	  Children: {
-	    toArray: __webpack_require__(19)
+	    toArray: __webpack_require__(19),
+	    mapSelf: __webpack_require__(20)
 	  }
 	};
 
 
 /***/ },
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	var seed = 0;
 	module.exports = function () {
@@ -372,7 +425,7 @@ webpackJsonp([0,1],[
 
 /***/ },
 /* 11 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright 2013-2014, Facebook, Inc.
@@ -386,7 +439,7 @@ webpackJsonp([0,1],[
 	 * An additional grant of patent rights can be found here:
 	 * https://github.com/facebook/react/blob/v0.12.0/PATENTS
 	 */
-
+	
 	/**
 	 * This function is used to mark string literals representing CSS class names
 	 * so that they can be transformed statically. This allows for modularization
@@ -411,13 +464,13 @@ webpackJsonp([0,1],[
 	    return Array.prototype.join.call(arguments, ' ');
 	  }
 	}
-
+	
 	module.exports = cx;
 
 
 /***/ },
 /* 12 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright 2013-2014, Facebook, Inc.
@@ -431,9 +484,9 @@ webpackJsonp([0,1],[
 	 * An additional grant of patent rights can be found here:
 	 * https://github.com/facebook/react/blob/v0.12.0/PATENTS
 	 */
-
+	
 	"use strict";
-
+	
 	/**
 	 * Combines multiple className strings into one.
 	 * http://jsperf.com/joinclasses-args-vs-array
@@ -441,7 +494,7 @@ webpackJsonp([0,1],[
 	 * @param {...?string} classes
 	 * @return {string}
 	 */
-
+	
 	function joinClasses(className /*, ... */ ) {
 	  if (!className) {
 	    className = '';
@@ -458,20 +511,20 @@ webpackJsonp([0,1],[
 	  }
 	  return className;
 	}
-
+	
 	module.exports = joinClasses;
 
 
 /***/ },
 /* 13 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	/**
 	 * @ignore
 	 * some key-codes definition and utils from closure-library
 	 * @author yiminghe@gmail.com
 	 */
-
+	
 	var KeyCode = {
 	  /**
 	   * MAC_ENTER
@@ -894,7 +947,7 @@ webpackJsonp([0,1],[
 	   */
 	  WIN_IME: 229
 	};
-
+	
 	/*
 	 whether text and modified key is entered at the same time.
 	 */
@@ -905,7 +958,7 @@ webpackJsonp([0,1],[
 	    keyCode >= KeyCode.F1 && keyCode <= KeyCode.F12) {
 	    return false;
 	  }
-
+	
 	  // The following keys are quite harmless, even in combination with
 	  // CTRL, ALT or SHIFT.
 	  switch (keyCode) {
@@ -937,7 +990,7 @@ webpackJsonp([0,1],[
 	      return true;
 	  }
 	};
-
+	
 	/*
 	 whether character is entered.
 	 */
@@ -946,22 +999,22 @@ webpackJsonp([0,1],[
 	    keyCode <= KeyCode.NINE) {
 	    return true;
 	  }
-
+	
 	  if (keyCode >= KeyCode.NUM_ZERO &&
 	    keyCode <= KeyCode.NUM_MULTIPLY) {
 	    return true;
 	  }
-
+	
 	  if (keyCode >= KeyCode.A &&
 	    keyCode <= KeyCode.Z) {
 	    return true;
 	  }
-
+	
 	  // Safari sends zero key code for non-latin characters.
 	  if (window.navigation.userAgent.indexOf('WebKit') !== -1 && keyCode === 0) {
 	    return true;
 	  }
-
+	
 	  switch (keyCode) {
 	    case KeyCode.SPACE:
 	    case KeyCode.QUESTION_MARK:
@@ -985,7 +1038,7 @@ webpackJsonp([0,1],[
 	      return false;
 	  }
 	};
-
+	
 	module.exports = KeyCode;
 
 
@@ -1003,11 +1056,11 @@ webpackJsonp([0,1],[
 	 *
 	* @providesModule ReactComponentWithPureRenderMixin
 	*/
-
+	
 	"use strict";
-
+	
 	var shallowEqual = __webpack_require__(15);
-
+	
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
 	 * same result given the same props and state, provide this Mixin for a
@@ -1038,13 +1091,13 @@ webpackJsonp([0,1],[
 	           !shallowEqual(this.state, nextState);
 	  }
 	};
-
+	
 	module.exports = ReactComponentWithPureRenderMixin;
 
 
 /***/ },
 /* 15 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright 2013-2014, Facebook, Inc.
@@ -1056,9 +1109,9 @@ webpackJsonp([0,1],[
 	 *
 	 * @providesModule shallowEqual
 	 */
-
+	
 	"use strict";
-
+	
 	/**
 	 * Performs equality by iterating through keys on an object and returning
 	 * false when any key has values which are not strictly equal between
@@ -1086,13 +1139,13 @@ webpackJsonp([0,1],[
 	  }
 	  return true;
 	}
-
+	
 	module.exports = shallowEqual;
 
 
 /***/ },
 /* 16 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	/**
 	 * Safe chained function
@@ -1104,7 +1157,7 @@ webpackJsonp([0,1],[
 	 */
 	function createChainedFunction() {
 	  var args = arguments;
-
+	
 	  return function chainedFunction() {
 	    for (var i = 0; i < args.length; i++) {
 	      if (args[i] && args[i].apply) {
@@ -1113,13 +1166,13 @@ webpackJsonp([0,1],[
 	    }
 	  };
 	}
-
+	
 	module.exports = createChainedFunction;
 
 
 /***/ },
 /* 17 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = function (target, eventType, callback) {
 	  if (target.addEventListener) {
@@ -1142,7 +1195,7 @@ webpackJsonp([0,1],[
 
 /***/ },
 /* 18 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	module.exports = function (root, node) {
 	  while (node) {
@@ -1151,7 +1204,7 @@ webpackJsonp([0,1],[
 	    }
 	    node = node.parentNode;
 	  }
-
+	
 	  return false;
 	};
 
@@ -1160,8 +1213,8 @@ webpackJsonp([0,1],[
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(2);
-
+	var React = __webpack_require__(6);
+	
 	module.exports = function (children) {
 	  var ret = [];
 	  React.Children.forEach(children, function (c) {
@@ -1171,5 +1224,22 @@ webpackJsonp([0,1],[
 	};
 
 
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(6);
+	
+	function mirror(o) {
+	  return o;
+	}
+	
+	module.exports = function (children) {
+	  // return ReactFragment
+	  return React.Children.map(children, mirror);
+	};
+
+
 /***/ }
 ]);
+//# sourceMappingURL=simple.js.map
