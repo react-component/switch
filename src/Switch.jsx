@@ -23,6 +23,8 @@ var Switch = React.createClass({
       return {
         prefixCls: 'rc-switch',
         style: {},
+        checkedChildren: null,
+        unCheckedChildren: null,
         className: '',
         defaultChecked: false,
         onChange: noop
@@ -47,7 +49,11 @@ var Switch = React.createClass({
         })}
           onClick = {props.disabled ? noop : this.toggle}
           style={props.style}
-        > </span>
+        >
+          <span className={`${prefixCls}-inner`}>{this.state.checked ?
+            props.checkedChildren :
+            props.unCheckedChildren}</span>
+        </span>
       );
     },
     toggle() {

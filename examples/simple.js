@@ -6,7 +6,16 @@ function onChange(value) {
   console.log('switch checked:' + value);
 }
 
-React.render(
-  <div>
-    <Switch onChange={onChange}></Switch>
-  </div>, document.getElementById("__react-content"));
+
+var Test = React.createClass({
+  render() {
+    return <div style={{margin: 20}}>
+      <Switch onChange={onChange}
+        checkedChildren={'开'}
+        unCheckedChildren={'关'}
+      />
+    </div>;
+  }
+});
+
+React.render(<Test />, document.getElementById("__react-content"));
