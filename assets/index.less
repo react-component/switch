@@ -22,7 +22,7 @@
     position: absolute;
     left:24px;
   }
-  
+
   &:after{
     position: absolute;
     width: 18px;
@@ -40,12 +40,12 @@
     animation-duration: @duration;
     animation-name: rcSwitchOff;
   }
-  
+
   &:hover:after{
     transform: scale(1.1);
     animation-name: rcSwitchOn;
   }
-  
+
   &-checked{
     border: 1px solid #87d068;
     background-color: #87d068;
@@ -58,22 +58,24 @@
       left: 22px;
     }
   }
-  
+
   &-disabled{
     cursor: no-drop;
-    
+    background: #ccc;
+    border-color:#ccc;
+
     &:after{
       background: #9e9e9e;
       animation-name: none;
       cursor: no-drop;
     }
-    
+
     &:hover:after{
       transform: scale(1);
       animation-name: none;
     }
   }
-  
+
   &-label {
     display: inline-block;
     line-height: 20px;
