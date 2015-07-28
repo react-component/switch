@@ -54,7 +54,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 	
-	React.render(React.createElement(Test, null), document.getElementById('__react-content'));
+	React.render(React.createElement(Test, null), document.getElementById("__react-content"));
 
 /***/ },
 /* 2 */
@@ -323,16 +323,18 @@ webpackJsonp([0,1],[
 
 	'use strict';
 	
-	function _defineProperty(obj, key, value) {
-	  if (key in obj) {
-	    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
-	  } else {
-	    obj[key] = value;
-	  }return obj;
-	}
+	module.exports = __webpack_require__(9);
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	var React = __webpack_require__(6);
-	var rcUtil = __webpack_require__(9);
+	var rcUtil = __webpack_require__(10);
 	
 	function noop() {}
 	
@@ -374,10 +376,18 @@ webpackJsonp([0,1],[
 	
 	    var props = this.props;
 	    var prefixCls = props.prefixCls;
-	    return React.createElement('span', { className: rcUtil.classSet((_rcUtil$classSet = {}, _defineProperty(_rcUtil$classSet, props.className, !!props.className), _defineProperty(_rcUtil$classSet, prefixCls, 1), _defineProperty(_rcUtil$classSet, prefixCls + '-checked', this.state.checked), _defineProperty(_rcUtil$classSet, prefixCls + '-disabled', props.disabled), _rcUtil$classSet)),
-	      onClick: props.disabled ? noop : this.toggle,
-	      style: props.style
-	    }, React.createElement('span', { className: prefixCls + '-inner' }, this.state.checked ? props.checkedChildren : props.unCheckedChildren));
+	    return React.createElement(
+	      'span',
+	      { className: rcUtil.classSet((_rcUtil$classSet = {}, _defineProperty(_rcUtil$classSet, props.className, !!props.className), _defineProperty(_rcUtil$classSet, prefixCls, 1), _defineProperty(_rcUtil$classSet, prefixCls + '-checked', this.state.checked), _defineProperty(_rcUtil$classSet, prefixCls + '-disabled', props.disabled), _rcUtil$classSet)),
+	        onClick: props.disabled ? noop : this.toggle,
+	        style: props.style
+	      },
+	      React.createElement(
+	        'span',
+	        { className: prefixCls + '-inner' },
+	        this.state.checked ? props.checkedChildren : props.unCheckedChildren
+	      )
+	    );
 	  },
 	  toggle: function toggle() {
 	    var checked = !this.state.checked;
@@ -391,30 +401,30 @@ webpackJsonp([0,1],[
 	module.exports = Switch;
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  guid: __webpack_require__(10),
-	  classSet: __webpack_require__(11),
-	  joinClasses: __webpack_require__(12),
-	  KeyCode: __webpack_require__(13),
-	  PureRenderMixin: __webpack_require__(14),
-	  shallowEqual: __webpack_require__(15),
-	  createChainedFunction: __webpack_require__(16),
+	  guid: __webpack_require__(11),
+	  classSet: __webpack_require__(12),
+	  joinClasses: __webpack_require__(13),
+	  KeyCode: __webpack_require__(14),
+	  PureRenderMixin: __webpack_require__(15),
+	  shallowEqual: __webpack_require__(16),
+	  createChainedFunction: __webpack_require__(17),
 	  Dom: {
-	    addEventListener: __webpack_require__(17),
-	    contains: __webpack_require__(18)
+	    addEventListener: __webpack_require__(18),
+	    contains: __webpack_require__(19)
 	  },
 	  Children: {
-	    toArray: __webpack_require__(19),
-	    mapSelf: __webpack_require__(20)
+	    toArray: __webpack_require__(20),
+	    mapSelf: __webpack_require__(21)
 	  }
 	};
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	var seed = 0;
@@ -424,7 +434,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	/**
@@ -469,7 +479,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	/**
@@ -516,7 +526,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	/**
@@ -1043,7 +1053,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1059,7 +1069,7 @@ webpackJsonp([0,1],[
 	
 	"use strict";
 	
-	var shallowEqual = __webpack_require__(15);
+	var shallowEqual = __webpack_require__(16);
 	
 	/**
 	 * If your React component's render function is "pure", e.g. it will render the
@@ -1096,7 +1106,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	/**
@@ -1144,7 +1154,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	/**
@@ -1171,7 +1181,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	module.exports = function (target, eventType, callback) {
@@ -1194,7 +1204,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = function (root, node) {
@@ -1210,7 +1220,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(6);
@@ -1225,7 +1235,7 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(6);
