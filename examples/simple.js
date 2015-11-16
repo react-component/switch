@@ -1,4 +1,4 @@
-require('../assets/index.css');
+require('../assets/index.less');
 var React = require('react');
 var Switch = require('rc-switch');
 
