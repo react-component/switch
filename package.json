@@ -23,7 +23,6 @@
   },
   "scripts": {
     "build": "rc-tools run build",
-    "precommit": "rc-tools run precommit",
     "less": "rc-tools run less",
     "gh-pages": "rc-tools run gh-pages",
     "history": "rc-tools run history",
@@ -38,14 +37,13 @@
     "expect.js": "~0.3.1",
     "precommit-hook": "^1.0.7",
     "rc-server": "3.x",
-    "rc-tools": "3.x",
+    "rc-tools": "~4.3.11",
     "react": "^0.13.0"
   },
-  "licenses": "MIT",
   "precommit": [
-    "precommit"
+    "lint"
   ],
   "dependencies": {
-    "rc-util": "2.x"
+    "classnames": "^2.2.1"
   }
 }

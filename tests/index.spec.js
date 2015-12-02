@@ -1,29 +1,29 @@
 /**
  * only require other specs here
  */
-var expect = require('expect.js');
-var Switch = require('../index');
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
-var Simulate = TestUtils.Simulate;
+const expect = require('expect.js');
+const Switch = require('../index');
+const React = require('react/addons');
+const TestUtils = React.addons.TestUtils;
+const Simulate = TestUtils.Simulate;
 
-describe('rc-switch',function(){
-  var switcher;
-  var container = document.createElement('div');
+describe('rc-switch', () => {
+  let switcher;
+  const container = document.createElement('div');
   document.body.appendChild(container);
 
-  beforeEach(function (done) {
-    React.render(<Switch/>, container, function () {
+  beforeEach((done) => {
+    React.render(<Switch />, container, function() {
       switcher = this;
       done();
     });
   });
 
-  afterEach(function () {
+  afterEach(() => {
     React.unmountComponentAtNode(container);
   });
 
-  it('works',function(){
+  it('works', () =>{
     expect(switcher.state.checked).to.be(false);
     Simulate.click(React.findDOMNode(switcher));
     expect(switcher.state.checked).to.be(true);

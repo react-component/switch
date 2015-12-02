@@ -1,69 +1,74 @@
-'use strict';
-
-var React = require('react');
-var rcUtil = require('rc-util');
+const React = require('react');
+const classNames = require('classnames');
 
 function noop() {
 }
 
-var Switch = React.createClass({
-    getInitialState() {
-      var props = this.props;
-      var checked = false;
-      if ('checked' in props) {
-        checked = !!props.checked;
-      } else {
-        checked = !!props.defaultChecked;
-      }
-      return {
-        checked: checked
-      };
-    },
-    getDefaultProps() {
-      return {
-        prefixCls: 'rc-switch',
-        style: {},
-        checkedChildren: null,
-        unCheckedChildren: null,
-        className: '',
-        defaultChecked: false,
-        onChange: noop
-      };
-    },
-    componentWillReceiveProps(nextProps) {
-      if ('checked' in nextProps) {
-        this.setState({
-          checked: !!nextProps.checked
-        });
-      }
-    },
-    render() {
-      var props = this.props;
-      var prefixCls = props.prefixCls;
-      return (
-        <span className={rcUtil.classSet({
-          [props.className]: !!props.className,
-          [prefixCls]: 1,
-          [`${prefixCls}-checked`]: this.state.checked,
-          [`${prefixCls}-disabled`]: props.disabled
-        })}
-          onClick = {props.disabled ? noop : this.toggle}
-          style={props.style}
-        >
-          <span className={`${prefixCls}-inner`}>{this.state.checked ?
-            props.checkedChildren :
-            props.unCheckedChildren}</span>
-        </span>
-      );
-    },
-    toggle() {
-      var checked = !this.state.checked;
-      this.setState({
-        checked: checked
-      });
-      this.props.onChange(checked);
+const Switch = React.createClass({
+  propTypes: {
+    className: React.PropTypes.string,
+    prefixCls: React.PropTypes.string,
+    disabled: React.PropTypes.bool,
+    style: React.PropTypes.object,
+    checkedChildren: React.PropTypes.any,
+    unCheckedChildren: React.PropTypes.any,
+    onChange: React.PropTypes.func,
+  },
+  getDefaultProps() {
+    return {
+      prefixCls: 'rc-switch',
+      style: {},
+      checkedChildren: null,
+      unCheckedChildren: null,
+      className: '',
+      defaultChecked: false,
+      onChange: noop,
+    };
+  },
+  getInitialState() {
+    const props = this.props;
+    let checked = false;
+    if ('checked' in props) {
+      checked = !!props.checked;
+    } else {
+      checked = !!props.defaultChecked;
     }
-  }
-);
+    return {
+      checked: checked,
+    };
+  },
+  componentWillReceiveProps(nextProps) {
+    if ('checked' in nextProps) {
+      this.setState({
+        checked: !!nextProps.checked,
+      });
+    }
+  },
+  toggle() {
+    const checked = !this.state.checked;
+    this.setState({
+      checked: checked,
+    });
+    this.props.onChange(checked);
+  },
+  render() {
+    const {className, prefixCls, disabled, style,
+           checkedChildren, unCheckedChildren} = this.props;
+    const checked = this.state.checked;
+    const switchClassName = classNames({
+      [className]: !!className,
+      [prefixCls]: true,
+      [`${prefixCls}-checked`]: checked,
+      [`${prefixCls}-disabled`]: disabled,
+    });
+    return (<span className={switchClassName}
+                  onClick={disabled ? noop : this.toggle}
+                  style={style}>
+              <span className={`${prefixCls}-inner`}>
+                {checked ? checkedChildren : unCheckedChildren}
+              </span>
+            </span>);
+  },
+});
 
 module.exports = Switch;

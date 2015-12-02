@@ -1,25 +1,25 @@
 require('../assets/index.css');
-var React = require('react');
-var Switch = require('rc-switch');
+const React = require('react');
+const Switch = require('rc-switch');
 
 function onChange(value) {
   console.log('switch checked:' + value);
 }
 
 
-var Test = React.createClass({
+const Test = React.createClass({
   getInitialState() {
     return {
-      disabled: false
-    }
+      disabled: false,
+    };
   },
-  toggle(){
+  toggle() {
     this.setState({
-      disabled:!this.state.disabled
+      disabled: !this.state.disabled,
     });
   },
   render() {
-    return <div style={{margin: 20}}>
+    return (<div style={{margin: 20}}>
       <Switch onChange={onChange}
         disabled={this.state.disabled}
         checkedChildren={'开'}
@@ -28,8 +28,8 @@ var Test = React.createClass({
       <div>
         <button onClick={this.toggle}>toggle disabled</button>
       </div>
-    </div>;
-  }
+    </div>);
+  },
 });
 
-React.render(<Test />, document.getElementById("__react-content"));
+React.render(<Test />, document.getElementById('__react-content'));
