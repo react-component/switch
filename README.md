@@ -4,7 +4,6 @@
 switch ui component for react
 
 [![NPM version][npm-image]][npm-url]
-[![SPM version](http://spmjs.io/badge/rc-switch)](http://spmjs.io/package/rc-switch)
 [![build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
 [![gemnasium deps][gemnasium-image]][gemnasium-url]
@@ -25,7 +24,6 @@ switch ui component for react
 [download-url]: https://npmjs.org/package/rc-switch
 
 ## Screenshots
-
 
 ## Feature
 
