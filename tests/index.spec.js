@@ -3,8 +3,9 @@
  */
 const expect = require('expect.js');
 const Switch = require('../index');
-const React = require('react/addons');
-const TestUtils = React.addons.TestUtils;
+const React = require('react');
+const ReactDOM = require('react-dom');
+const TestUtils = require('react-addons-test-utils');
 const Simulate = TestUtils.Simulate;
 
 describe('rc-switch', () => {
@@ -13,14 +14,14 @@ describe('rc-switch', () => {
   document.body.appendChild(container);
 
   beforeEach((done) => {
-    React.render(<Switch />, container, function() {
+    ReactDOM.render(<Switch />, container, function() {
       switcher = this;
       done();
     });
   });
 
   afterEach(() => {
-    React.unmountComponentAtNode(container);
+    ReactDOM.unmountComponentAtNode(container);
   });
 
   it('works', () =>{
