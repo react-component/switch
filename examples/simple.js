@@ -11,7 +11,7 @@ webpackJsonp([0,1],[
 
 	'use strict';
 	
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../assets/index.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	__webpack_require__(2);
 	var React = __webpack_require__(3);
 	var Switch = __webpack_require__(160);
 	
@@ -57,7 +57,12 @@ webpackJsonp([0,1],[
 	React.render(React.createElement(Test, null), document.getElementById('__react-content'));
 
 /***/ },
-/* 2 */,
+/* 2 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
