@@ -19721,9 +19721,11 @@ webpackJsonp([0,1],[
 	  },
 	  toggle: function toggle() {
 	    var checked = !this.state.checked;
-	    this.setState({
-	      checked: checked
-	    });
+	    if (!('checked' in this.props)) {
+	      this.setState({
+	        checked: checked
+	      });
+	    }
 	    this.props.onChange(checked);
 	  },
 	  render: function render() {
