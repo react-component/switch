@@ -34,7 +34,7 @@ const Switch = React.createClass({
       checked = !!props.defaultChecked;
     }
     return {
-      checked: checked,
+      checked,
     };
   },
   componentWillReceiveProps(nextProps) {
@@ -46,14 +46,16 @@ const Switch = React.createClass({
   },
   toggle() {
     const checked = !this.state.checked;
-    this.setState({
-      checked: checked,
-    });
+    if (!('checked' in this.props)) {
+      this.setState({
+        checked,
+      });
+    }
     this.props.onChange(checked);
   },
   render() {
     const {className, prefixCls, disabled, style,
-           checkedChildren, unCheckedChildren} = this.props;
+      checkedChildren, unCheckedChildren} = this.props;
     const checked = this.state.checked;
     const switchClassName = classNames({
       [className]: !!className,

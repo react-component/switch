@@ -14,7 +14,7 @@ describe('rc-switch', () => {
   document.body.appendChild(container);
 
   beforeEach((done) => {
-    ReactDOM.render(<Switch />, container, function() {
+    ReactDOM.render(<Switch />, container, function init() {
       switcher = this;
       done();
     });
