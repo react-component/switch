@@ -1,5 +1,6 @@
 require('../assets/index.less');
 const React = require('react');
+const ReactDOM = require('react-dom');
 const Switch = require('rc-switch');
 
 function onChange(value) {
@@ -32,4 +33,4 @@ const Test = React.createClass({
   },
 });
 
-React.render(<Test />, document.getElementById('__react-content'));
+ReactDOM.render(<Test />, document.getElementById('__react-content'));

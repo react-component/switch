@@ -53,6 +53,18 @@ const Switch = React.createClass({
     }
     this.props.onChange(checked);
   },
+  handleKeyDown(e) {
+    if (e.keyCode === 37) {
+      this.setState({
+        checked: false,
+      });
+    }
+    if (e.keyCode === 39) {
+      this.setState({
+        checked: true,
+      });
+    }
+  },
   render() {
     const {className, prefixCls, disabled, style,
       checkedChildren, unCheckedChildren} = this.props;
@@ -64,6 +76,8 @@ const Switch = React.createClass({
       [`${prefixCls}-disabled`]: disabled,
     });
     return (<span className={switchClassName}
+                  tabIndex="0"
+                  onKeyDown={this.handleKeyDown}
                   onClick={disabled ? noop : this.toggle}
                   style={style}>
               <span className={`${prefixCls}-inner`}>
