@@ -47,6 +47,10 @@
   -webkit-animation-name: rcSwitchOn;
           animation-name: rcSwitchOn;
 }
+.rc-switch:focus {
+  box-shadow: 0 0 0 2px #d5f1fd;
+  outline: none;
+}
 .rc-switch-checked {
   border: 1px solid #87d068;
   background-color: #87d068;

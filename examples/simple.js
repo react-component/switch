@@ -13,7 +13,8 @@ webpackJsonp([0,1],[
 	
 	__webpack_require__(2);
 	var React = __webpack_require__(3);
-	var Switch = __webpack_require__(160);
+	var ReactDOM = __webpack_require__(160);
+	var Switch = __webpack_require__(161);
 	
 	function onChange(value) {
 	  console.log('switch checked:' + value);
@@ -54,7 +55,7 @@ webpackJsonp([0,1],[
 	  }
 	});
 	
-	React.render(React.createElement(Test, null), document.getElementById('__react-content'));
+	ReactDOM.render(React.createElement(Test, null), document.getElementById('__react-content'));
 
 /***/ },
 /* 2 */
@@ -7961,6 +7962,10 @@ webpackJsonp([0,1],[
 	  }
 	};
 	
+	function registerNullComponentID() {
+	  ReactEmptyComponentRegistry.registerNullComponentID(this._rootNodeID);
+	}
+	
 	var ReactEmptyComponent = function (instantiate) {
 	  this._currentElement = null;
 	  this._rootNodeID = null;
@@ -7969,7 +7974,7 @@ webpackJsonp([0,1],[
 	assign(ReactEmptyComponent.prototype, {
 	  construct: function (element) {},
 	  mountComponent: function (rootID, transaction, context) {
-	    ReactEmptyComponentRegistry.registerNullComponentID(rootID);
+	    transaction.getReactMountReady().enqueue(registerNullComponentID, this);
 	    this._rootNodeID = rootID;
 	    return ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, context);
 	  },
@@ -9319,6 +9324,7 @@ webpackJsonp([0,1],[
 	 */
 	var EventInterface = {
 	  type: null,
+	  target: null,
 	  // currentTarget is set when dispatching; no use in copying it here
 	  currentTarget: emptyFunction.thatReturnsNull,
 	  eventPhase: null,
@@ -9352,8 +9358,6 @@ webpackJsonp([0,1],[
 	  this.dispatchConfig = dispatchConfig;
 	  this.dispatchMarker = dispatchMarker;
 	  this.nativeEvent = nativeEvent;
-	  this.target = nativeEventTarget;
-	  this.currentTarget = nativeEventTarget;
 	
 	  var Interface = this.constructor.Interface;
 	  for (var propName in Interface) {
@@ -9364,7 +9368,11 @@ webpackJsonp([0,1],[
 	    if (normalize) {
 	      this[propName] = normalize(nativeEvent);
 	    } else {
-	      this[propName] = nativeEvent[propName];
+	      if (propName === 'target') {
+	        this.target = nativeEventTarget;
+	      } else {
+	        this[propName] = nativeEvent[propName];
+	      }
 	    }
 	  }
 	
@@ -13213,7 +13221,10 @@ webpackJsonp([0,1],[
 	      }
 	    });
 	
-	    nativeProps.children = content;
+	    if (content) {
+	      nativeProps.children = content;
+	    }
+	
 	    return nativeProps;
 	  }
 	
@@ -18686,7 +18697,7 @@ webpackJsonp([0,1],[
 	
 	'use strict';
 	
-	module.exports = '0.14.6';
+	module.exports = '0.14.8';
 
 /***/ },
 /* 149 */
@@ -19654,7 +19665,8 @@ webpackJsonp([0,1],[
 
 	'use strict';
 	
-	module.exports = __webpack_require__(161);
+	module.exports = __webpack_require__(5);
+
 
 /***/ },
 /* 161 */
@@ -19670,10 +19682,18 @@ webpackJsonp([0,1],[
 
 	'use strict';
 	
+	module.exports = __webpack_require__(163);
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	var React = __webpack_require__(3);
-	var classNames = __webpack_require__(163);
+	var classNames = __webpack_require__(164);
 	
 	function noop() {}
 	
@@ -19728,6 +19748,18 @@ webpackJsonp([0,1],[
 	    }
 	    this.props.onChange(checked);
 	  },
+	  handleKeyDown: function handleKeyDown(e) {
+	    if (e.keyCode === 37) {
+	      this.setState({
+	        checked: false
+	      });
+	    }
+	    if (e.keyCode === 39) {
+	      this.setState({
+	        checked: true
+	      });
+	    }
+	  },
 	  render: function render() {
 	    var _classNames;
 	
@@ -19744,6 +19776,8 @@ webpackJsonp([0,1],[
 	    return React.createElement(
 	      'span',
 	      { className: switchClassName,
+	        tabIndex: '0',
+	        onKeyDown: this.handleKeyDown,
 	        onClick: disabled ? noop : this.toggle,
 	        style: style },
 	      React.createElement(
@@ -19758,7 +19792,7 @@ webpackJsonp([0,1],[
 	module.exports = Switch;
 
 /***/ },
-/* 163 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
