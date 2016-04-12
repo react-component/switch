@@ -44,8 +44,7 @@ const Switch = React.createClass({
       });
     }
   },
-  toggle() {
-    const checked = !this.state.checked;
+  setChecked(checked) {
     if (!('checked' in this.props)) {
       this.setState({
         checked,
@@ -53,16 +52,16 @@ const Switch = React.createClass({
     }
     this.props.onChange(checked);
   },
+  toggle() {
+    const checked = !this.state.checked;
+    this.setChecked(checked);
+  },
   handleKeyDown(e) {
     if (e.keyCode === 37) {
-      this.setState({
-        checked: false,
-      });
+      this.setChecked(false);
     }
     if (e.keyCode === 39) {
-      this.setState({
-        checked: true,
-      });
+      this.setChecked(true);
     }
   },
   render() {
@@ -75,15 +74,17 @@ const Switch = React.createClass({
       [`${prefixCls}-checked`]: checked,
       [`${prefixCls}-disabled`]: disabled,
     });
-    return (<span className={switchClassName}
-                  tabIndex="0"
-                  onKeyDown={this.handleKeyDown}
-                  onClick={disabled ? noop : this.toggle}
-                  style={style}>
-              <span className={`${prefixCls}-inner`}>
-                {checked ? checkedChildren : unCheckedChildren}
-              </span>
-            </span>);
+    return (
+      <span className={switchClassName}
+        tabIndex="0"
+        onKeyDown={this.handleKeyDown}
+        onClick={disabled ? noop : this.toggle}
+        style={style}>
+        <span className={`${prefixCls}-inner`}>
+          {checked ? checkedChildren : unCheckedChildren}
+        </span>
+      </span>
+    );
   },
 });
 
