@@ -19739,8 +19739,7 @@ webpackJsonp([0,1],[
 	      });
 	    }
 	  },
-	  toggle: function toggle() {
-	    var checked = !this.state.checked;
+	  setChecked: function setChecked(checked) {
 	    if (!('checked' in this.props)) {
 	      this.setState({
 	        checked: checked
@@ -19748,16 +19747,16 @@ webpackJsonp([0,1],[
 	    }
 	    this.props.onChange(checked);
 	  },
+	  toggle: function toggle() {
+	    var checked = !this.state.checked;
+	    this.setChecked(checked);
+	  },
 	  handleKeyDown: function handleKeyDown(e) {
 	    if (e.keyCode === 37) {
-	      this.setState({
-	        checked: false
-	      });
+	      this.setChecked(false);
 	    }
 	    if (e.keyCode === 39) {
-	      this.setState({
-	        checked: true
-	      });
+	      this.setChecked(true);
 	    }
 	  },
 	  render: function render() {
