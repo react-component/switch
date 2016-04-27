@@ -19690,6 +19690,10 @@ webpackJsonp([0,1],[
 
 	'use strict';
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	var React = __webpack_require__(3);
@@ -19704,15 +19708,14 @@ webpackJsonp([0,1],[
 	    className: React.PropTypes.string,
 	    prefixCls: React.PropTypes.string,
 	    disabled: React.PropTypes.bool,
-	    style: React.PropTypes.object,
 	    checkedChildren: React.PropTypes.any,
 	    unCheckedChildren: React.PropTypes.any,
-	    onChange: React.PropTypes.func
+	    onChange: React.PropTypes.func,
+	    onMouseUp: React.PropTypes.func
 	  },
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      prefixCls: 'rc-switch',
-	      style: {},
 	      checkedChildren: null,
 	      unCheckedChildren: null,
 	      className: '',
@@ -19759,6 +19762,15 @@ webpackJsonp([0,1],[
 	      this.setChecked(true);
 	    }
 	  },
+	  // Handle auto focus when click switch in Chrome
+	  handleMouseUp: function handleMouseUp(e) {
+	    if (this.refs.node) {
+	      this.refs.node.blur();
+	    }
+	    if (this.props.onMouseUp) {
+	      this.props.onMouseUp(e);
+	    }
+	  },
 	  render: function render() {
 	    var _classNames;
 	
@@ -19766,19 +19778,22 @@ webpackJsonp([0,1],[
 	    var className = _props.className;
 	    var prefixCls = _props.prefixCls;
 	    var disabled = _props.disabled;
-	    var style = _props.style;
 	    var checkedChildren = _props.checkedChildren;
 	    var unCheckedChildren = _props.unCheckedChildren;
+	
+	    var restProps = _objectWithoutProperties(_props, ['className', 'prefixCls', 'disabled', 'checkedChildren', 'unCheckedChildren']);
 	
 	    var checked = this.state.checked;
 	    var switchClassName = classNames((_classNames = {}, _defineProperty(_classNames, className, !!className), _defineProperty(_classNames, prefixCls, true), _defineProperty(_classNames, prefixCls + '-checked', checked), _defineProperty(_classNames, prefixCls + '-disabled', disabled), _classNames));
 	    return React.createElement(
 	      'span',
-	      { className: switchClassName,
+	      _extends({}, restProps, {
+	        className: switchClassName,
 	        tabIndex: '0',
+	        ref: 'node',
 	        onKeyDown: this.handleKeyDown,
 	        onClick: disabled ? noop : this.toggle,
-	        style: style },
+	        onMouseUp: this.handleMouseUp }),
 	      React.createElement(
 	        'span',
 	        { className: prefixCls + '-inner' },
