@@ -9,15 +9,14 @@ const Switch = React.createClass({
     className: React.PropTypes.string,
     prefixCls: React.PropTypes.string,
     disabled: React.PropTypes.bool,
-    style: React.PropTypes.object,
     checkedChildren: React.PropTypes.any,
     unCheckedChildren: React.PropTypes.any,
     onChange: React.PropTypes.func,
+    onMouseUp: React.PropTypes.func,
   },
   getDefaultProps() {
     return {
       prefixCls: 'rc-switch',
-      style: {},
       checkedChildren: null,
       unCheckedChildren: null,
       className: '',
@@ -64,9 +63,18 @@ const Switch = React.createClass({
       this.setChecked(true);
     }
   },
+  // Handle auto focus when click switch in Chrome
+  handleMouseUp(e) {
+    if (this.refs.node) {
+      this.refs.node.blur();
+    }
+    if (this.props.onMouseUp) {
+      this.props.onMouseUp(e);
+    }
+  },
   render() {
-    const {className, prefixCls, disabled, style,
-      checkedChildren, unCheckedChildren} = this.props;
+    const {className, prefixCls, disabled,
+      checkedChildren, unCheckedChildren, ...restProps } = this.props;
     const checked = this.state.checked;
     const switchClassName = classNames({
       [className]: !!className,
@@ -75,11 +83,13 @@ const Switch = React.createClass({
       [`${prefixCls}-disabled`]: disabled,
     });
     return (
-      <span className={switchClassName}
+      <span {...restProps}
+        className={switchClassName}
         tabIndex="0"
+        ref="node"
         onKeyDown={this.handleKeyDown}
         onClick={disabled ? noop : this.toggle}
-        style={style}>
+        onMouseUp={this.handleMouseUp}>
         <span className={`${prefixCls}-inner`}>
           {checked ? checkedChildren : unCheckedChildren}
         </span>
