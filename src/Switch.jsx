@@ -85,7 +85,7 @@ const Switch = React.createClass({
     return (
       <span {...restProps}
         className={switchClassName}
-        tabIndex="0"
+        tabIndex={disabled ? -1 : 0}
         ref="node"
         onKeyDown={this.handleKeyDown}
         onClick={disabled ? noop : this.toggle}
