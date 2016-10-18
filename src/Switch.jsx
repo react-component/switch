@@ -13,6 +13,7 @@ const Switch = React.createClass({
     unCheckedChildren: React.PropTypes.any,
     onChange: React.PropTypes.func,
     onMouseUp: React.PropTypes.func,
+    checked: React.PropTypes.oneOfType(React.PropTypes.bool),
   },
   getDefaultProps() {
     return {
@@ -37,7 +38,7 @@ const Switch = React.createClass({
     };
   },
   componentWillReceiveProps(nextProps) {
-    if ('checked' in nextProps) {
+    if (nextProps.checked !== null && nextProps.checked !== undefined) {
       this.setState({
         checked: !!nextProps.checked,
       });
