@@ -44,7 +44,7 @@ const Switch = React.createClass({
     }
   },
   setChecked(checked) {
-    if (!('checked' in this.props)) {
+    if (this.props.checked == null) {
       this.setState({
         checked,
       });
