@@ -1,18 +1,20 @@
 const React = require('react');
+const PropTypes = require('prop-types');
+const createReactClass = require('create-react-class');
 const classNames = require('classnames');
 
 function noop() {
 }
 
-const Switch = React.createClass({
+const Switch = createReactClass({
   propTypes: {
-    className: React.PropTypes.string,
-    prefixCls: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    checkedChildren: React.PropTypes.any,
-    unCheckedChildren: React.PropTypes.any,
-    onChange: React.PropTypes.func,
-    onMouseUp: React.PropTypes.func,
+    className: PropTypes.string,
+    prefixCls: PropTypes.string,
+    disabled: PropTypes.bool,
+    checkedChildren: PropTypes.any,
+    unCheckedChildren: PropTypes.any,
+    onChange: PropTypes.func,
+    onMouseUp: PropTypes.func,
   },
   getDefaultProps() {
     return {
