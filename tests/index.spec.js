@@ -13,20 +13,34 @@ describe('rc-switch', () => {
   const container = document.createElement('div');
   document.body.appendChild(container);
 
-  beforeEach((done) => {
-    ReactDOM.render(<Switch />, container, function init() {
+  function createComponent(props) {
+    ReactDOM.render(<Switch disabled={props.disabled} readOnly={props.readOnly} />, container, function init() {
       switcher = this;
-      done();
     });
-  });
+  }
 
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(container);
   });
 
   it('works', () =>{
+    createComponent({});
     expect(switcher.state.checked).to.be(false);
     Simulate.click(React.findDOMNode(switcher));
     expect(switcher.state.checked).to.be(true);
+  });
+
+  it('is readonly', () =>{
+    createComponent({readOnly: true});
+    expect(switcher.state.checked).to.be(false);
+    Simulate.click(React.findDOMNode(switcher));
+    expect(switcher.state.checked).to.be(false);
+  });
+
+  it('is disabled', () =>{
+    createComponent({disabled: true});
+    expect(switcher.state.checked).to.be(false);
+    Simulate.click(React.findDOMNode(switcher));
+    expect(switcher.state.checked).to.be(false);
   });
 });

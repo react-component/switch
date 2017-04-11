@@ -9,6 +9,7 @@ const Switch = React.createClass({
     className: React.PropTypes.string,
     prefixCls: React.PropTypes.string,
     disabled: React.PropTypes.bool,
+    readOnly: React.PropTypes.bool,
     checkedChildren: React.PropTypes.any,
     unCheckedChildren: React.PropTypes.any,
     onChange: React.PropTypes.func,
@@ -20,6 +21,7 @@ const Switch = React.createClass({
       checkedChildren: null,
       unCheckedChildren: null,
       className: '',
+      readOnly: false,
       defaultChecked: false,
       onChange: noop,
     };
@@ -27,19 +29,29 @@ const Switch = React.createClass({
   getInitialState() {
     const props = this.props;
     let checked = false;
+    let readOnly = false;
     if ('checked' in props) {
       checked = !!props.checked;
     } else {
       checked = !!props.defaultChecked;
     }
+    if ('readOnly' in props) {
+      readOnly = !!props.readOnly;
+    }
     return {
-      checked,
+      checked: checked,
+      readOnly: readOnly,
     };
   },
   componentWillReceiveProps(nextProps) {
     if ('checked' in nextProps) {
       this.setState({
         checked: !!nextProps.checked,
+      });
+    }
+    if ('readOnly' in nextProps) {
+      this.setState({
+        readOnly: !!nextProps.readOnly,
       });
     }
   },
@@ -76,6 +88,7 @@ const Switch = React.createClass({
     const {className, prefixCls, disabled,
       checkedChildren, unCheckedChildren, ...restProps } = this.props;
     const checked = this.state.checked;
+    const readOnly = this.state.readOnly;
     const switchClassName = classNames({
       [className]: !!className,
       [prefixCls]: true,
@@ -87,8 +100,8 @@ const Switch = React.createClass({
         className={switchClassName}
         tabIndex={disabled ? -1 : 0}
         ref="node"
-        onKeyDown={this.handleKeyDown}
-        onClick={disabled ? noop : this.toggle}
+        onKeyDown={disabled || readOnly ? noop : this.handleKeyDown}
+        onClick={disabled || readOnly ? noop : this.toggle}
         onMouseUp={this.handleMouseUp}>
         <span className={`${prefixCls}-inner`}>
           {checked ? checkedChildren : unCheckedChildren}

@@ -75,6 +75,12 @@ React.render(<Switch />, container);
           <td>whether switch is checked</td>
         </tr>
         <tr>
+          <td>readOnly</td>
+          <td>boolean</td>
+          <td>false</td>
+          <td>whether switch is readOnly or not</td>
+        </tr>
+        <tr>
           <td>defaultChecked</td>
           <td>boolean</td>
           <td>false</td>
