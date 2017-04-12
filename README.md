@@ -1,7 +1,7 @@
 # rc-switch
 ---
 
-switch ui component for react
+switch ui component for react.
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
@@ -23,12 +23,9 @@ switch ui component for react
 [download-image]: https://img.shields.io/npm/dm/rc-switch.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-switch
 
-## Screenshots
-
 ## Feature
 
 * support ie8,ie8+,chrome,firefox,safari
-
 
 ## install
 
@@ -37,9 +34,10 @@ switch ui component for react
 ## Usage
 
 ```js
-var Switch = require('rc-switch');
-var React = require('react');
-React.render(<Switch />, container);
+import ReactDOM from 'react-dom';
+import Switch from 'rc-switch';
+
+ReactDOM.render(<Switch />, container);
 ```
 
 ## API
@@ -95,19 +93,7 @@ npm install
 npm start
 ```
 
-## Example
-
-http://localhost:8001/examples/
-
-online example: http://react-component.github.io/switch/examples/
-
-## Test Case
-
-http://localhost:8001/tests/runner.html?coverage
-
-## Coverage
-
-http://localhost:8001/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:8001/tests/runner.html?coverage
+Online demo: http://react-component.github.io/switch/examples/
 
 ## License
 
