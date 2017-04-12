@@ -4,9 +4,8 @@ const ReactDOM = require('react-dom');
 const Switch = require('rc-switch');
 
 function onChange(value) {
-  console.log('switch checked:' + value);
+  console.log(`switch checked: ${value}`); // eslint-disable-line
 }
-
 
 const Test = React.createClass({
   getInitialState() {
@@ -20,16 +19,19 @@ const Test = React.createClass({
     });
   },
   render() {
-    return (<div style={{margin: 20}}>
-      <Switch onChange={onChange}
-        disabled={this.state.disabled}
-        checkedChildren={'开'}
-        unCheckedChildren={'关'}
-      />
-      <div>
-        <button onClick={this.toggle}>toggle disabled</button>
+    return (
+      <div style={{ margin: 20 }}>
+        <Switch
+          onChange={onChange}
+          disabled={this.state.disabled}
+          checkedChildren={'开'}
+          unCheckedChildren={'关'}
+        />
+        <div>
+          <button onClick={this.toggle}>toggle disabled</button>
+        </div>
       </div>
-    </div>);
+    );
   },
 });
 

@@ -6,7 +6,6 @@ function noop() {
 }
 
 class Switch extends Component {
-
   constructor(props) {
     super(props);
 
@@ -71,13 +70,15 @@ class Switch extends Component {
       [`${prefixCls}-disabled`]: disabled,
     });
     return (
-      <span {...restProps}
+      <span
+        {...restProps}
         className={switchClassName}
         tabIndex={disabled ? -1 : 0}
         ref="node"
         onKeyDown={this.handleKeyDown.bind(this)}
         onClick={disabled ? noop : this.toggle.bind(this)}
-        onMouseUp={ this.handleMouseUp.bind(this) }>
+        onMouseUp={ this.handleMouseUp.bind(this) }
+      >
         <span className={`${prefixCls}-inner`}>
           {checked ? checkedChildren : unCheckedChildren}
         </span>
@@ -94,6 +95,8 @@ Switch.propTypes = {
   unCheckedChildren: PropTypes.any,
   onChange: PropTypes.func,
   onMouseUp: PropTypes.func,
+  checked: PropTypes.bool,
+  defaultChecked: PropTypes.bool,
 };
 
 Switch.defaultProps = {

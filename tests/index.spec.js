@@ -24,9 +24,9 @@ describe('rc-switch', () => {
     ReactDOM.unmountComponentAtNode(container);
   });
 
-  it('works', () =>{
+  it('works', () => {
     expect(switcher.state.checked).to.be(false);
-    Simulate.click(React.findDOMNode(switcher));
+    Simulate.click(ReactDOM.findDOMNode(switcher));
     expect(switcher.state.checked).to.be(true);
   });
 });
