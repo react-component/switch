@@ -1,6 +1,6 @@
 {
   "name": "rc-switch",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "switch ui component for react",
   "keywords": [
     "react",
@@ -21,7 +21,7 @@
   "config": {
     "port": 8001
   },
-  "scripts": {    
+  "scripts": {
     "build": "rc-tools run build",
     "gh-pages": "rc-tools run gh-pages",
     "start": "rc-tools run server",
