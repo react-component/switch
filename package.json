@@ -21,16 +21,18 @@
   "config": {
     "port": 8001
   },
-  "scripts": {
+  "scripts": {    
     "build": "rc-tools run build",
     "gh-pages": "rc-tools run gh-pages",
     "start": "rc-tools run server",
     "pub": "rc-tools run pub",
     "lint": "rc-tools run lint",
+    "lint:fix": "rc-tools run lint --fix",
     "karma": "rc-tools run karma",
     "saucelabs": "rc-tools run saucelabs",
-    "browser-test": "rc-tools run browser-test",
-    "browser-test-cover": "rc-tools run browser-test-cover"
+    "test": "rc-tools run test",
+    "chrome-test": "rc-tools run chrome-test",
+    "coverage": "rc-tools run coverage"
   },
   "devDependencies": {
     "expect.js": "~0.3.1",
@@ -38,8 +40,7 @@
     "rc-tools": "5.x",
     "react": "15.x",
     "react-addons-test-utils": "15.x",
-    "react-dom": "~15.x",
-    "xtemplate": "4.6.0"
+    "react-dom": "~15.x"
   },
   "pre-commit": [
     "lint"
