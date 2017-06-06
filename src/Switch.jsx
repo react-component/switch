@@ -35,12 +35,16 @@ class Switch extends Component {
     this.props.onChange(checked);
   }
 
-  toggle() {
+  toggle = () => {
+    const { disabled, onClick } = this.props;
     const checked = !this.state.checked;
-    this.setChecked(checked);
+    if (!disabled) {
+      this.setChecked(checked);
+    }
+    onClick(checked);
   }
 
-  handleKeyDown(e) {
+  handleKeyDown = (e) => {
     if (e.keyCode === 37) {
       this.setChecked(false);
     }
@@ -50,7 +54,7 @@ class Switch extends Component {
   }
 
   // Handle auto focus when click switch in Chrome
-  handleMouseUp(e) {
+  handleMouseUp = (e) => {
     if (this.refs.node) {
       this.refs.node.blur();
     }
@@ -76,9 +80,9 @@ class Switch extends Component {
         className={switchClassName}
         tabIndex={switchTabIndex}
         ref="node"
-        onKeyDown={this.handleKeyDown.bind(this)}
-        onClick={disabled ? noop : this.toggle.bind(this)}
-        onMouseUp={ this.handleMouseUp.bind(this) }
+        onKeyDown={this.handleKeyDown}
+        onClick={this.toggle}
+        onMouseUp={this.handleMouseUp}
       >
         <span className={`${prefixCls}-inner`}>
           {checked ? checkedChildren : unCheckedChildren}
@@ -96,6 +100,7 @@ Switch.propTypes = {
   unCheckedChildren: PropTypes.any,
   onChange: PropTypes.func,
   onMouseUp: PropTypes.func,
+  onClick: PropTypes.func,
   tabIndex: PropTypes.number,
   checked: PropTypes.bool,
   defaultChecked: PropTypes.bool,
@@ -108,6 +113,7 @@ Switch.defaultProps = {
   className: '',
   defaultChecked: false,
   onChange: noop,
+  onClick: noop,
 };
 
 export default Switch;
