@@ -9,6 +9,12 @@
     "switch"
   ],
   "main": "lib/index",
+  "module": "./es/index",
+  "files": [
+    "assets/*.css",
+    "es",
+    "lib"
+  ],
   "homepage": "http://github.com/react-component/switch",
   "repository": {
     "type": "git",
@@ -23,29 +29,42 @@
   },
   "scripts": {
     "build": "rc-tools run build",
+    "compile": "rc-tools run compile --babel-runtime",
     "gh-pages": "rc-tools run gh-pages",
     "start": "rc-tools run server",
-    "pub": "rc-tools run pub",
+    "pub": "rc-tools run pub --babel-runtime",
     "lint": "rc-tools run lint",
-    "lint:fix": "rc-tools run lint --fix",
-    "karma": "rc-tools run karma",
-    "saucelabs": "rc-tools run saucelabs",
-    "test": "rc-tools run test",
-    "chrome-test": "rc-tools run chrome-test",
-    "coverage": "rc-tools run coverage"
+    "test": "jest",
+    "prepublish": "rc-tools run guard",
+    "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
-  "devDependencies": {
-    "expect.js": "~0.3.1",
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "transform": {
+      "\\.jsx?$": "./node_modules/rc-tools/scripts/jestPreprocessor.js"
+    }
+  },
+  "devDependencies": {  
+    "coveralls": "^2.11.15",
+    "enzyme": "^2.6.0",
+    "enzyme-to-json": "^1.5.0",
+    "jest": "^19.0.2",
     "pre-commit": "1.x",
-    "rc-tools": "5.x",
+    "rc-tools": "6.x",
     "react": "15.x",
-    "react-addons-test-utils": "15.x",
-    "react-dom": "~15.x"
+    "react-dom": "15.x",
+    "react-test-renderer": "^15.3.2"
   },
   "pre-commit": [
     "lint"
   ],
   "dependencies": {
+    "babel-runtime": "^6.23.0",
     "classnames": "^2.2.1",
     "prop-types": "^15.5.6"
   }
