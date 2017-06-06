@@ -83,6 +83,18 @@ ReactDOM.render(<Switch />, container);
           <td></td>
           <td>called when switch is checked or unchecked</td>
         </tr>
+        <tr>
+          <td>tabIndex</td>
+          <td>number</td>
+          <td></td>
+          <td>tab-index of switch node</td>
+        </tr>
+        <tr>
+          <td>onClick</td>
+          <td>Function(checked)</td>
+          <td></td>
+          <td>called when switch is clicked</td>
+        </tr>
     </tbody>
 </table>
 
