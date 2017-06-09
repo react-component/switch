@@ -45,11 +45,14 @@ class Switch extends Component {
   }
 
   handleKeyDown = (e) => {
-    if (e.keyCode === 37) {
-      this.setChecked(false);
-    }
-    if (e.keyCode === 39) {
-      this.setChecked(true);
+    if (!this.props.disabled) {
+      if (e.keyCode === 37) { // Left
+        this.setChecked(false);
+      } else if (e.keyCode === 39) { // Right
+        this.setChecked(true);
+      } else if (e.keyCode === 32 || e.keyCode === 13) { // Space, Enter
+        this.toggle();
+      }
     }
   }
 
