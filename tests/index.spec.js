@@ -15,6 +15,14 @@ describe('rc-switch', () => {
     expect(switcher.state().checked).toBe(true);
   });
 
+  it('should toggle upon space and enter key', () => {
+    expect(switcher.state().checked).toBe(false);
+    switcher.simulate('keydown', { keyCode: 32 });
+    expect(switcher.state().checked).toBe(true);
+    switcher.simulate('keydown', { keyCode: 13 });
+    expect(switcher.state().checked).toBe(false);
+  });
+
   it('should change from an initial checked state of true to false on click', () => {
     const wrapper = mount(<Switch defaultChecked/>);
     expect(wrapper.state().checked).toBe(true);
