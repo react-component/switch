@@ -27,6 +27,9 @@ class Switch extends Component {
   }
 
   setChecked(checked) {
+    if (this.props.disabled) {
+      return;
+    }
     if (!('checked' in this.props)) {
       this.setState({
         checked,
@@ -36,20 +39,19 @@ class Switch extends Component {
   }
 
   toggle = () => {
-    const { disabled, onClick } = this.props;
+    const { onClick } = this.props;
     const checked = !this.state.checked;
-    if (!disabled) {
-      this.setChecked(checked);
-    }
+    this.setChecked(checked);
     onClick(checked);
   }
 
   handleKeyDown = (e) => {
-    if (e.keyCode === 37) {
+    if (e.keyCode === 37) { // Left
       this.setChecked(false);
-    }
-    if (e.keyCode === 39) {
+    } else if (e.keyCode === 39) { // Right
       this.setChecked(true);
+    } else if (e.keyCode === 32 || e.keyCode === 13) { // Space, Enter
+      this.toggle();
     }
   }
 

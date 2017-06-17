@@ -23,7 +23,7 @@
   "bugs": {
     "url": "http://github.com/react-component/switch/issues"
   },
-  "licenses": "MIT",
+  "license": "MIT",
   "config": {
     "port": 8001
   },

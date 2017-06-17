@@ -1,21 +1,23 @@
-require('../assets/index.less');
-const React = require('react');
-const ReactDOM = require('react-dom');
-const Switch = require('rc-switch');
+import '../assets/index.less';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Switch from 'rc-switch';
 
 function onChange(value) {
   console.log(`switch checked: ${value}`); // eslint-disable-line
 }
 
-class Test extends React.Component {
+class Demo extends React.Component {
   state = {
     disabled: false,
-  };
+  }
+
   toggle = () => {
     this.setState({
       disabled: !this.state.disabled,
     });
   }
+
   render() {
     return (
       <div style={{ margin: 20 }}>
@@ -25,7 +27,7 @@ class Test extends React.Component {
           checkedChildren={'开'}
           unCheckedChildren={'关'}
         />
-        <div>
+        <div style={{ marginTop: 20 }}>
           <button onClick={this.toggle}>toggle disabled</button>
         </div>
       </div>
@@ -33,4 +35,4 @@ class Test extends React.Component {
   }
 }
 
-ReactDOM.render(<Test />, document.getElementById('__react-content'));
+ReactDOM.render(<Demo />, document.getElementById('__react-content'));
