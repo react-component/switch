@@ -7,17 +7,17 @@ function onChange(value) {
   console.log(`switch checked: ${value}`); // eslint-disable-line
 }
 
-const Test = React.createClass({
-  getInitialState() {
-    return {
-      disabled: false,
-    };
-  },
-  toggle() {
+class Demo extends React.Component {
+  state = {
+    disabled: false,
+  }
+
+  toggle = () => {
     this.setState({
       disabled: !this.state.disabled,
     });
-  },
+  }
+
   render() {
     return (
       <div style={{ margin: 20 }}>
@@ -32,7 +32,7 @@ const Test = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
-ReactDOM.render(<Test />, document.getElementById('__react-content'));
+ReactDOM.render(<Demo />, document.getElementById('__react-content'));
