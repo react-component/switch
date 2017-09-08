@@ -57,12 +57,16 @@ class Switch extends Component {
 
   // Handle auto focus when click switch in Chrome
   handleMouseUp = (e) => {
-    if (this.refs.node) {
-      this.refs.node.blur();
+    if (this.node) {
+      this.node.blur();
     }
     if (this.props.onMouseUp) {
       this.props.onMouseUp(e);
     }
+  }
+
+  saveNode = (node) => {
+    this.node = node;
   }
 
   render() {
@@ -81,7 +85,7 @@ class Switch extends Component {
         {...restProps}
         className={switchClassName}
         tabIndex={switchTabIndex}
-        ref="node"
+        ref={this.saveNode}
         onKeyDown={this.handleKeyDown}
         onClick={this.toggle}
         onMouseUp={this.handleMouseUp}
