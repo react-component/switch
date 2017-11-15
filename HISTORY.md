@@ -1,3 +1,7 @@
+## 1.6.0
+
+- Add `focus()` `blur()` and `autoFocus`.
+
 ## 1.5.0
 
 - Add `onClick` and `tabIndex`.
