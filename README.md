@@ -95,6 +95,12 @@ ReactDOM.render(<Switch />, container);
           <td></td>
           <td>called when switch is clicked</td>
         </tr>
+        <tr>
+          <td>autoFocus</td>
+          <td>boolean</td>
+          <td></td>
+          <td>get focus when mounts</td>
+        </tr>
     </tbody>
 </table>
 

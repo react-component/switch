@@ -57,4 +57,31 @@ describe('rc-switch', () => {
     expect(wrapper.state().checked).toBe(true);
     expect(onChange.mock.calls.length).toBe(0);
   });
+
+  it('focus()', () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    const handleFocus = jest.fn();
+    const wrapper = mount(<Switch onFocus={handleFocus} />, { attachTo: container });
+    wrapper.instance().focus();
+    expect(handleFocus).toBeCalled();
+  });
+
+  it('blur()', () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    const handleBlur = jest.fn();
+    const wrapper = mount(<Switch onBlur={handleBlur} />, { attachTo: container });
+    wrapper.instance().focus();
+    wrapper.instance().blur();
+    expect(handleBlur).toBeCalled();
+  });
+
+  it('autoFocus', () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    const handleFocus = jest.fn();
+    mount(<Switch autoFocus onFocus={handleFocus} />, { attachTo: container });
+    expect(handleFocus).toBeCalled();
+  });
 });

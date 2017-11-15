@@ -18,6 +18,13 @@ class Switch extends Component {
     this.state = { checked };
   }
 
+  componentDidMount() {
+    const { autoFocus, disabled } = this.props;
+    if (autoFocus && !disabled) {
+      this.focus();
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if ('checked' in nextProps) {
       this.setState({
@@ -65,6 +72,14 @@ class Switch extends Component {
     }
   }
 
+  focus() {
+    this.node.focus();
+  }
+
+  blur() {
+    this.node.blur();
+  }
+
   saveNode = (node) => {
     this.node = node;
   }
@@ -110,6 +125,7 @@ Switch.propTypes = {
   tabIndex: PropTypes.number,
   checked: PropTypes.bool,
   defaultChecked: PropTypes.bool,
+  autoFocus: PropTypes.bool,
 };
 
 Switch.defaultProps = {
