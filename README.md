@@ -101,6 +101,12 @@ ReactDOM.render(<Switch />, container);
           <td></td>
           <td>get focus when mounts</td>
         </tr>
+        <tr>
+          <td>disabled</td>
+          <td>boolean</td>
+          <td>false</td>
+          <td>whether switch is disabled</td>
+        </tr>
     </tbody>
 </table>
 
