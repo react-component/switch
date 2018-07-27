@@ -58,9 +58,9 @@ describe('rc-switch', () => {
     expect(onChange.mock.calls.length).toBe(0);
   });
 
-  it('should support extra node', () => {
-    const wrapper = mount(<Switch extra={<span className="extra">extra-node</span>}/>);
-    expect(wrapper.find('.extra').text()).toBe('extra-node');
+  it('should support loading icon node', () => {
+    const wrapper = mount(<Switch loadingIcon={<span className="extra">loading</span>}/>);
+    expect(wrapper.find('.extra').text()).toBe('loading');
   });
 
   it('focus()', () => {
