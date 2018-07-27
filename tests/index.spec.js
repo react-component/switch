@@ -58,6 +58,11 @@ describe('rc-switch', () => {
     expect(onChange.mock.calls.length).toBe(0);
   });
 
+  it('should support extra node', () => {
+    const wrapper = mount(<Switch extra={<span className="extra">extra-node</span>}/>);
+    expect(wrapper.find('.extra').text()).toBe('extra-node');
+  });
+
   it('focus()', () => {
     const container = document.createElement('div');
     document.body.appendChild(container);

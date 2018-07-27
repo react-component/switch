@@ -107,6 +107,12 @@ ReactDOM.render(<Switch />, container);
           <td>false</td>
           <td>whether switch is disabled</td>
         </tr>
+        <tr>
+          <td>extra</td>
+          <td>React.ReactNode</td>
+          <td></td>
+          <td>specific the extra node. generally used in loading icon.</td>
+        </tr>
     </tbody>
 </table>
 
