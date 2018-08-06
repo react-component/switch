@@ -1,3 +1,7 @@
+## 1.7.0
+
+- Add `loadingIcon`.
+
 ## 1.6.0
 
 - Add `focus()` `blur()` and `autoFocus`.
