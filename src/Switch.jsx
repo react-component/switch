@@ -95,6 +95,7 @@ class Switch extends Component {
     return (
       <button
         {...restProps}
+        type="button"
         role="switch"
         aria-checked={checked}
         disabled={disabled}
