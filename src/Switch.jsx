@@ -57,8 +57,6 @@ class Switch extends Component {
       this.setChecked(false);
     } else if (e.keyCode === 39) { // Right
       this.setChecked(true);
-    } else if (e.keyCode === 32 || e.keyCode === 13) { // Space, Enter
-      this.toggle();
     }
   }
 
@@ -86,9 +84,8 @@ class Switch extends Component {
 
   render() {
     const { className, prefixCls, disabled, loadingIcon,
-      checkedChildren, tabIndex, unCheckedChildren, ...restProps } = this.props;
+      checkedChildren, unCheckedChildren, ...restProps } = this.props;
     const checked = this.state.checked;
-    const switchTabIndex = disabled ? -1 : (tabIndex || 0);
     const switchClassName = classNames({
       [className]: !!className,
       [prefixCls]: true,
@@ -96,10 +93,13 @@ class Switch extends Component {
       [`${prefixCls}-disabled`]: disabled,
     });
     return (
-      <span
+      <button
         {...restProps}
+        type="button"
+        role="switch"
+        aria-checked={checked}
+        disabled={disabled}
         className={switchClassName}
-        tabIndex={switchTabIndex}
         ref={this.saveNode}
         onKeyDown={this.handleKeyDown}
         onClick={this.toggle}
@@ -109,7 +109,7 @@ class Switch extends Component {
         <span className={`${prefixCls}-inner`}>
           {checked ? checkedChildren : unCheckedChildren}
         </span>
-      </span>
+      </button>
     );
   }
 }
