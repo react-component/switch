@@ -5,6 +5,7 @@
   width: 44px;
   height: 22px;
   line-height: 20px;
+  padding: 0;
   vertical-align: middle;
   border-radius: 20px 20px;
   border: 1px solid #ccc;
@@ -17,6 +18,7 @@
   font-size: 12px;
   position: absolute;
   left: 24px;
+  top: 0;
 }
 .rc-switch:after {
   position: absolute;
