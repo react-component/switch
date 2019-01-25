@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-const classNames = require('classnames');
+import { polyfill } from 'react-lifecycles-compat';
 
-function noop() {
-}
+const classNames = require('classnames');
 
 class Switch extends Component {
   constructor(props) {
@@ -25,16 +24,20 @@ class Switch extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(nextProps) {
+    const newState = {};
+    const { checked } = nextProps;
+
     if ('checked' in nextProps) {
-      this.setState({
-        checked: !!nextProps.checked,
-      });
+      newState.checked = !!checked;
     }
+
+    return newState;
   }
 
-  setChecked(checked) {
-    if (this.props.disabled) {
+  setChecked(checked, e) {
+    const { disabled, onChange } = this.props;
+    if (disabled) {
       return;
     }
     if (!('checked' in this.props)) {
@@ -42,33 +45,45 @@ class Switch extends Component {
         checked,
       });
     }
-    this.props.onChange(checked);
-  }
-
-  toggle = () => {
-    const { onClick } = this.props;
-    const checked = !this.state.checked;
-    this.setChecked(checked);
-    onClick(checked);
-  }
-
-  handleKeyDown = (e) => {
-    if (e.keyCode === 37) { // Left
-      this.setChecked(false);
-    } else if (e.keyCode === 39) { // Right
-      this.setChecked(true);
+    if (onChange) {
+      onChange(checked, e);
     }
   }
 
+  handleClick = e => {
+    const { checked } = this.state;
+    const { onClick } = this.props;
+    const newChecked = !checked;
+    this.setChecked(newChecked, e);
+    if (onClick) {
+      onClick(newChecked, e);
+    }
+  };
+
+  handleKeyDown = e => {
+    if (e.keyCode === 37) {
+      // Left
+      this.setChecked(false, e);
+    } else if (e.keyCode === 39) {
+      // Right
+      this.setChecked(true, e);
+    }
+  };
+
   // Handle auto focus when click switch in Chrome
-  handleMouseUp = (e) => {
+  handleMouseUp = e => {
+    const { onMouseUp } = this.props;
     if (this.node) {
       this.node.blur();
     }
-    if (this.props.onMouseUp) {
-      this.props.onMouseUp(e);
+    if (onMouseUp) {
+      onMouseUp(e);
     }
-  }
+  };
+
+  saveNode = node => {
+    this.node = node;
+  };
 
   focus() {
     this.node.focus();
@@ -78,14 +93,17 @@ class Switch extends Component {
     this.node.blur();
   }
 
-  saveNode = (node) => {
-    this.node = node;
-  }
-
   render() {
-    const { className, prefixCls, disabled, loadingIcon,
-      checkedChildren, unCheckedChildren, ...restProps } = this.props;
-    const checked = this.state.checked;
+    const {
+      className,
+      prefixCls,
+      disabled,
+      loadingIcon,
+      checkedChildren,
+      unCheckedChildren,
+      ...restProps
+    } = this.props;
+    const { checked } = this.state;
     const switchClassName = classNames({
       [className]: !!className,
       [prefixCls]: true,
@@ -102,7 +120,7 @@ class Switch extends Component {
         className={switchClassName}
         ref={this.saveNode}
         onKeyDown={this.handleKeyDown}
-        onClick={this.toggle}
+        onClick={this.handleClick}
         onMouseUp={this.handleMouseUp}
       >
         {loadingIcon}
@@ -136,8 +154,8 @@ Switch.defaultProps = {
   unCheckedChildren: null,
   className: '',
   defaultChecked: false,
-  onChange: noop,
-  onClick: noop,
 };
+
+polyfill(Switch);
 
 export default Switch;
