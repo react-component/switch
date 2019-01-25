@@ -79,7 +79,7 @@ ReactDOM.render(<Switch />, container);
           <td>whether switch is checked on init</td>
         <tr>
           <td>onChange</td>
-          <td>Function</td>
+          <td>Function(checked, event)</td>
           <td></td>
           <td>called when switch is checked or unchecked</td>
         </tr>
@@ -91,7 +91,7 @@ ReactDOM.render(<Switch />, container);
         </tr>
         <tr>
           <td>onClick</td>
-          <td>Function(checked)</td>
+          <td>Function(checked, event)</td>
           <td></td>
           <td>called when switch is clicked</td>
         </tr>

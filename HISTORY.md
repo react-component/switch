@@ -1,3 +1,7 @@
+## 1.9.0
+
+- onChange and onClick support pass event as argument.
+
 ## 1.7.0
 
 - Add `loadingIcon`.
