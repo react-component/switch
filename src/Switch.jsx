@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { polyfill } from 'react-lifecycles-compat';
 const classNames = require('classnames');
-
-function noop() {
-}
 
 class Switch extends Component {
   constructor(props) {
@@ -25,16 +23,20 @@ class Switch extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(nextProps) {
+    const newState = {};
+    const { checked } = nextProps;
+
     if ('checked' in nextProps) {
-      this.setState({
-        checked: !!nextProps.checked,
-      });
+      newState.checked = !!checked;
     }
+
+    return newState;
   }
 
-  setChecked(checked) {
-    if (this.props.disabled) {
+  setChecked(checked, e) {
+    const { disabled, onChange } = this.props;
+    if (disabled) {
       return;
     }
     if (!('checked' in this.props)) {
@@ -42,21 +44,26 @@ class Switch extends Component {
         checked,
       });
     }
-    this.props.onChange(checked);
+    if (onChange) {
+      onChange(checked, e);
+    }
   }
 
-  toggle = () => {
+  handleClick = (e) => {
+    const { checked } = this.state;
     const { onClick } = this.props;
-    const checked = !this.state.checked;
-    this.setChecked(checked);
-    onClick(checked);
+    const newChecked = !checked;
+    this.setChecked(newChecked, e);
+    if (onClick) {
+      onClick(newChecked, e);
+    }
   }
 
   handleKeyDown = (e) => {
     if (e.keyCode === 37) { // Left
-      this.setChecked(false);
+      this.setChecked(false, e);
     } else if (e.keyCode === 39) { // Right
-      this.setChecked(true);
+      this.setChecked(true, e);
     }
   }
 
@@ -102,7 +109,7 @@ class Switch extends Component {
         className={switchClassName}
         ref={this.saveNode}
         onKeyDown={this.handleKeyDown}
-        onClick={this.toggle}
+        onClick={this.handleClick}
         onMouseUp={this.handleMouseUp}
       >
         {loadingIcon}
@@ -136,8 +143,8 @@ Switch.defaultProps = {
   unCheckedChildren: null,
   className: '',
   defaultChecked: false,
-  onChange: noop,
-  onClick: noop,
 };
+
+polyfill(Switch);
 
 export default Switch;

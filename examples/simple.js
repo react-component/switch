@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Switch from 'rc-switch';
 
-function onChange(value) {
-  console.log(`switch checked: ${value}`); // eslint-disable-line
+function onChange(value, event) {
+  console.log(`switch checked: ${value}`, event); // eslint-disable-line
 }
 
 class Demo extends React.Component {
@@ -23,6 +23,7 @@ class Demo extends React.Component {
       <div style={{ margin: 20 }}>
         <Switch
           onChange={onChange}
+          onClick={onChange}
           disabled={this.state.disabled}
           checkedChildren={'开'}
           unCheckedChildren={'关'}

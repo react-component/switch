@@ -34,10 +34,10 @@ describe('rc-switch', () => {
     const onClick = jest.fn();
     const wrapper = mount(<Switch onClick={onClick} />);
     wrapper.simulate('click');
-    expect(onClick).toBeCalledWith(true);
+    expect(onClick).toBeCalledWith(true, expect.objectContaining({ type: 'click' }));
     expect(onClick.mock.calls.length).toBe(1);
     wrapper.simulate('click');
-    expect(onClick).toBeCalledWith(false);
+    expect(onClick).toBeCalledWith(false, expect.objectContaining({ type: 'click' }));
     expect(onClick.mock.calls.length).toBe(2);
   });
 

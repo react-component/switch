@@ -27,3 +27,4 @@ lib
 es
 yarn.lock
 package-lock.json
+coverage/

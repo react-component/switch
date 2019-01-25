@@ -39,7 +39,9 @@
     "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "jest": {
-    "setupFiles": ["./tests/setup.js"],
+    "setupFiles": [
+      "./tests/setup.js"
+    ],
     "collectCoverageFrom": [
       "src/**/*"
     ],
@@ -72,6 +74,7 @@
   "dependencies": {
     "babel-runtime": "^6.23.0",
     "classnames": "^2.2.1",
-    "prop-types": "^15.5.6"
+    "prop-types": "^15.5.6",
+    "react-lifecycles-compat": "^3.0.4"
   }
 }
