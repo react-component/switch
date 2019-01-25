@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-import Switch from '../index';
 import React from 'react';
 import { mount } from 'enzyme';
+import Switch from '../index';
 
 describe('rc-switch', () => {
   let switcher;
@@ -24,7 +24,7 @@ describe('rc-switch', () => {
   });
 
   it('should change from an initial checked state of true to false on click', () => {
-    const wrapper = mount(<Switch defaultChecked/>);
+    const wrapper = mount(<Switch defaultChecked />);
     expect(wrapper.state().checked).toBe(true);
     wrapper.simulate('click');
     expect(wrapper.state().checked).toBe(false);
@@ -43,7 +43,7 @@ describe('rc-switch', () => {
 
   it('should not toggle when clicked in a disabled state', () => {
     const onChange = jest.fn();
-    const wrapper = mount(<Switch disabled checked onChange={onChange}/>);
+    const wrapper = mount(<Switch disabled checked onChange={onChange} />);
     expect(wrapper.state().checked).toBe(true);
     wrapper.simulate('click');
     expect(wrapper.state().checked).toBe(true);
@@ -51,7 +51,7 @@ describe('rc-switch', () => {
   });
 
   it('should support loading icon node', () => {
-    const wrapper = mount(<Switch loadingIcon={<span className="extra">loading</span>}/>);
+    const wrapper = mount(<Switch loadingIcon={<span className="extra">loading</span>} />);
     expect(wrapper.find('.extra').text()).toBe('loading');
   });
 
