@@ -45,7 +45,7 @@
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.1",
     "enzyme-to-json": "^3.0.0",
-    "lint-staged": "^8.1.0",
+    "lint-staged": "^9.0.0",
     "pre-commit": "1.x",
     "rc-tools": "^9.3.4",
     "react": "^16.0.0",
