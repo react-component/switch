@@ -1,4 +1,5 @@
 # rc-switch
+
 ---
 
 switch ui component for react.
@@ -25,7 +26,22 @@ switch ui component for react.
 
 ## Feature
 
-* support ie8,ie8+,chrome,firefox,safari
+- support ie8,ie8+,chrome,firefox,safari
+
+## API
+
+| Property       | Type                     | Default   | Description                                              |
+| -------------- | ------------------------ | --------- | -------------------------------------------------------- |
+| prefixCls      | String                   | rc-switch |                                                          |
+| className      | String                   | ''        | additional class name of root node                       |
+| checked        | boolean                  | false     | whether switch is checked                                |
+| defaultChecked | boolean                  | false     | whether switch is checked on init                        |
+| onChange       | Function(checked, event) |           | called when switch is checked or unchecked               |
+| tabIndex       | number                   |           | tab-index of switch node                                 |
+| onClick        | Function(checked, event) |           | called when switch is clicked                            |
+| autoFocus      | boolean                  |           | get focus when mounts                                    |
+| disabled       | boolean                  | false     | whether switch is disabled                               |
+| loadingIcon    | React.ReactNode          |           | specific the extra node. generally used in loading icon. |
 
 ## install
 
@@ -39,82 +55,6 @@ import Switch from 'rc-switch';
 
 ReactDOM.render(<Switch />, container);
 ```
-
-## API
-
-### props
-
-<table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <th style="width: 100px;">name</th>
-        <th style="width: 50px;">type</th>
-        <th style="width: 50px;">default</th>
-        <th>description</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td>prefixCls</td>
-          <td>String</td>
-          <td>rc-switch</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>className</td>
-          <td>String</td>
-          <td>''</td>
-          <td>additional class name of root node</td>
-        </tr>
-        <tr>
-          <td>checked</td>
-          <td>boolean</td>
-          <td>false</td>
-          <td>whether switch is checked</td>
-        </tr>
-        <tr>
-          <td>defaultChecked</td>
-          <td>boolean</td>
-          <td>false</td>
-          <td>whether switch is checked on init</td>
-        <tr>
-          <td>onChange</td>
-          <td>Function(checked, event)</td>
-          <td></td>
-          <td>called when switch is checked or unchecked</td>
-        </tr>
-        <tr>
-          <td>tabIndex</td>
-          <td>number</td>
-          <td></td>
-          <td>tab-index of switch node</td>
-        </tr>
-        <tr>
-          <td>onClick</td>
-          <td>Function(checked, event)</td>
-          <td></td>
-          <td>called when switch is clicked</td>
-        </tr>
-        <tr>
-          <td>autoFocus</td>
-          <td>boolean</td>
-          <td></td>
-          <td>get focus when mounts</td>
-        </tr>
-        <tr>
-          <td>disabled</td>
-          <td>boolean</td>
-          <td>false</td>
-          <td>whether switch is disabled</td>
-        </tr>
-        <tr>
-          <td>loadingIcon</td>
-          <td>React.ReactNode</td>
-          <td></td>
-          <td>specific the extra node. generally used in loading icon.</td>
-        </tr>
-    </tbody>
-</table>
 
 ## Development
 

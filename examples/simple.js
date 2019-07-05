@@ -1,13 +1,13 @@
 import '../assets/index.less';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Switch from 'rc-switch';
+import Switch from '../src/index';
 
 function onChange(value, event) {
-  console.log(`switch checked: ${value}`, event); // eslint-disable-line
+  // eslint-disable-next-line no-console
+  console.log(`switch checked: ${value}`, event);
 }
 
-class Demo extends React.Component {
+export default class Simple extends React.Component {
   state = {
     disabled: false,
   };
@@ -39,5 +39,3 @@ class Demo extends React.Component {
     );
   }
 }
-
-ReactDOM.render(<Demo />, document.getElementById('__react-content'));

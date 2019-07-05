@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { polyfill } from 'react-lifecycles-compat';
-
-const classNames = require('classnames');
+import classNames from 'classnames';
 
 class Switch extends Component {
   constructor(props) {
@@ -132,6 +131,7 @@ class Switch extends Component {
   }
 }
 
+/* eslint-disable react/require-default-props */
 Switch.propTypes = {
   className: PropTypes.string,
   prefixCls: PropTypes.string,
@@ -147,6 +147,7 @@ Switch.propTypes = {
   autoFocus: PropTypes.bool,
   loadingIcon: PropTypes.node,
 };
+/* eslint-enable */
 
 Switch.defaultProps = {
   prefixCls: 'rc-switch',
