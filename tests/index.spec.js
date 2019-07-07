@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
 import Switch from '../index';
 
@@ -34,10 +34,10 @@ describe('rc-switch', () => {
     const onClick = jest.fn();
     const wrapper = mount(<Switch onClick={onClick} />);
     wrapper.simulate('click');
-    expect(onClick).toBeCalledWith(true, expect.objectContaining({ type: 'click' }));
+    expect(onClick).toHaveBeenCalledWith(true, expect.objectContaining({ type: 'click' }));
     expect(onClick.mock.calls.length).toBe(1);
     wrapper.simulate('click');
-    expect(onClick).toBeCalledWith(false, expect.objectContaining({ type: 'click' }));
+    expect(onClick).toHaveBeenCalledWith(false, expect.objectContaining({ type: 'click' }));
     expect(onClick.mock.calls.length).toBe(2);
   });
 
@@ -61,7 +61,7 @@ describe('rc-switch', () => {
     const handleFocus = jest.fn();
     const wrapper = mount(<Switch onFocus={handleFocus} />, { attachTo: container });
     wrapper.instance().focus();
-    expect(handleFocus).toBeCalled();
+    expect(handleFocus).toHaveBeenCalled();
   });
 
   it('blur()', () => {
@@ -71,7 +71,7 @@ describe('rc-switch', () => {
     const wrapper = mount(<Switch onBlur={handleBlur} />, { attachTo: container });
     wrapper.instance().focus();
     wrapper.instance().blur();
-    expect(handleBlur).toBeCalled();
+    expect(handleBlur).toHaveBeenCalled();
   });
 
   it('autoFocus', () => {
@@ -79,6 +79,6 @@ describe('rc-switch', () => {
     document.body.appendChild(container);
     const handleFocus = jest.fn();
     mount(<Switch autoFocus onFocus={handleFocus} />, { attachTo: container });
-    expect(handleFocus).toBeCalled();
+    expect(handleFocus).toHaveBeenCalled();
   });
 });

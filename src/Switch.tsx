@@ -1,12 +1,45 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, MouseEventHandler } from 'react';
 import { polyfill } from 'react-lifecycles-compat';
 import classNames from 'classnames';
 
-class Switch extends Component {
+export type SwitchChangeEventHandler = (checked: boolean, event: MouseEvent) => void;
+export type SwitchClickEventHandler = SwitchChangeEventHandler;
+
+interface SwitchProps {
+  className?: string;
+  prefixCls?: string;
+  disabled?: boolean;
+  checkedChildren?: React.ReactNode;
+  unCheckedChildren?: React.ReactNode;
+  onChange?: SwitchChangeEventHandler;
+  onMouseUp: MouseEventHandler<HTMLButtonElement>;
+  onClick?: SwitchClickEventHandler;
+  tabIndex?: number;
+  checked?: boolean;
+  defaultChecked?: boolean;
+  autoFocus?: boolean;
+  loadingIcon: React.ReactNode;
+  style?: React.CSSProperties;
+  title?: string;
+}
+
+interface SwitchState {
+  checked: boolean;
+}
+
+class Switch extends Component<SwitchProps, SwitchState> {
+  private node: React.RefObject<HTMLButtonElement>;
+
+  static defaultProps = {
+    prefixCls: 'rc-switch',
+    checkedChildren: null,
+    unCheckedChildren: null,
+    className: '',
+    defaultChecked: false,
+  };
+
   constructor(props) {
     super(props);
-
     let checked = false;
     if ('checked' in props) {
       checked = !!props.checked;
@@ -14,6 +47,7 @@ class Switch extends Component {
       checked = !!props.defaultChecked;
     }
     this.state = { checked };
+    this.node = React.createRef();
   }
 
   componentDidMount() {
@@ -24,13 +58,11 @@ class Switch extends Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    const newState = {};
     const { checked } = nextProps;
-
+    const newState: Partial<SwitchState> = {};
     if ('checked' in nextProps) {
       newState.checked = !!checked;
     }
-
     return newState;
   }
 
@@ -72,24 +104,22 @@ class Switch extends Component {
   // Handle auto focus when click switch in Chrome
   handleMouseUp = e => {
     const { onMouseUp } = this.props;
-    if (this.node) {
-      this.node.blur();
-    }
+    this.blur();
     if (onMouseUp) {
       onMouseUp(e);
     }
   };
 
-  saveNode = node => {
-    this.node = node;
-  };
-
   focus() {
-    this.node.focus();
+    if (this.node.current) {
+      this.node.current.focus();
+    }
   }
 
   blur() {
-    this.node.blur();
+    if (this.node.current) {
+      this.node.current.blur();
+    }
   }
 
   render() {
@@ -100,6 +130,7 @@ class Switch extends Component {
       loadingIcon,
       checkedChildren,
       unCheckedChildren,
+      onChange,
       ...restProps
     } = this.props;
     const { checked } = this.state;
@@ -117,7 +148,7 @@ class Switch extends Component {
         aria-checked={checked}
         disabled={disabled}
         className={switchClassName}
-        ref={this.saveNode}
+        ref={this.node}
         onKeyDown={this.handleKeyDown}
         onClick={this.handleClick}
         onMouseUp={this.handleMouseUp}
@@ -130,32 +161,6 @@ class Switch extends Component {
     );
   }
 }
-
-/* eslint-disable react/require-default-props */
-Switch.propTypes = {
-  className: PropTypes.string,
-  prefixCls: PropTypes.string,
-  disabled: PropTypes.bool,
-  checkedChildren: PropTypes.any,
-  unCheckedChildren: PropTypes.any,
-  onChange: PropTypes.func,
-  onMouseUp: PropTypes.func,
-  onClick: PropTypes.func,
-  tabIndex: PropTypes.number,
-  checked: PropTypes.bool,
-  defaultChecked: PropTypes.bool,
-  autoFocus: PropTypes.bool,
-  loadingIcon: PropTypes.node,
-};
-/* eslint-enable */
-
-Switch.defaultProps = {
-  prefixCls: 'rc-switch',
-  checkedChildren: null,
-  unCheckedChildren: null,
-  className: '',
-  defaultChecked: false,
-};
 
 polyfill(Switch);
 
