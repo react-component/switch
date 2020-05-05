@@ -2,7 +2,7 @@
 
 ---
 
-switch ui component for react.
+Switch ui component for react.
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
@@ -27,7 +27,19 @@ switch ui component for react.
 [bundlephobia-url]: https://bundlephobia.com/result?p=rc-switch
 [bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-switch
 
-## Feature
+## Install
+
+[![rc-switch](https://nodei.co/npm/rc-switch.png)](https://npmjs.org/package/rc-switch)
+
+## Usage
+
+```js
+import Switch from 'rc-switch';
+
+export default () => <Switch />;
+```
+
+## Compatibility
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/electron/electron_48x48.png" alt="Electron" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Electron |
 | --- | --- | --- | --- | --- |
@@ -47,19 +59,6 @@ switch ui component for react.
 | autoFocus      | boolean                  |           | get focus when mounts                                    |
 | disabled       | boolean                  | false     | whether switch is disabled                               |
 | loadingIcon    | React.ReactNode          |           | specific the extra node. generally used in loading icon. |
-
-## install
-
-[![rc-switch](https://nodei.co/npm/rc-switch.png)](https://npmjs.org/package/rc-switch)
-
-## Usage
-
-```js
-import ReactDOM from 'react-dom';
-import Switch from 'rc-switch';
-
-ReactDOM.render(<Switch />, container);
-```
 
 ## Development
 
