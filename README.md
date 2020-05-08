@@ -14,8 +14,10 @@ Switch ui component for react.
 
 [npm-image]: http://img.shields.io/npm/v/rc-switch.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-switch
-[travis-image]: https://img.shields.io/travis/react-component/switch.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/react-component/notification/master?style=flat-square
 [travis-url]: https://travis-ci.org/react-component/switch
+[circleci-image]: https://img.shields.io/circleci/react-component/notification/master?style=flat-square
+[circleci-url]: https://circleci.com/gh/react-component/switch
 [coveralls-image]: https://img.shields.io/coveralls/react-component/switch.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/react-component/switch?branch=master
 [david-url]: https://david-dm.org/react-component/switch
