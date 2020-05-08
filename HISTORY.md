@@ -1,3 +1,7 @@
+## 2.0.0
+
+- Remove `react-lifecycles-compat`.
+
 ## 1.9.0
 
 - onChange and onClick support pass event as argument.
