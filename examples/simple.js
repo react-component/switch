@@ -25,7 +25,6 @@ export default class Simple extends React.Component {
       <div style={{ margin: 20 }}>
         <Switch
           onChange={onChange}
-          onClick={onChange}
           disabled={disabled}
           checkedChildren="开"
           unCheckedChildren="关"

@@ -4,45 +4,44 @@ import { mount } from 'enzyme';
 import Switch from '../index';
 
 describe('rc-switch', () => {
-  let switcher;
-  const checkedChildren = <span className="checked" />;
-  const uncheckedChildren = <span className="unchecked" />;
-  beforeEach(() => {
-    switcher = mount(
-      <Switch checkedChildren={checkedChildren} uncheckedChildren={uncheckedChildren} />,
+  function createSwitch(props = {}) {
+    return mount(
+      <Switch
+        checkedChildren={<span className="checked" />}
+        unCheckedChildren={<span className="unchecked" />}
+        {...props}
+      />,
     );
-  });
+  }
 
   it('works', () => {
-    expect(switcher.find('.unchecked')).toBeTruthy();
-    switcher.simulate('click');
-    expect(switcher.find('.checked')).toBeTruthy();
+    const wrapper = createSwitch();
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    wrapper.simulate('click');
+    expect(wrapper.exists('.checked')).toBeTruthy();
   });
 
   it('should be checked upon right key and unchecked on left key', () => {
-    expect(switcher.find('.unchecked')).toBeTruthy();
-    switcher.simulate('keydown', { keyCode: 39 });
-    expect(switcher.find('.checked')).toBeTruthy();
-    switcher.simulate('keydown', { keyCode: 37 });
-    expect(switcher.find('.unchecked')).toBeTruthy();
+    const wrapper = createSwitch();
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    wrapper.simulate('keydown', { keyCode: 39 });
+    expect(wrapper.exists('.checked')).toBeTruthy();
+    wrapper.simulate('keydown', { keyCode: 37 });
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
   });
 
   it('should change from an initial checked state of true to false on click', () => {
-    const wrapper = mount(
-      <Switch
-        defaultChecked
-        checkedChildren={checkedChildren}
-        uncheckedChildren={uncheckedChildren}
-      />,
-    );
-    expect(switcher.find('.checked')).toBeTruthy();
+    const onChange = jest.fn();
+    const wrapper = createSwitch({ defaultChecked: true, onChange });
+    expect(wrapper.exists('.checked')).toBeTruthy();
     wrapper.simulate('click');
-    expect(switcher.find('.unchecked')).toBeTruthy();
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    expect(onChange.mock.calls.length).toBe(1);
   });
 
   it('should support onClick', () => {
     const onClick = jest.fn();
-    const wrapper = mount(<Switch onClick={onClick} />);
+    const wrapper = createSwitch({ onClick });
     wrapper.simulate('click');
     expect(onClick).toHaveBeenCalledWith(true, expect.objectContaining({ type: 'click' }));
     expect(onClick.mock.calls.length).toBe(1);
@@ -53,18 +52,10 @@ describe('rc-switch', () => {
 
   it('should not toggle when clicked in a disabled state', () => {
     const onChange = jest.fn();
-    const wrapper = mount(
-      <Switch
-        disabled
-        checked
-        onChange={onChange}
-        checkedChildren={checkedChildren}
-        uncheckedChildren={uncheckedChildren}
-      />,
-    );
-    expect(switcher.find('.checked')).toBeTruthy();
+    const wrapper = createSwitch({ disabled: true, checked: true, onChange });
+    expect(wrapper.exists('.checked')).toBeTruthy();
     wrapper.simulate('click');
-    expect(switcher.find('.checked')).toBeTruthy();
+    expect(wrapper.exists('.checked')).toBeTruthy();
     expect(onChange.mock.calls.length).toBe(0);
   });
 
@@ -102,7 +93,15 @@ describe('rc-switch', () => {
     const container = document.createElement('div');
     document.body.appendChild(container);
     const handleFocus = jest.fn();
-    mount(<Switch autoFocus onFocus={handleFocus} />, { attachTo: container });
+    const wrapper = mount(<Switch autoFocus onFocus={handleFocus} />, { attachTo: container });
     expect(handleFocus).toHaveBeenCalled();
+  });
+
+  it('disabled', () => {
+    const wrapper = createSwitch({ disabled: true });
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    wrapper.simulate('keydown', { keyCode: 39 });
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    wrapper.simulate('mouseup');
   });
 });

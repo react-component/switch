@@ -23,8 +23,11 @@ interface SwitchProps {
 }
 
 const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>((props, ref) => {
+  const mergedRef = (ref as any) || React.createRef<HTMLButtonElement>();
+
   let initChecked = false;
   if ('checked' in props) {
+    console.log('object');
     initChecked = !!props.checked;
   } else {
     initChecked = !!props.defaultChecked;
@@ -78,10 +81,9 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>((props, ref) => 
 
   // Handle auto focus when click switch in Chrome
   const handleMouseUp = e => {
-    const { onMouseUp } = props;
-    blur();
-    if (onMouseUp) {
-      onMouseUp(e);
+    (mergedRef.current as any).blur();
+    if (props.onMouseUp) {
+      props.onMouseUp(e);
     }
   };
 
@@ -111,7 +113,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>((props, ref) => 
       aria-checked={checked}
       disabled={disabled}
       className={switchClassName}
-      ref={ref}
+      ref={mergedRef}
       onKeyDown={handleKeyDown}
       onClick={handleClick}
       onMouseUp={handleMouseUp}
