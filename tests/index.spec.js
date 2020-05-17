@@ -5,29 +5,39 @@ import Switch from '../index';
 
 describe('rc-switch', () => {
   let switcher;
+  const checkedChildren = <span className="checked" />;
+  const uncheckedChildren = <span className="unchecked" />;
   beforeEach(() => {
-    switcher = mount(<Switch />);
+    switcher = mount(
+      <Switch checkedChildren={checkedChildren} uncheckedChildren={uncheckedChildren} />,
+    );
   });
 
   it('works', () => {
-    expect(switcher.state().checked).toBe(false);
+    expect(switcher.find('.unchecked')).toBeTruthy();
     switcher.simulate('click');
-    expect(switcher.state().checked).toBe(true);
+    expect(switcher.find('.checked')).toBeTruthy();
   });
 
   it('should be checked upon right key and unchecked on left key', () => {
-    expect(switcher.state().checked).toBe(false);
+    expect(switcher.find('.unchecked')).toBeTruthy();
     switcher.simulate('keydown', { keyCode: 39 });
-    expect(switcher.state().checked).toBe(true);
+    expect(switcher.find('.checked')).toBeTruthy();
     switcher.simulate('keydown', { keyCode: 37 });
-    expect(switcher.state().checked).toBe(false);
+    expect(switcher.find('.unchecked')).toBeTruthy();
   });
 
   it('should change from an initial checked state of true to false on click', () => {
-    const wrapper = mount(<Switch defaultChecked />);
-    expect(wrapper.state().checked).toBe(true);
+    const wrapper = mount(
+      <Switch
+        defaultChecked
+        checkedChildren={checkedChildren}
+        uncheckedChildren={uncheckedChildren}
+      />,
+    );
+    expect(switcher.find('.checked')).toBeTruthy();
     wrapper.simulate('click');
-    expect(wrapper.state().checked).toBe(false);
+    expect(switcher.find('.unchecked')).toBeTruthy();
   });
 
   it('should support onClick', () => {
@@ -43,10 +53,18 @@ describe('rc-switch', () => {
 
   it('should not toggle when clicked in a disabled state', () => {
     const onChange = jest.fn();
-    const wrapper = mount(<Switch disabled checked onChange={onChange} />);
-    expect(wrapper.state().checked).toBe(true);
+    const wrapper = mount(
+      <Switch
+        disabled
+        checked
+        onChange={onChange}
+        checkedChildren={checkedChildren}
+        uncheckedChildren={uncheckedChildren}
+      />,
+    );
+    expect(switcher.find('.checked')).toBeTruthy();
     wrapper.simulate('click');
-    expect(wrapper.state().checked).toBe(true);
+    expect(switcher.find('.checked')).toBeTruthy();
     expect(onChange.mock.calls.length).toBe(0);
   });
 
@@ -59,8 +77,11 @@ describe('rc-switch', () => {
     const container = document.createElement('div');
     document.body.appendChild(container);
     const handleFocus = jest.fn();
-    const wrapper = mount(<Switch onFocus={handleFocus} />, { attachTo: container });
-    wrapper.instance().focus();
+    const ref = React.createRef();
+    const wrapper = mount(<Switch ref={ref} onFocus={handleFocus} />, {
+      attachTo: container,
+    });
+    ref.current.focus();
     expect(handleFocus).toHaveBeenCalled();
   });
 
@@ -68,9 +89,12 @@ describe('rc-switch', () => {
     const container = document.createElement('div');
     document.body.appendChild(container);
     const handleBlur = jest.fn();
-    const wrapper = mount(<Switch onBlur={handleBlur} />, { attachTo: container });
-    wrapper.instance().focus();
-    wrapper.instance().blur();
+    const ref = React.createRef();
+    const wrapper = mount(<Switch ref={ref} onBlur={handleBlur} />, {
+      attachTo: container,
+    });
+    ref.current.focus();
+    ref.current.blur();
     expect(handleBlur).toHaveBeenCalled();
   });
 
