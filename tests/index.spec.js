@@ -93,7 +93,7 @@ describe('rc-switch', () => {
     const container = document.createElement('div');
     document.body.appendChild(container);
     const handleFocus = jest.fn();
-    const wrapper = mount(<Switch autoFocus onFocus={handleFocus} />, { attachTo: container });
+    mount(<Switch autoFocus onFocus={handleFocus} />, { attachTo: container });
     expect(handleFocus).toHaveBeenCalled();
   });
 
