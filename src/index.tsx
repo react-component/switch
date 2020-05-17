@@ -27,7 +27,6 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>((props, ref) => 
 
   let initChecked = false;
   if ('checked' in props) {
-    console.log('object');
     initChecked = !!props.checked;
   } else {
     initChecked = !!props.defaultChecked;
