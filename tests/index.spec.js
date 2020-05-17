@@ -97,6 +97,13 @@ describe('rc-switch', () => {
     expect(handleFocus).toHaveBeenCalled();
   });
 
+  it('disabled', () => {
+    const wrapper = createSwitch({ disabled: true });
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    wrapper.simulate('keydown', { keyCode: 39 });
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
+  });
+
   it('onMouseUp', () => {
     const onMouseUp = jest.fn();
     const wrapper = createSwitch({ onMouseUp });
