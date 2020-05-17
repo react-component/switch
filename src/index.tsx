@@ -1,4 +1,4 @@
-import React, { Component, MouseEventHandler } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 
 export type SwitchChangeEventHandler = (checked: boolean, event: MouseEvent) => void;
@@ -11,7 +11,7 @@ interface SwitchProps {
   checkedChildren?: React.ReactNode;
   unCheckedChildren?: React.ReactNode;
   onChange?: SwitchChangeEventHandler;
-  onMouseUp: MouseEventHandler<HTMLButtonElement>;
+  onMouseUp: React.MouseEventHandler<HTMLButtonElement>;
   onClick?: SwitchClickEventHandler;
   tabIndex?: number;
   checked?: boolean;
@@ -22,143 +22,115 @@ interface SwitchProps {
   title?: string;
 }
 
-interface SwitchState {
-  checked: boolean;
-}
+const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>((props, ref) => {
+  const mergedRef = (ref as any) || React.createRef<HTMLButtonElement>();
 
-class Switch extends Component<SwitchProps, SwitchState> {
-  private node: React.RefObject<HTMLButtonElement>;
-
-  static defaultProps = {
-    prefixCls: 'rc-switch',
-    checkedChildren: null,
-    unCheckedChildren: null,
-    className: '',
-    defaultChecked: false,
-  };
-
-  constructor(props) {
-    super(props);
-    let checked = false;
-    if ('checked' in props) {
-      checked = !!props.checked;
-    } else {
-      checked = !!props.defaultChecked;
-    }
-    this.state = { checked };
-    this.node = React.createRef();
+  let initChecked = false;
+  if ('checked' in props) {
+    initChecked = !!props.checked;
+  } else {
+    initChecked = !!props.defaultChecked;
   }
+  const [checked, setChecked] = React.useState(initChecked);
 
-  componentDidMount() {
-    const { autoFocus, disabled } = this.props;
+  React.useEffect(() => {
+    const { autoFocus, disabled } = props;
     if (autoFocus && !disabled) {
-      this.focus();
+      focus();
     }
-  }
+  }, [props.autoFocus, props.disabled]);
 
-  static getDerivedStateFromProps(nextProps) {
-    const { checked } = nextProps;
-    const newState: Partial<SwitchState> = {};
-    if ('checked' in nextProps) {
-      newState.checked = !!checked;
+  React.useEffect(() => {
+    if ('checked' in props) {
+      setChecked(!!props.checked);
     }
-    return newState;
-  }
+  }, [props.checked]);
 
-  setChecked(checked, e) {
-    const { disabled, onChange } = this.props;
+  const setInternalChecked = (checked, e) => {
+    const { disabled, onChange } = props;
     if (disabled) {
       return;
     }
-    if (!('checked' in this.props)) {
-      this.setState({
-        checked,
-      });
+    if (!('checked' in props)) {
+      setChecked(checked);
     }
     if (onChange) {
       onChange(checked, e);
     }
-  }
+  };
 
-  handleClick = e => {
-    const { checked } = this.state;
-    const { onClick } = this.props;
+  const handleClick = e => {
+    const { onClick } = props;
     const newChecked = !checked;
-    this.setChecked(newChecked, e);
+    setInternalChecked(newChecked, e);
     if (onClick) {
       onClick(newChecked, e);
     }
   };
 
-  handleKeyDown = e => {
+  const handleKeyDown = e => {
     if (e.keyCode === 37) {
       // Left
-      this.setChecked(false, e);
+      setInternalChecked(false, e);
     } else if (e.keyCode === 39) {
       // Right
-      this.setChecked(true, e);
+      setInternalChecked(true, e);
     }
   };
 
   // Handle auto focus when click switch in Chrome
-  handleMouseUp = e => {
-    const { onMouseUp } = this.props;
-    this.blur();
-    if (onMouseUp) {
-      onMouseUp(e);
+  const handleMouseUp = e => {
+    (mergedRef.current as any).blur();
+    if (props.onMouseUp) {
+      props.onMouseUp(e);
     }
   };
 
-  focus() {
-    if (this.node.current) {
-      this.node.current.focus();
-    }
-  }
+  const {
+    className,
+    prefixCls,
+    disabled,
+    loadingIcon,
+    checkedChildren,
+    unCheckedChildren,
+    onChange,
+    ...restProps
+  } = props;
 
-  blur() {
-    if (this.node.current) {
-      this.node.current.blur();
-    }
-  }
+  const switchClassName = classNames({
+    [className]: !!className,
+    [prefixCls]: true,
+    [`${prefixCls}-checked`]: checked,
+    [`${prefixCls}-disabled`]: disabled,
+  });
 
-  render() {
-    const {
-      className,
-      prefixCls,
-      disabled,
-      loadingIcon,
-      checkedChildren,
-      unCheckedChildren,
-      onChange,
-      ...restProps
-    } = this.props;
-    const { checked } = this.state;
-    const switchClassName = classNames({
-      [className]: !!className,
-      [prefixCls]: true,
-      [`${prefixCls}-checked`]: checked,
-      [`${prefixCls}-disabled`]: disabled,
-    });
-    return (
-      <button
-        {...restProps}
-        type="button"
-        role="switch"
-        aria-checked={checked}
-        disabled={disabled}
-        className={switchClassName}
-        ref={this.node}
-        onKeyDown={this.handleKeyDown}
-        onClick={this.handleClick}
-        onMouseUp={this.handleMouseUp}
-      >
-        {loadingIcon}
-        <span className={`${prefixCls}-inner`}>
-          {checked ? checkedChildren : unCheckedChildren}
-        </span>
-      </button>
-    );
-  }
-}
+  return (
+    <button
+      {...restProps}
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      disabled={disabled}
+      className={switchClassName}
+      ref={mergedRef}
+      onKeyDown={handleKeyDown}
+      onClick={handleClick}
+      onMouseUp={handleMouseUp}
+    >
+      {loadingIcon}
+      <span className={`${prefixCls}-inner`}>{checked ? checkedChildren : unCheckedChildren}</span>
+    </button>
+  );
+});
+
+Switch.displayName = 'Switch';
+
+Switch.defaultProps = {
+  prefixCls: 'rc-switch',
+  checkedChildren: null,
+  unCheckedChildren: null,
+  className: '',
+  defaultChecked: false,
+};
 
 export default Switch;

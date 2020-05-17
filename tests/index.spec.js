@@ -4,35 +4,44 @@ import { mount } from 'enzyme';
 import Switch from '../index';
 
 describe('rc-switch', () => {
-  let switcher;
-  beforeEach(() => {
-    switcher = mount(<Switch />);
-  });
+  function createSwitch(props = {}) {
+    return mount(
+      <Switch
+        checkedChildren={<span className="checked" />}
+        unCheckedChildren={<span className="unchecked" />}
+        {...props}
+      />,
+    );
+  }
 
   it('works', () => {
-    expect(switcher.state().checked).toBe(false);
-    switcher.simulate('click');
-    expect(switcher.state().checked).toBe(true);
+    const wrapper = createSwitch();
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    wrapper.simulate('click');
+    expect(wrapper.exists('.checked')).toBeTruthy();
   });
 
   it('should be checked upon right key and unchecked on left key', () => {
-    expect(switcher.state().checked).toBe(false);
-    switcher.simulate('keydown', { keyCode: 39 });
-    expect(switcher.state().checked).toBe(true);
-    switcher.simulate('keydown', { keyCode: 37 });
-    expect(switcher.state().checked).toBe(false);
+    const wrapper = createSwitch();
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    wrapper.simulate('keydown', { keyCode: 39 });
+    expect(wrapper.exists('.checked')).toBeTruthy();
+    wrapper.simulate('keydown', { keyCode: 37 });
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
   });
 
   it('should change from an initial checked state of true to false on click', () => {
-    const wrapper = mount(<Switch defaultChecked />);
-    expect(wrapper.state().checked).toBe(true);
+    const onChange = jest.fn();
+    const wrapper = createSwitch({ defaultChecked: true, onChange });
+    expect(wrapper.exists('.checked')).toBeTruthy();
     wrapper.simulate('click');
-    expect(wrapper.state().checked).toBe(false);
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    expect(onChange.mock.calls.length).toBe(1);
   });
 
   it('should support onClick', () => {
     const onClick = jest.fn();
-    const wrapper = mount(<Switch onClick={onClick} />);
+    const wrapper = createSwitch({ onClick });
     wrapper.simulate('click');
     expect(onClick).toHaveBeenCalledWith(true, expect.objectContaining({ type: 'click' }));
     expect(onClick.mock.calls.length).toBe(1);
@@ -43,10 +52,10 @@ describe('rc-switch', () => {
 
   it('should not toggle when clicked in a disabled state', () => {
     const onChange = jest.fn();
-    const wrapper = mount(<Switch disabled checked onChange={onChange} />);
-    expect(wrapper.state().checked).toBe(true);
+    const wrapper = createSwitch({ disabled: true, checked: true, onChange });
+    expect(wrapper.exists('.checked')).toBeTruthy();
     wrapper.simulate('click');
-    expect(wrapper.state().checked).toBe(true);
+    expect(wrapper.exists('.checked')).toBeTruthy();
     expect(onChange.mock.calls.length).toBe(0);
   });
 
@@ -59,8 +68,11 @@ describe('rc-switch', () => {
     const container = document.createElement('div');
     document.body.appendChild(container);
     const handleFocus = jest.fn();
-    const wrapper = mount(<Switch onFocus={handleFocus} />, { attachTo: container });
-    wrapper.instance().focus();
+    const ref = React.createRef();
+    mount(<Switch ref={ref} onFocus={handleFocus} />, {
+      attachTo: container,
+    });
+    ref.current.focus();
     expect(handleFocus).toHaveBeenCalled();
   });
 
@@ -68,9 +80,12 @@ describe('rc-switch', () => {
     const container = document.createElement('div');
     document.body.appendChild(container);
     const handleBlur = jest.fn();
-    const wrapper = mount(<Switch onBlur={handleBlur} />, { attachTo: container });
-    wrapper.instance().focus();
-    wrapper.instance().blur();
+    const ref = React.createRef();
+    mount(<Switch ref={ref} onBlur={handleBlur} />, {
+      attachTo: container,
+    });
+    ref.current.focus();
+    ref.current.blur();
     expect(handleBlur).toHaveBeenCalled();
   });
 
@@ -80,5 +95,19 @@ describe('rc-switch', () => {
     const handleFocus = jest.fn();
     mount(<Switch autoFocus onFocus={handleFocus} />, { attachTo: container });
     expect(handleFocus).toHaveBeenCalled();
+  });
+
+  it('disabled', () => {
+    const wrapper = createSwitch({ disabled: true });
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    wrapper.simulate('keydown', { keyCode: 39 });
+    expect(wrapper.exists('.unchecked')).toBeTruthy();
+  });
+
+  it('onMouseUp', () => {
+    const onMouseUp = jest.fn();
+    const wrapper = createSwitch({ onMouseUp });
+    wrapper.simulate('mouseup');
+    expect(onMouseUp).toHaveBeenCalled();
   });
 });
