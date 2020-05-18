@@ -1,7 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import { composeRef } from 'rc-util/lib/ref';
 import KeyCode from 'rc-util/lib/KeyCode';
 
 export type SwitchChangeEventHandler = (
@@ -23,7 +22,6 @@ interface SwitchProps
   tabIndex?: number;
   checked?: boolean;
   defaultChecked?: boolean;
-  autoFocus?: boolean;
   loadingIcon: React.ReactNode;
   style?: React.CSSProperties;
   title?: string;
@@ -34,7 +32,6 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     {
       prefixCls = 'rc-switch',
       className,
-      autoFocus,
       checked,
       defaultChecked,
       disabled,
@@ -48,19 +45,10 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     },
     ref,
   ) => {
-    const buttonRef = React.useRef<HTMLButtonElement>();
-    const mergedRef = composeRef(buttonRef, ref);
-
     const [innerChecked, setInnerChecked] = useMergedState<boolean>(false, {
       value: checked,
       defaultValue: defaultChecked,
     });
-
-    React.useEffect(() => {
-      if (autoFocus && !disabled) {
-        buttonRef.current.focus();
-      }
-    }, []);
 
     function triggerChange(
       newChecked: boolean,
@@ -105,7 +93,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         aria-checked={innerChecked}
         disabled={disabled}
         className={switchClassName}
-        ref={mergedRef}
+        ref={ref}
         onKeyDown={onInternalKeyDown}
         onClick={onInternalClick}
       >
