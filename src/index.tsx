@@ -36,9 +36,9 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>((props, ref) => 
   React.useEffect(() => {
     const { autoFocus, disabled } = props;
     if (autoFocus && !disabled) {
-      focus();
+      (mergedRef.current as any).focus();
     }
-  }, [props.autoFocus, props.disabled]);
+  }, [props.autoFocus]);
 
   React.useEffect(() => {
     if ('checked' in props) {
