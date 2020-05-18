@@ -1,4 +1,5 @@
 import React from 'react';
+import KeyCode from 'rc-util/lib/KeyCode';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
 import Switch from '../index';
@@ -24,9 +25,9 @@ describe('rc-switch', () => {
   it('should be checked upon right key and unchecked on left key', () => {
     const wrapper = createSwitch();
     expect(wrapper.exists('.unchecked')).toBeTruthy();
-    wrapper.simulate('keydown', { keyCode: 39 });
+    wrapper.simulate('keydown', { which: KeyCode.RIGHT });
     expect(wrapper.exists('.checked')).toBeTruthy();
-    wrapper.simulate('keydown', { keyCode: 37 });
+    wrapper.simulate('keydown', { which: KeyCode.LEFT });
     expect(wrapper.exists('.unchecked')).toBeTruthy();
   });
 
@@ -89,12 +90,22 @@ describe('rc-switch', () => {
     expect(handleBlur).toHaveBeenCalled();
   });
 
-  it('autoFocus', () => {
-    const container = document.createElement('div');
-    document.body.appendChild(container);
-    const handleFocus = jest.fn();
-    mount(<Switch autoFocus onFocus={handleFocus} />, { attachTo: container });
-    expect(handleFocus).toHaveBeenCalled();
+  describe('autoFocus', () => {
+    it('basic', () => {
+      const container = document.createElement('div');
+      document.body.appendChild(container);
+      const handleFocus = jest.fn();
+      mount(<Switch autoFocus onFocus={handleFocus} />, { attachTo: container });
+      expect(handleFocus).toHaveBeenCalled();
+    });
+
+    it('not work when disabled', () => {
+      const container = document.createElement('div');
+      document.body.appendChild(container);
+      const handleFocus = jest.fn();
+      mount(<Switch autoFocus disabled onFocus={handleFocus} />, { attachTo: container });
+      expect(handleFocus).not.toHaveBeenCalled();
+    });
   });
 
   it('disabled', () => {
@@ -109,5 +120,14 @@ describe('rc-switch', () => {
     const wrapper = createSwitch({ onMouseUp });
     wrapper.simulate('mouseup');
     expect(onMouseUp).toHaveBeenCalled();
+  });
+
+  it('disabled should click not to change', () => {
+    const onChange = jest.fn();
+    const onClick = jest.fn();
+    const wrapper = createSwitch({ disabled: true, onChange, onClick, checked: true });
+
+    wrapper.simulate('click');
+    expect(onChange).not.toHaveBeenCalled();
   });
 });

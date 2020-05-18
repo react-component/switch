@@ -1,136 +1,111 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import useMergedState from 'rc-util/lib/hooks/useMergedState';
+import KeyCode from 'rc-util/lib/KeyCode';
 
-export type SwitchChangeEventHandler = (checked: boolean, event: MouseEvent) => void;
+export type SwitchChangeEventHandler = (
+  checked: boolean,
+  event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
+) => void;
 export type SwitchClickEventHandler = SwitchChangeEventHandler;
 
-interface SwitchProps {
+interface SwitchProps
+  extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick'> {
   className?: string;
   prefixCls?: string;
   disabled?: boolean;
   checkedChildren?: React.ReactNode;
   unCheckedChildren?: React.ReactNode;
   onChange?: SwitchChangeEventHandler;
-  onMouseUp: React.MouseEventHandler<HTMLButtonElement>;
+  onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
   onClick?: SwitchClickEventHandler;
   tabIndex?: number;
   checked?: boolean;
   defaultChecked?: boolean;
-  autoFocus?: boolean;
   loadingIcon: React.ReactNode;
   style?: React.CSSProperties;
   title?: string;
 }
 
-const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>((props, ref) => {
-  const mergedRef = (ref as any) || React.createRef<HTMLButtonElement>();
+const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
+  (
+    {
+      prefixCls = 'rc-switch',
+      className,
+      checked,
+      defaultChecked,
+      disabled,
+      loadingIcon,
+      checkedChildren,
+      unCheckedChildren,
+      onClick,
+      onChange,
+      onKeyDown,
+      ...restProps
+    },
+    ref,
+  ) => {
+    const [innerChecked, setInnerChecked] = useMergedState<boolean>(false, {
+      value: checked,
+      defaultValue: defaultChecked,
+    });
 
-  let initChecked = false;
-  if ('checked' in props) {
-    initChecked = !!props.checked;
-  } else {
-    initChecked = !!props.defaultChecked;
-  }
-  const [checked, setChecked] = React.useState(initChecked);
+    function triggerChange(
+      newChecked: boolean,
+      event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>,
+    ) {
+      let mergedChecked = innerChecked;
 
-  React.useEffect(() => {
-    const { autoFocus, disabled } = props;
-    if (autoFocus && !disabled) {
-      (mergedRef.current as any).focus();
+      if (!disabled) {
+        mergedChecked = newChecked;
+        setInnerChecked(mergedChecked);
+        onChange?.(mergedChecked, event);
+      }
+
+      return mergedChecked;
     }
-  }, [props.autoFocus]);
 
-  React.useEffect(() => {
-    if ('checked' in props) {
-      setChecked(!!props.checked);
+    function onInternalKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
+      if (e.which === KeyCode.LEFT) {
+        triggerChange(false, e);
+      } else if (e.which === KeyCode.RIGHT) {
+        triggerChange(true, e);
+      }
+      onKeyDown?.(e);
     }
-  }, [props.checked]);
 
-  const setInternalChecked = (checked, e) => {
-    const { disabled, onChange } = props;
-    if (disabled) {
-      return;
+    function onInternalClick(e: React.MouseEvent<HTMLButtonElement>) {
+      const ret = triggerChange(!innerChecked, e);
+      // [Legacy] trigger onClick with value
+      onClick?.(ret, e);
     }
-    if (!('checked' in props)) {
-      setChecked(checked);
-    }
-    if (onChange) {
-      onChange(checked, e);
-    }
-  };
 
-  const handleClick = e => {
-    const { onClick } = props;
-    const newChecked = !checked;
-    setInternalChecked(newChecked, e);
-    if (onClick) {
-      onClick(newChecked, e);
-    }
-  };
+    const switchClassName = classNames(prefixCls, className, {
+      [`${prefixCls}-checked`]: innerChecked,
+      [`${prefixCls}-disabled`]: disabled,
+    });
 
-  const handleKeyDown = e => {
-    if (e.keyCode === 37) {
-      // Left
-      setInternalChecked(false, e);
-    } else if (e.keyCode === 39) {
-      // Right
-      setInternalChecked(true, e);
-    }
-  };
-
-  // Handle auto focus when click switch in Chrome
-  const handleMouseUp = e => {
-    (mergedRef.current as any).blur();
-    if (props.onMouseUp) {
-      props.onMouseUp(e);
-    }
-  };
-
-  const {
-    className,
-    prefixCls,
-    disabled,
-    loadingIcon,
-    checkedChildren,
-    unCheckedChildren,
-    onChange,
-    ...restProps
-  } = props;
-
-  const switchClassName = classNames({
-    [className]: !!className,
-    [prefixCls]: true,
-    [`${prefixCls}-checked`]: checked,
-    [`${prefixCls}-disabled`]: disabled,
-  });
-
-  return (
-    <button
-      {...restProps}
-      type="button"
-      role="switch"
-      aria-checked={checked}
-      disabled={disabled}
-      className={switchClassName}
-      ref={mergedRef}
-      onKeyDown={handleKeyDown}
-      onClick={handleClick}
-      onMouseUp={handleMouseUp}
-    >
-      {loadingIcon}
-      <span className={`${prefixCls}-inner`}>{checked ? checkedChildren : unCheckedChildren}</span>
-    </button>
-  );
-});
+    return (
+      <button
+        {...restProps}
+        type="button"
+        role="switch"
+        aria-checked={innerChecked}
+        disabled={disabled}
+        className={switchClassName}
+        ref={ref}
+        onKeyDown={onInternalKeyDown}
+        onClick={onInternalClick}
+      >
+        {loadingIcon}
+        <span className={`${prefixCls}-inner`}>
+          {innerChecked ? checkedChildren : unCheckedChildren}
+        </span>
+      </button>
+    );
+  },
+);
 
 Switch.displayName = 'Switch';
-
-Switch.defaultProps = {
-  prefixCls: 'rc-switch',
-  checkedChildren: null,
-  unCheckedChildren: null,
-  className: '',
-  defaultChecked: false,
-};
 
 export default Switch;
