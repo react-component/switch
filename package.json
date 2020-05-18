@@ -35,6 +35,8 @@
     "coverage": "father test --coverage"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.10",
+    "@types/jest": "^25.2.2",
     "coveralls": "^3.0.6",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.1",
@@ -52,6 +54,7 @@
     "react-dom": "^16.0.0"
   },
   "dependencies": {
-    "classnames": "^2.2.1"
+    "classnames": "^2.2.1",
+    "rc-util": "^4.20.5"
   }
 }
