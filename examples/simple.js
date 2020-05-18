@@ -1,6 +1,6 @@
 import '../assets/index.less';
 import React from 'react';
-import Switch from '../src/index';
+import Switch from '../src';
 
 function onChange(value, event) {
   // eslint-disable-next-line no-console
