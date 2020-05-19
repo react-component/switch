@@ -35,8 +35,8 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>((props, ref) => 
 
   React.useEffect(() => {
     const { autoFocus, disabled } = props;
-    if (autoFocus && !disabled && mergedRef.current) {
-      (mergedRef.current as any).focus();
+    if (autoFocus && !disabled) {
+      (mergedRef.current as any)?.focus();
     }
   }, [props.autoFocus]);
 
@@ -80,9 +80,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>((props, ref) => 
 
   // Handle auto focus when click switch in Chrome
   const handleMouseUp = e => {
-    if (mergedRef.current) {
-      (mergedRef.current as any).blur();
-    }
+    (mergedRef.current as any)?.blur();
     if (props.onMouseUp) {
       props.onMouseUp(e);
     }
