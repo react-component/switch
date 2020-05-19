@@ -46,16 +46,16 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>((props, ref) => 
     }
   }, [props.checked]);
 
-  const setInternalChecked = (chk, e) => {
+  const setInternalChecked = (isChecked, e) => {
     const { disabled, onChange } = props;
     if (disabled) {
       return;
     }
     if (!('checked' in props)) {
-      setChecked(chk);
+      setChecked(isChecked);
     }
     if (onChange) {
-      onChange(chk, e);
+      onChange(isChecked, e);
     }
   };
 
