@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.10",
-    "@types/jest": "^25.2.2",
+    "@types/jest": "^26.0.4",
     "coveralls": "^3.0.6",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.1",
