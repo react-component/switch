@@ -22,7 +22,7 @@ interface SwitchProps
   tabIndex?: number;
   checked?: boolean;
   defaultChecked?: boolean;
-  loadingIcon: React.ReactNode;
+  loadingIcon?: React.ReactNode;
   style?: React.CSSProperties;
   title?: string;
 }
