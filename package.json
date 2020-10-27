@@ -1,6 +1,6 @@
 {
   "name": "rc-switch",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "description": "switch ui component for react",
   "keywords": [
     "react",
@@ -14,7 +14,8 @@
   "files": [
     "assets/*.css",
     "es",
-    "lib"
+    "lib",
+    "index.d.ts"
   ],
   "homepage": "http://github.com/react-component/switch",
   "repository": {
