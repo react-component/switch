@@ -1,6 +1,6 @@
 {
   "name": "rc-switch",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "switch ui component for react",
   "keywords": [
     "react",
@@ -10,6 +10,7 @@
   ],
   "main": "lib/index",
   "module": "./es/index",
+  "typings": "./index.d.ts",
   "files": [
     "assets/*.css",
     "es",
