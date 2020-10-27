@@ -31,8 +31,7 @@
   content: " ";
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
   transition: left 0.3s cubic-bezier(0.35, 0, 0.25, 1);
   -webkit-animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
           animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
@@ -42,8 +41,7 @@
           animation-name: rcSwitchOff;
 }
 .rc-switch:hover:after {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  transform: scale(1.1);
   -webkit-animation-name: rcSwitchOn;
           animation-name: rcSwitchOn;
 }
@@ -73,8 +71,7 @@
   cursor: no-drop;
 }
 .rc-switch-disabled:hover:after {
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
   -webkit-animation-name: none;
           animation-name: none;
 }
@@ -93,50 +90,40 @@
 }
 @-webkit-keyframes rcSwitchOn {
   0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
   50% {
-    -webkit-transform: scale(1.25);
-            transform: scale(1.25);
+    transform: scale(1.25);
   }
   100% {
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
+    transform: scale(1.1);
   }
 }
 @keyframes rcSwitchOn {
   0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
   50% {
-    -webkit-transform: scale(1.25);
-            transform: scale(1.25);
+    transform: scale(1.25);
   }
   100% {
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
+    transform: scale(1.1);
   }
 }
 @-webkit-keyframes rcSwitchOff {
   0% {
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
+    transform: scale(1.1);
   }
   100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
 }
 @keyframes rcSwitchOff {
   0% {
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
+    transform: scale(1.1);
   }
   100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
 }
 
