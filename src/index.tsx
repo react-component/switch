@@ -19,12 +19,10 @@ interface SwitchProps
   onChange?: SwitchChangeEventHandler;
   onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
   onClick?: SwitchClickEventHandler;
-  tabIndex?: number;
   checked?: boolean;
   defaultChecked?: boolean;
   loadingIcon?: React.ReactNode;
   style?: React.CSSProperties;
-  title?: string;
 }
 
 const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
