@@ -31,9 +31,18 @@
     "compile": "father build && lessc assets/index.less assets/index.css",
     "gh-pages": "npm run docs:build && npm run docs:deploy",
     "prepublishOnly": "npm run compile && np --yolo --no-publish",
+    "postpublish": "npm run gh-pages",
     "lint": "eslint .",
-    "test": "father test",
-    "coverage": "father test --coverage"
+    "lint-staged": "lint-staged",
+    "test": "umi-test",
+    "coverage": "father test --coverage",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts,md,json}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "devDependencies": {
     "@types/classnames": "^2.2.10",
@@ -44,12 +53,15 @@
     "enzyme-adapter-react-16": "^1.0.1",
     "enzyme-to-json": "^3.0.0",
     "eslint": "^7.0.0",
-    "father": "^2.13.4",
+    "father": "^4.0.0",
+    "husky": "^8.0.1",
     "less": "^3.11.1",
+    "lint-staged": "^13.0.3",
     "np": "^7.1.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-test-renderer": "^16.0.0"
+    "react-test-renderer": "^16.0.0",
+    "umi-test": "^1.9.7"
   },
   "peerDependencies": {
     "react": ">=16.9.0",
