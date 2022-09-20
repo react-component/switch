@@ -98,8 +98,10 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         onClick={onInternalClick}
       >
         {loadingIcon}
-        <span className={`${prefixCls}-inner-checked`}>{checkedChildren}</span>
-        <span className={`${prefixCls}-inner-unchecked`}>{unCheckedChildren}</span>
+        <span className={`${prefixCls}-inner`}>
+          <span className={`${prefixCls}-inner-checked`}>{checkedChildren}</span>
+          <span className={`${prefixCls}-inner-unchecked`}>{unCheckedChildren}</span>
+        </span>
       </button>
     );
   },
