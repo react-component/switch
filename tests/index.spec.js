@@ -1,8 +1,7 @@
 import React from 'react';
 import KeyCode from 'rc-util/lib/KeyCode';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import Switch from '../index';
+import Switch from '..';
 
 describe('rc-switch', () => {
   function createSwitch(props = {}) {

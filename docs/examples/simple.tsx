@@ -1,6 +1,7 @@
 import '../../assets/index.less';
 import React, { useState } from 'react';
-import Switch, { SwitchChangeEventHandler } from 'rc-switch';
+import type { SwitchChangeEventHandler } from 'rc-switch';
+import Switch from 'rc-switch';
 
 const onChange: SwitchChangeEventHandler = (value, event) => {
   // eslint-disable-next-line no-console
