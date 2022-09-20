@@ -16,13 +16,23 @@
   background-color: #ccc;
   cursor: pointer;
   transition: all @duration cubic-bezier(0.35, 0, 0.25, 1);
+  overflow: hidden;
 
-  &-inner {
+  &-inner-checked,
+  &-inner-unchecked {
     color:#fff;
     font-size: 12px;
     position: absolute;
-    left: 24px;
     top: 0;
+    transition: left @duration cubic-bezier(0.35, 0, 0.25, 1);
+  }
+
+  &-inner-checked {
+    left: 6px - 20px;
+  }
+
+  &-inner-unchecked {
+    left: 24px;
   }
 
   &:after{
@@ -57,8 +67,12 @@
     border: 1px solid #87d068;
     background-color: #87d068;
 
-    .@{switchPrefixCls}-inner {
+    .@{switchPrefixCls}-inner-checked {
       left: 6px;
+    }
+
+    .@{switchPrefixCls}-inner-unchecked {
+      left: 44px;
     }
 
     &:after{
