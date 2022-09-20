@@ -1,1 +1,4 @@
 .eslintrc.js
+es/
+lib/
+.doc/

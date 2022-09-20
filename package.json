@@ -47,6 +47,7 @@
   "devDependencies": {
     "@types/classnames": "^2.2.10",
     "@types/jest": "^26.0.4",
+    "@umijs/fabric": "^3.0.0",
     "coveralls": "^3.0.6",
     "dumi": "^1.1.0",
     "enzyme": "^3.0.0",
