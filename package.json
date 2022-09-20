@@ -55,6 +55,7 @@
     "enzyme-to-json": "^3.0.0",
     "eslint": "^7.0.0",
     "father": "^4.0.0",
+    "gh-pages": "^4.0.0",
     "husky": "^8.0.1",
     "less": "^3.11.1",
     "lint-staged": "^13.0.3",
