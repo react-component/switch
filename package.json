@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@rc-component/father-plugin": "^1.0.0",
     "@types/classnames": "^2.2.10",
     "@types/jest": "^26.0.4",
     "@umijs/fabric": "^3.0.0",
