@@ -1,7 +1,6 @@
-import * as React from 'react';
 import classNames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import KeyCode from 'rc-util/lib/KeyCode';
+import * as React from 'react';
 
 export type SwitchChangeEventHandler = (
   checked: boolean,
@@ -66,9 +65,9 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     }
 
     function onInternalKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
-      if (e.which === KeyCode.LEFT) {
+      if (e.key === 'ArrowLeft') {
         triggerChange(false, e);
-      } else if (e.which === KeyCode.RIGHT) {
+      } else if (e.key === 'ArrowRight') {
         triggerChange(true, e);
       }
       onKeyDown?.(e);
