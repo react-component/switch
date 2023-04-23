@@ -12,16 +12,16 @@ Switch ui component for react.
 
 [npm-image]: http://img.shields.io/npm/v/rc-switch.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-switch
-[travis-image]: https://img.shields.io/travis/react-component/select/master?style=flat-square
-[travis-url]: https://travis-ci.com/react-component/select
-[github-actions-image]: https://github.com/react-component/select/workflows/CI/badge.svg
-[github-actions-url]: https://github.com/react-component/select/actions
-[codecov-image]: https://img.shields.io/codecov/c/github/react-component/select/master.svg?style=flat-square
-[codecov-url]: https://app.codecov.io/gh/react-component/select
-[david-url]: https://david-dm.org/react-component/select
-[david-image]: https://david-dm.org/react-component/select/status.svg?style=flat-square
-[david-dev-url]: https://david-dm.org/react-component/select?type=dev
-[david-dev-image]: https://david-dm.org/react-component/select/dev-status.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/react-component/switch/master?style=flat-square
+[travis-url]: https://travis-ci.com/react-component/switch
+[github-actions-image]: https://github.com/react-component/switch/workflows/CI/badge.svg
+[github-actions-url]: https://github.com/react-component/switch/actions
+[codecov-image]: https://img.shields.io/codecov/c/github/react-component/switch/master.svg?style=flat-square
+[codecov-url]: https://app.codecov.io/gh/react-component/switch
+[david-url]: https://david-dm.org/react-component/switch
+[david-image]: https://david-dm.org/react-component/switch/status.svg?style=flat-square
+[david-dev-url]: https://david-dm.org/react-component/switch?type=dev
+[david-dev-image]: https://david-dm.org/react-component/switch/dev-status.svg?style=flat-square
 [download-image]: https://img.shields.io/npm/dm/rc-switch.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-switch
 [bundlephobia-url]: https://bundlephobia.com/package/rc-switch
