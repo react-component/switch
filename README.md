@@ -67,7 +67,7 @@ npm install
 npm start
 ```
 
-Online demo: http://react-component.github.io/switch/examples/
+Online demo: http://react-component.github.io/switch/
 
 ## License
 
