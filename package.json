@@ -52,6 +52,7 @@
     "@types/classnames": "^2.2.10",
     "@types/jest": "^29.4.0",
     "@umijs/fabric": "^3.0.0",
+    "cheerio": "1.0.0-rc.12",
     "dumi": "^2.0.0",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.1",
