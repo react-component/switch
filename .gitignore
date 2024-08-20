@@ -34,3 +34,5 @@ coverage/
 .dumi/tmp-production
 .env.local
 .doc/
+
+bun.lockb
