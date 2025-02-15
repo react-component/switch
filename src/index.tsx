@@ -25,6 +25,8 @@ interface SwitchProps
   loadingIcon?: React.ReactNode;
   style?: React.CSSProperties;
   title?: string;
+  styles?: { content: React.CSSProperties };
+  classNames?: { content: string };
 }
 
 const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
@@ -41,6 +43,8 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
       onClick,
       onChange,
       onKeyDown,
+      styles,
+      classNames: switchClassNames,
       ...restProps
     },
     ref,
@@ -99,8 +103,18 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
       >
         {loadingIcon}
         <span className={`${prefixCls}-inner`}>
-          <span className={`${prefixCls}-inner-checked`}>{checkedChildren}</span>
-          <span className={`${prefixCls}-inner-unchecked`}>{unCheckedChildren}</span>
+          <span
+            className={classNames(`${prefixCls}-inner-checked`, switchClassNames?.content)}
+            style={styles?.content}
+          >
+            {checkedChildren}
+          </span>
+          <span
+            className={classNames(`${prefixCls}-inner-unchecked`, switchClassNames?.content)}
+            style={styles?.content}
+          >
+            {unCheckedChildren}
+          </span>
         </span>
       </button>
     );
