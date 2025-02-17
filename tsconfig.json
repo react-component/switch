@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "declaration": true,
     "paths": {
-      "rc-switch": ["src/index.tsx"],
+      "@rc-component/switch": ["src/"],
       "@@/*": [".dumi/tmp/*"]
     }
   }
