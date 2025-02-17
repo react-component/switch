@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import KeyCode from 'rc-util/lib/KeyCode';
+import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import KeyCode from '@rc-component/util/lib/KeyCode';
 
 export type SwitchChangeEventHandler = (
   checked: boolean,

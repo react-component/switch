@@ -1,5 +1,5 @@
 import React from 'react';
-import KeyCode from 'rc-util/lib/KeyCode';
+import KeyCode from '@rc-component/util/lib/KeyCode';
 import { mount } from 'enzyme';
 import Switch from '..';
 
