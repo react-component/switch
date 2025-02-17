@@ -14,7 +14,10 @@
     "declaration": true,
     "paths": {
       "rc-switch": ["src/index.tsx"],
-      "@@/*": [".dumi/tmp/*"]
+      "@@/*": [".dumi/tmp/*"],
+      "@rc-component/switch": [
+        "src/"
+      ]
     }
   }
 }
