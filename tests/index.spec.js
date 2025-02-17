@@ -129,4 +129,13 @@ describe('rc-switch', () => {
     wrapper.simulate('click');
     expect(onChange).not.toHaveBeenCalled();
   });
+  it('support classnames and styles', () => {
+    const wrapper = createSwitch({
+      classNames: { content: 'custom-content' },
+      styles: { content: { background: 'red' } },
+    });
+    const contentElement = wrapper.find('.custom-content').at(0);
+    expect(contentElement.exists()).toBe(true);
+    expect(contentElement.prop('style')).toEqual({ background: 'red' });
+  });
 });
