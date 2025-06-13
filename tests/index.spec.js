@@ -34,7 +34,7 @@ describe('rc-switch', () => {
     const onChange = jest.fn();
     const wrapper = createSwitch({ defaultChecked: true, onChange });
     expect(wrapper.exists('.checked')).toBeTruthy();
-    wrapper.simulate('click');
+    wrapper.find('.rc-switch').simulate('click');
     expect(wrapper.exists('.unchecked')).toBeTruthy();
     expect(onChange.mock.calls.length).toBe(1);
   });
@@ -42,10 +42,10 @@ describe('rc-switch', () => {
   it('should support onClick', () => {
     const onClick = jest.fn();
     const wrapper = createSwitch({ onClick });
-    wrapper.simulate('click');
+    wrapper.find('.rc-switch').simulate('click');
     expect(onClick).toHaveBeenCalledWith(true, expect.objectContaining({ type: 'click' }));
     expect(onClick.mock.calls.length).toBe(1);
-    wrapper.simulate('click');
+    wrapper.find('.rc-switch').simulate('click');
     expect(onClick).toHaveBeenCalledWith(false, expect.objectContaining({ type: 'click' }));
     expect(onClick.mock.calls.length).toBe(2);
   });
@@ -117,7 +117,7 @@ describe('rc-switch', () => {
   it('onMouseUp', () => {
     const onMouseUp = jest.fn();
     const wrapper = createSwitch({ onMouseUp });
-    wrapper.simulate('mouseup');
+    wrapper.find('.rc-switch').simulate('mouseup');
     expect(onMouseUp).toHaveBeenCalled();
   });
 

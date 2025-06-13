@@ -90,33 +90,35 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     });
 
     return (
-      <button
-        {...restProps}
-        type="button"
-        role="switch"
-        aria-checked={innerChecked}
-        disabled={disabled}
-        className={switchClassName}
-        ref={ref}
-        onKeyDown={onInternalKeyDown}
-        onClick={onInternalClick}
-      >
-        {loadingIcon}
-        <span className={`${prefixCls}-inner`}>
-          <span
-            className={classNames(`${prefixCls}-inner-checked`, switchClassNames?.content)}
-            style={styles?.content}
-          >
-            {checkedChildren}
+      <label className={`${prefixCls}-wrapper`}>
+        <button
+          {...restProps}
+          type="button"
+          role="switch"
+          aria-checked={innerChecked}
+          disabled={disabled}
+          className={switchClassName}
+          ref={ref}
+          onKeyDown={onInternalKeyDown}
+          onClick={onInternalClick}
+        >
+          {loadingIcon}
+          <span className={`${prefixCls}-inner`}>
+            <span
+              className={classNames(`${prefixCls}-inner-checked`, switchClassNames?.content)}
+              style={styles?.content}
+            >
+              {checkedChildren}
+            </span>
+            <span
+              className={classNames(`${prefixCls}-inner-unchecked`, switchClassNames?.content)}
+              style={styles?.content}
+            >
+              {unCheckedChildren}
+            </span>
           </span>
-          <span
-            className={classNames(`${prefixCls}-inner-unchecked`, switchClassNames?.content)}
-            style={styles?.content}
-          >
-            {unCheckedChildren}
-          </span>
-        </span>
-      </button>
+        </button>
+      </label>
     );
   },
 );
