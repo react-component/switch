@@ -90,7 +90,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     });
 
     return (
-      <label className={`${prefixCls}-wrapper`}>
+      <span className={`${prefixCls}-wrapper`}>
         <button
           {...restProps}
           type="button"
@@ -118,7 +118,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
             </span>
           </span>
         </button>
-      </label>
+      </span>
     );
   },
 );
