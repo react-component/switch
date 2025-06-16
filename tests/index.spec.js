@@ -14,38 +14,40 @@ describe('rc-switch', () => {
     );
   }
 
+  const findSwitch = (wrapper) => wrapper.find('.rc-switch');
+
   it('works', () => {
     const wrapper = createSwitch();
-    expect(wrapper.exists('.unchecked')).toBeTruthy();
-    wrapper.simulate('click');
-    expect(wrapper.exists('.checked')).toBeTruthy();
+    expect(findSwitch(wrapper).exists('.unchecked')).toBeTruthy();
+    findSwitch(wrapper).simulate('click');
+    expect(findSwitch(wrapper).exists('.checked')).toBeTruthy();
   });
 
   it('should be checked upon right key and unchecked on left key', () => {
     const wrapper = createSwitch();
-    expect(wrapper.exists('.unchecked')).toBeTruthy();
-    wrapper.simulate('keydown', { which: KeyCode.RIGHT });
-    expect(wrapper.exists('.checked')).toBeTruthy();
-    wrapper.simulate('keydown', { which: KeyCode.LEFT });
-    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    expect(findSwitch(wrapper).exists('.unchecked')).toBeTruthy();
+    findSwitch(wrapper).simulate('keydown', { which: KeyCode.RIGHT });
+    expect(findSwitch(wrapper).exists('.checked')).toBeTruthy();
+    findSwitch(wrapper).simulate('keydown', { which: KeyCode.LEFT });
+    expect(findSwitch(wrapper).exists('.unchecked')).toBeTruthy();
   });
 
   it('should change from an initial checked state of true to false on click', () => {
     const onChange = jest.fn();
     const wrapper = createSwitch({ defaultChecked: true, onChange });
-    expect(wrapper.exists('.checked')).toBeTruthy();
-    wrapper.find('.rc-switch').simulate('click');
-    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    expect(findSwitch(wrapper).exists('.checked')).toBeTruthy();
+    findSwitch(wrapper).simulate('click');
+    expect(findSwitch(wrapper).exists('.unchecked')).toBeTruthy();
     expect(onChange.mock.calls.length).toBe(1);
   });
 
   it('should support onClick', () => {
     const onClick = jest.fn();
     const wrapper = createSwitch({ onClick });
-    wrapper.find('.rc-switch').simulate('click');
+    findSwitch(wrapper).simulate('click');
     expect(onClick).toHaveBeenCalledWith(true, expect.objectContaining({ type: 'click' }));
     expect(onClick.mock.calls.length).toBe(1);
-    wrapper.find('.rc-switch').simulate('click');
+    findSwitch(wrapper).simulate('click');
     expect(onClick).toHaveBeenCalledWith(false, expect.objectContaining({ type: 'click' }));
     expect(onClick.mock.calls.length).toBe(2);
   });
@@ -53,9 +55,9 @@ describe('rc-switch', () => {
   it('should not toggle when clicked in a disabled state', () => {
     const onChange = jest.fn();
     const wrapper = createSwitch({ disabled: true, checked: true, onChange });
-    expect(wrapper.exists('.checked')).toBeTruthy();
-    wrapper.simulate('click');
-    expect(wrapper.exists('.checked')).toBeTruthy();
+    expect(findSwitch(wrapper).exists('.checked')).toBeTruthy();
+    findSwitch(wrapper).simulate('click');
+    expect(findSwitch(wrapper).exists('.checked')).toBeTruthy();
     expect(onChange.mock.calls.length).toBe(0);
   });
 
@@ -109,15 +111,15 @@ describe('rc-switch', () => {
 
   it('disabled', () => {
     const wrapper = createSwitch({ disabled: true });
-    expect(wrapper.exists('.unchecked')).toBeTruthy();
-    wrapper.simulate('keydown', { keyCode: 39 });
-    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    expect(findSwitch(wrapper).exists('.unchecked')).toBeTruthy();
+    findSwitch(wrapper).simulate('keydown', { keyCode: 39 });
+    expect(findSwitch(wrapper).exists('.unchecked')).toBeTruthy();
   });
 
   it('onMouseUp', () => {
     const onMouseUp = jest.fn();
     const wrapper = createSwitch({ onMouseUp });
-    wrapper.find('.rc-switch').simulate('mouseup');
+    findSwitch(wrapper).simulate('mouseup');
     expect(onMouseUp).toHaveBeenCalled();
   });
 
@@ -126,7 +128,7 @@ describe('rc-switch', () => {
     const onClick = jest.fn();
     const wrapper = createSwitch({ disabled: true, onChange, onClick, checked: true });
 
-    wrapper.simulate('click');
+    findSwitch(wrapper).simulate('click');
     expect(onChange).not.toHaveBeenCalled();
   });
   it('support classnames and styles', () => {
