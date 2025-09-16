@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import useControlledState from '@rc-component/util/lib/hooks/useControlledState';
 import KeyCode from '@rc-component/util/lib/KeyCode';
 
 export type SwitchChangeEventHandler = (
@@ -49,10 +49,10 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     },
     ref,
   ) => {
-    const [innerChecked, setInnerChecked] = useMergedState<boolean>(false, {
-      value: checked,
-      defaultValue: defaultChecked,
-    });
+    const [innerChecked, setInnerChecked] = useControlledState<boolean>(
+      defaultChecked ?? false,
+      checked,
+    );
 
     function triggerChange(
       newChecked: boolean,
