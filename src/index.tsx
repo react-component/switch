@@ -25,8 +25,8 @@ interface SwitchProps
   loadingIcon?: React.ReactNode;
   style?: React.CSSProperties;
   title?: string;
-  styles?: { content: React.CSSProperties };
-  classNames?: { content: string };
+  styles?: { content?: React.CSSProperties };
+  classNames?: { content?: string };
 }
 
 const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
