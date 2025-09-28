@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import useControlledState from '@rc-component/util/lib/hooks/useControlledState';
 import KeyCode from '@rc-component/util/lib/KeyCode';
 
@@ -84,7 +84,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
       onClick?.(ret, e);
     }
 
-    const switchClassName = classNames(prefixCls, className, {
+    const switchClassName = clsx(prefixCls, className, {
       [`${prefixCls}-checked`]: innerChecked,
       [`${prefixCls}-disabled`]: disabled,
     });
@@ -104,13 +104,13 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
         {loadingIcon}
         <span className={`${prefixCls}-inner`}>
           <span
-            className={classNames(`${prefixCls}-inner-checked`, switchClassNames?.content)}
+            className={clsx(`${prefixCls}-inner-checked`, switchClassNames?.content)}
             style={styles?.content}
           >
             {checkedChildren}
           </span>
           <span
-            className={classNames(`${prefixCls}-inner-unchecked`, switchClassNames?.content)}
+            className={clsx(`${prefixCls}-inner-unchecked`, switchClassNames?.content)}
             style={styles?.content}
           >
             {unCheckedChildren}
