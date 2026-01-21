@@ -9,7 +9,7 @@ export type SwitchChangeEventHandler = (
 ) => void;
 export type SwitchClickEventHandler = SwitchChangeEventHandler;
 
-interface SwitchProps
+export interface SwitchProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick'> {
   className?: string;
   prefixCls?: string;
