@@ -1,11 +1,15 @@
 import React from 'react';
-import KeyCode from '@rc-component/util/lib/KeyCode';
-import { mount } from 'enzyme';
+import { KeyCode } from '@rc-component/util';
+import { fireEvent, render } from '@testing-library/react';
 import Switch from '..';
 
 describe('rc-switch', () => {
+  function keyDownWithWhich(target, which) {
+    fireEvent.keyDown(target, { keyCode: which });
+  }
+
   function createSwitch(props = {}) {
-    return mount(
+    return render(
       <Switch
         checkedChildren={<span className="checked" />}
         unCheckedChildren={<span className="unchecked" />}
@@ -15,127 +19,140 @@ describe('rc-switch', () => {
   }
 
   it('works', () => {
-    const wrapper = createSwitch();
-    expect(wrapper.exists('.unchecked')).toBeTruthy();
-    wrapper.simulate('click');
-    expect(wrapper.exists('.checked')).toBeTruthy();
+    const { getByRole } = createSwitch();
+    const switchNode = getByRole('switch');
+
+    expect(switchNode.getAttribute('aria-checked')).toBe('false');
+    fireEvent.click(switchNode);
+    expect(switchNode.getAttribute('aria-checked')).toBe('true');
   });
 
   it('should be checked upon right key and unchecked on left key', () => {
-    const wrapper = createSwitch();
-    expect(wrapper.exists('.unchecked')).toBeTruthy();
-    wrapper.simulate('keydown', { which: KeyCode.RIGHT });
-    expect(wrapper.exists('.checked')).toBeTruthy();
-    wrapper.simulate('keydown', { which: KeyCode.LEFT });
-    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    const { getByRole } = createSwitch();
+    const switchNode = getByRole('switch');
+
+    expect(switchNode.getAttribute('aria-checked')).toBe('false');
+    keyDownWithWhich(switchNode, KeyCode.RIGHT);
+    expect(switchNode.getAttribute('aria-checked')).toBe('true');
+    keyDownWithWhich(switchNode, KeyCode.LEFT);
+    expect(switchNode.getAttribute('aria-checked')).toBe('false');
   });
 
   it('should change from an initial checked state of true to false on click', () => {
     const onChange = jest.fn();
-    const wrapper = createSwitch({ defaultChecked: true, onChange });
-    expect(wrapper.exists('.checked')).toBeTruthy();
-    wrapper.simulate('click');
-    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    const { getByRole } = createSwitch({ defaultChecked: true, onChange });
+    const switchNode = getByRole('switch');
+
+    expect(switchNode.getAttribute('aria-checked')).toBe('true');
+    fireEvent.click(switchNode);
+    expect(switchNode.getAttribute('aria-checked')).toBe('false');
     expect(onChange.mock.calls.length).toBe(1);
   });
 
   it('should support onClick', () => {
     const onClick = jest.fn();
-    const wrapper = createSwitch({ onClick });
-    wrapper.simulate('click');
+    const { getByRole } = createSwitch({ onClick });
+    const switchNode = getByRole('switch');
+
+    fireEvent.click(switchNode);
     expect(onClick).toHaveBeenCalledWith(true, expect.objectContaining({ type: 'click' }));
     expect(onClick.mock.calls.length).toBe(1);
-    wrapper.simulate('click');
+    fireEvent.click(switchNode);
     expect(onClick).toHaveBeenCalledWith(false, expect.objectContaining({ type: 'click' }));
     expect(onClick.mock.calls.length).toBe(2);
   });
 
   it('should not toggle when clicked in a disabled state', () => {
     const onChange = jest.fn();
-    const wrapper = createSwitch({ disabled: true, checked: true, onChange });
-    expect(wrapper.exists('.checked')).toBeTruthy();
-    wrapper.simulate('click');
-    expect(wrapper.exists('.checked')).toBeTruthy();
+    const { getByRole } = createSwitch({ disabled: true, checked: true, onChange });
+    const switchNode = getByRole('switch');
+
+    expect(switchNode.getAttribute('aria-checked')).toBe('true');
+    fireEvent.click(switchNode);
+    expect(switchNode.getAttribute('aria-checked')).toBe('true');
     expect(onChange.mock.calls.length).toBe(0);
   });
 
   it('should support loading icon node', () => {
-    const wrapper = mount(<Switch loadingIcon={<span className="extra">loading</span>} />);
-    expect(wrapper.find('.extra').text()).toBe('loading');
+    const { container } = render(<Switch loadingIcon={<span className="extra">loading</span>} />);
+    expect(container.querySelector('.extra').textContent).toBe('loading');
   });
 
   it('focus()', () => {
-    const container = document.createElement('div');
-    document.body.appendChild(container);
     const handleFocus = jest.fn();
     const ref = React.createRef();
-    mount(<Switch ref={ref} onFocus={handleFocus} />, {
-      attachTo: container,
-    });
+    render(<Switch ref={ref} onFocus={handleFocus} />);
+
     ref.current.focus();
+    expect(document.activeElement).toBe(ref.current);
+    fireEvent.focus(ref.current);
     expect(handleFocus).toHaveBeenCalled();
   });
 
   it('blur()', () => {
-    const container = document.createElement('div');
-    document.body.appendChild(container);
     const handleBlur = jest.fn();
     const ref = React.createRef();
-    mount(<Switch ref={ref} onBlur={handleBlur} />, {
-      attachTo: container,
-    });
+    render(<Switch ref={ref} onBlur={handleBlur} />);
+
     ref.current.focus();
+    expect(document.activeElement).toBe(ref.current);
     ref.current.blur();
+    expect(document.activeElement).not.toBe(ref.current);
+    fireEvent.blur(ref.current);
     expect(handleBlur).toHaveBeenCalled();
   });
 
   describe('autoFocus', () => {
     it('basic', () => {
-      const container = document.createElement('div');
-      document.body.appendChild(container);
       const handleFocus = jest.fn();
-      mount(<Switch autoFocus onFocus={handleFocus} />, { attachTo: container });
+      const { getByRole } = render(<Switch autoFocus onFocus={handleFocus} />);
+      const switchNode = getByRole('switch');
+
+      expect(document.activeElement).toBe(switchNode);
+      fireEvent.focus(switchNode);
       expect(handleFocus).toHaveBeenCalled();
     });
 
     it('not work when disabled', () => {
-      const container = document.createElement('div');
-      document.body.appendChild(container);
       const handleFocus = jest.fn();
-      mount(<Switch autoFocus disabled onFocus={handleFocus} />, { attachTo: container });
+      render(<Switch autoFocus disabled onFocus={handleFocus} />);
       expect(handleFocus).not.toHaveBeenCalled();
     });
   });
 
   it('disabled', () => {
-    const wrapper = createSwitch({ disabled: true });
-    expect(wrapper.exists('.unchecked')).toBeTruthy();
-    wrapper.simulate('keydown', { keyCode: 39 });
-    expect(wrapper.exists('.unchecked')).toBeTruthy();
+    const { getByRole } = createSwitch({ disabled: true });
+    const switchNode = getByRole('switch');
+
+    expect(switchNode.getAttribute('aria-checked')).toBe('false');
+    keyDownWithWhich(switchNode, KeyCode.RIGHT);
+    expect(switchNode.getAttribute('aria-checked')).toBe('false');
   });
 
   it('onMouseUp', () => {
     const onMouseUp = jest.fn();
-    const wrapper = createSwitch({ onMouseUp });
-    wrapper.simulate('mouseup');
+    const { getByRole } = createSwitch({ onMouseUp });
+
+    fireEvent.mouseUp(getByRole('switch'));
     expect(onMouseUp).toHaveBeenCalled();
   });
 
   it('disabled should click not to change', () => {
     const onChange = jest.fn();
     const onClick = jest.fn();
-    const wrapper = createSwitch({ disabled: true, onChange, onClick, checked: true });
+    const { getByRole } = createSwitch({ disabled: true, onChange, onClick, checked: true });
 
-    wrapper.simulate('click');
+    fireEvent.click(getByRole('switch'));
     expect(onChange).not.toHaveBeenCalled();
   });
   it('support classnames and styles', () => {
-    const wrapper = createSwitch({
+    const { container } = createSwitch({
       classNames: { content: 'custom-content' },
       styles: { content: { background: 'red' } },
     });
-    const contentElement = wrapper.find('.custom-content').at(0);
-    expect(contentElement.exists()).toBe(true);
-    expect(contentElement.prop('style')).toEqual({ background: 'red' });
+    const contentElement = container.querySelector('.custom-content');
+
+    expect(contentElement).toBeTruthy();
+    expect(contentElement.style.background).toBe('red');
   });
 });
