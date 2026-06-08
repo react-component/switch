@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { clsx } from 'clsx';
-import useControlledState from '@rc-component/util/lib/hooks/useControlledState';
-import KeyCode from '@rc-component/util/lib/KeyCode';
+import { KeyCode, useControlledState } from '@rc-component/util';
 
 export type SwitchChangeEventHandler = (
   checked: boolean,
@@ -9,8 +8,10 @@ export type SwitchChangeEventHandler = (
 ) => void;
 export type SwitchClickEventHandler = SwitchChangeEventHandler;
 
-interface SwitchProps
-  extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'onChange' | 'onClick'> {
+interface SwitchProps extends Omit<
+  React.HTMLAttributes<HTMLButtonElement>,
+  'onChange' | 'onClick'
+> {
   className?: string;
   prefixCls?: string;
   disabled?: boolean;
