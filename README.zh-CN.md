@@ -1,7 +1,7 @@
 <div align="center">
   <h1>@rc-component/switch</h1>
-  <p><sub>Part of the Ant Design ecosystem.</sub></p>
-  <p>🔘 Accessible React switch for boolean state with controlled and uncontrolled modes.</p>
+  <p><sub>Ant Design 生态的一部分。</sub></p>
+  <p>🔀 React 开关组件。</p>
 
   <p>
     <a href="https://www.npmjs.com/package/@rc-component/switch"><img src="https://img.shields.io/npm/v/@rc-component/switch.svg?style=flat-square" alt="npm version" /></a>
@@ -13,23 +13,23 @@
   </p>
 </div>
 
-<p align="center">English | <a href="./README.zh-CN.md">简体中文</a></p>
+<p align="center"><a href="./README.md">English</a> | 简体中文</p>
 
 
-## Highlights
+## 特性
 
 - Renders a native button with `role="switch"` and `aria-checked` state.
-- Supports controlled and uncontrolled checked state.
+- 支持 controlled and uncontrolled checked state.
 - Handles click and keyboard toggles with left and right arrow keys.
-- Provides content class/style slots for checked and unchecked labels.
+- 提供 content class/style slots for checked and unchecked labels.
 
-## Install
+## 安装
 
 ```bash
 npm install @rc-component/switch
 ```
 
-## Usage
+## 使用
 
 ```tsx pure
 import Switch from '@rc-component/switch';
@@ -42,7 +42,7 @@ Online preview: https://switch.react-component.vercel.app/
 
 ## API
 
-| Name                | Type                                | Default       | Description                                |
+| 名称                | 类型                                | 默认值       | 说明                                |
 | ------------------- | ----------------------------------- | ------------- | ------------------------------------------ |
 | `autoFocus`         | boolean                             | -             | Focus the switch on mount.                 |
 | `checked`           | boolean                             | -             | Controlled checked state.                  |
@@ -62,7 +62,7 @@ Online preview: https://switch.react-component.vercel.app/
 | `title`             | string                              | -             | Native title attribute.                    |
 | `unCheckedChildren` | React.ReactNode                     | -             | Content shown when unchecked.              |
 
-## Development
+## 本地开发
 
 ```bash
 npm install
@@ -73,7 +73,7 @@ npm run compile
 npm run build
 ```
 
-## Release
+## 发布
 
 ```bash
 npm run prepublishOnly
@@ -81,6 +81,6 @@ npm run prepublishOnly
 
 The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
 
-## License
+## 许可证
 
 @rc-component/switch is released under the [MIT](./LICENSE.md) license.
