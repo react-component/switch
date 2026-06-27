@@ -3,21 +3,46 @@
     "target": "esnext",
     "moduleResolution": "node",
     "baseUrl": "./",
-    "lib": ["dom", "es2017"],
+    "lib": [
+      "dom",
+      "es2017"
+    ],
     "jsx": "react",
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@@/*": [".dumi/tmp/*"],
-      "@rc-component/switch": ["src/index.tsx"],
-      "@rc-component/switch/es": ["src"],
-      "@rc-component/switch/es/*": ["src/*"],
-      "@rc-component/switch/assets/*": ["assets/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "@@/*": [
+        ".dumi/tmp/*"
+      ],
+      "@rc-component/switch": [
+        "src/index.tsx"
+      ],
+      "@rc-component/switch/es": [
+        "src"
+      ],
+      "@rc-component/switch/es/*": [
+        "src/*"
+      ],
+      "@rc-component/switch/assets/*": [
+        "assets/*"
+      ]
     },
-    "strict": true
+    "strict": true,
+    "ignoreDeprecations": "5.0"
   },
-  "include": [".dumirc.ts", "src", "tests", "docs/examples"],
-  "exclude": ["docs-dist", "lib", "es"]
+  "include": [
+    ".dumirc.ts",
+    "src",
+    "tests",
+    "docs/examples"
+  ],
+  "exclude": [
+    "docs-dist",
+    "lib",
+    "es"
+  ]
 }

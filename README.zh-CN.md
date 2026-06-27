@@ -40,6 +40,17 @@ export default () => <Switch checkedChildren="On" unCheckedChildren="Off" />;
 
 在线预览：https://switch.react-component.vercel.app/
 
+## 示例
+
+运行本地 dumi 站点：
+
+```bash
+npm install
+npm start
+```
+
+然后打开 `http://localhost:8000`。
+
 ## API
 
 | 名称                | 类型                                | 默认值       | 说明                                |

@@ -40,6 +40,17 @@ export default () => <Switch checkedChildren="On" unCheckedChildren="Off" />;
 
 Online preview: https://switch.react-component.vercel.app/
 
+## Examples
+
+Run the local dumi site:
+
+```bash
+npm install
+npm start
+```
+
+Then open `http://localhost:8000`.
+
 ## API
 
 | Name                | Type                                | Default       | Description                                |
