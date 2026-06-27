@@ -15,7 +15,8 @@
       "@rc-component/switch/es": ["src"],
       "@rc-component/switch/es/*": ["src/*"],
       "@rc-component/switch/assets/*": ["assets/*"]
-    }
+    },
+    "strict": true
   },
   "include": [".dumirc.ts", "src", "tests", "docs/examples"],
   "exclude": ["docs-dist", "lib", "es"]
