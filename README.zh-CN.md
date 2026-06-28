@@ -15,7 +15,6 @@
 
 <p align="center"><a href="./README.md">English</a> | 简体中文</p>
 
-
 ## 特性
 
 - 渲染具有 `role="switch"` 和 `aria-checked` 状态的本机按钮。
@@ -53,25 +52,25 @@ npm start
 
 ## API
 
-| 名称                | 类型                                | 默认值       | 说明                                |
-| ------------------- | ----------------------------------- | ------------- | ------------------------------------------ |
-| `autoFocus`         | boolean                             | -             | 将开关聚焦在安装座上。                 |
-| `checked`           | boolean                             | -             | 受控的检查状态。                  |
-| `checkedChildren`   | React.ReactNode                     | -             | 勾选时显示的内容。                |
-| `className`         | string                              | -             | 附加 className。                     |
+| 名称                | 类型                                | 默认值        | 说明                       |
+| ------------------- | ----------------------------------- | ------------- | -------------------------- |
+| `autoFocus`         | boolean                             | -             | 挂载后自动聚焦开关。       |
+| `checked`           | boolean                             | -             | 受控的检查状态。           |
+| `checkedChildren`   | React.ReactNode                     | -             | 勾选时显示的内容。         |
+| `className`         | string                              | -             | 附加 className。           |
 | `classNames`        | `{ content?: string }`              | -             | 内部内容的语义 className。 |
-| `defaultChecked`    | boolean                             | false         | 初始检查状态。                     |
-| `disabled`          | boolean                             | false         | 禁用交互。                       |
-| `loadingIcon`       | React.ReactNode                     | -             | 额外加载图标节点。                   |
-| `onChange`          | `(checked, event) => void`          | -             | 检查状态更改后触发。     |
-| `onClick`           | `(checked, event) => void`          | -             | 点击后触发。                     |
-| `onKeyDown`         | React.KeyboardEventHandler          | -             | 按键按下处理函数。                         |
-| `prefixCls`         | string                              | `'rc-switch'` | className 前缀。                         |
-| `style`             | React.CSSProperties                 | -             | 根样式。                                |
-| `styles`            | `{ content?: React.CSSProperties }` | -             | 内部内容的语义样式。      |
-| `tabIndex`          | number                              | -             | Tab index.                                 |
-| `title`             | string                              | -             | 本土产权属性。                    |
-| `unCheckedChildren` | React.ReactNode                     | -             | 未选中时显示的内容。              |
+| `defaultChecked`    | boolean                             | false         | 初始检查状态。             |
+| `disabled`          | boolean                             | false         | 禁用交互。                 |
+| `loadingIcon`       | React.ReactNode                     | -             | 额外加载图标节点。         |
+| `onChange`          | `(checked, event) => void`          | -             | 检查状态更改后触发。       |
+| `onClick`           | `(checked, event) => void`          | -             | 点击后触发。               |
+| `onKeyDown`         | React.KeyboardEventHandler          | -             | 按键按下处理函数。         |
+| `prefixCls`         | string                              | `'rc-switch'` | className 前缀。           |
+| `style`             | React.CSSProperties                 | -             | 根样式。                   |
+| `styles`            | `{ content?: React.CSSProperties }` | -             | 内部内容的语义样式。       |
+| `tabIndex`          | number                              | -             | Tab index.                 |
+| `title`             | string                              | -             | 本土产权属性。             |
+| `unCheckedChildren` | React.ReactNode                     | -             | 未选中时显示的内容。       |
 
 ## 本地开发
 
