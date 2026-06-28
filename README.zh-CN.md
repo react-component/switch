@@ -65,7 +65,7 @@ npm start
 | `loadingIcon`       | React.ReactNode                     | -             | 额外加载图标节点。                   |
 | `onChange`          | `(checked, event) => void`          | -             | 检查状态更改后触发。     |
 | `onClick`           | `(checked, event) => void`          | -             | 点击后触发。                     |
-| `onKeyDown`         | React.KeyboardEventHandler          | -             | Key down handler.                          |
+| `onKeyDown`         | React.KeyboardEventHandler          | -             | 按键按下处理函数。                         |
 | `prefixCls`         | string                              | `'rc-switch'` | className 前缀。                         |
 | `style`             | React.CSSProperties                 | -             | 根样式。                                |
 | `styles`            | `{ content?: React.CSSProperties }` | -             | 内部内容的语义样式。      |
