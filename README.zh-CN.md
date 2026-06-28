@@ -58,15 +58,15 @@ npm start
 | `autoFocus`         | boolean                             | -             | 将开关聚焦在安装座上。                 |
 | `checked`           | boolean                             | -             | 受控的检查状态。                  |
 | `checkedChildren`   | React.ReactNode                     | -             | 勾选时显示的内容。                |
-| `className`         | string                              | -             | 附加className。                     |
-| `classNames`        | `{ content?: string }`              | -             | 内部内容的语义className称。 |
+| `className`         | string                              | -             | 附加 className。                     |
+| `classNames`        | `{ content?: string }`              | -             | 内部内容的语义 className。 |
 | `defaultChecked`    | boolean                             | false         | 初始检查状态。                     |
 | `disabled`          | boolean                             | false         | 禁用交互。                       |
 | `loadingIcon`       | React.ReactNode                     | -             | 额外加载图标节点。                   |
 | `onChange`          | `(checked, event) => void`          | -             | 检查状态更改后触发。     |
 | `onClick`           | `(checked, event) => void`          | -             | 点击后触发。                     |
 | `onKeyDown`         | React.KeyboardEventHandler          | -             | Key down handler.                          |
-| `prefixCls`         | string                              | `'rc-switch'` | 前缀className。                         |
+| `prefixCls`         | string                              | `'rc-switch'` | className 前缀。                         |
 | `style`             | React.CSSProperties                 | -             | 根样式。                                |
 | `styles`            | `{ content?: React.CSSProperties }` | -             | 内部内容的语义样式。      |
 | `tabIndex`          | number                              | -             | Tab index.                                 |
