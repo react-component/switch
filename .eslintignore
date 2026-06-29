@@ -2,3 +2,5 @@
 es/
 lib/
 .doc/
+docs-dist/
+.vercel/

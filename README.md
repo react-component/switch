@@ -1,74 +1,99 @@
-# rc-switch
+<div align="center">
+  <h1>@rc-component/switch</h1>
+  <p><sub><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /> Part of the Ant Design ecosystem.</sub></p>
+  <p>🔘 Accessible React switch for boolean state with controlled and uncontrolled modes.</p>
 
----
+  <p>
+    <a href="https://npmjs.org/package/@rc-component/switch"><img alt="NPM version" src="https://img.shields.io/npm/v/@rc-component/switch.svg?style=flat-square"></a>
+    <a href="https://npmjs.org/package/@rc-component/switch"><img alt="npm downloads" src="https://img.shields.io/npm/dm/@rc-component/switch.svg?style=flat-square"></a>
+    <a href="https://github.com/react-component/switch/actions/workflows/react-component-ci.yml"><img alt="build status" src="https://github.com/react-component/switch/actions/workflows/react-component-ci.yml/badge.svg"></a>
+    <a href="https://app.codecov.io/gh/react-component/switch"><img alt="Codecov" src="https://img.shields.io/codecov/c/github/react-component/switch/master.svg?style=flat-square"></a>
+    <a href="https://bundlephobia.com/package/@rc-component/switch"><img alt="bundle size" src="https://img.shields.io/bundlephobia/minzip/@rc-component/switch?style=flat-square"></a>
+    <a href="https://github.com/umijs/dumi"><img alt="dumi" src="https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square"></a>
+  </p>
+</div>
 
-Switch ui component for react.
+<p align="center">English | <a href="./README.zh-CN.md">简体中文</a></p>
 
-[![NPM version][npm-image]][npm-url]
-[![npm download][download-image]][download-url]
-[![build status][github-actions-image]][github-actions-url]
-[![Test coverage][codecov-image]][codecov-url]
-[![bundle size][bundlephobia-image]][bundlephobia-url]
 
-[npm-image]: http://img.shields.io/npm/v/rc-switch.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/rc-switch
-[travis-image]: https://img.shields.io/travis/react-component/switch/master?style=flat-square
-[travis-url]: https://travis-ci.com/react-component/switch
-[github-actions-image]: https://github.com/react-component/switch/workflows/CI/badge.svg
-[github-actions-url]: https://github.com/react-component/switch/actions
-[codecov-image]: https://img.shields.io/codecov/c/github/react-component/switch/master.svg?style=flat-square
-[codecov-url]: https://app.codecov.io/gh/react-component/switch
-[david-url]: https://david-dm.org/react-component/switch
-[david-image]: https://david-dm.org/react-component/switch/status.svg?style=flat-square
-[david-dev-url]: https://david-dm.org/react-component/switch?type=dev
-[david-dev-image]: https://david-dm.org/react-component/switch/dev-status.svg?style=flat-square
-[download-image]: https://img.shields.io/npm/dm/rc-switch.svg?style=flat-square
-[download-url]: https://npmjs.org/package/rc-switch
-[bundlephobia-url]: https://bundlephobia.com/package/rc-switch
-[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-switch
+## Highlights
+
+- Renders a native button with `role="switch"` and `aria-checked` state.
+- Supports controlled and uncontrolled checked state.
+- Handles click and keyboard toggles with left and right arrow keys.
+- Provides content class/style slots for checked and unchecked labels.
 
 ## Install
 
-[![rc-switch](https://nodei.co/npm/rc-switch.png)](https://npmjs.org/package/rc-switch)
+```bash
+npm install @rc-component/switch
+```
 
 ## Usage
 
-```js
-import Switch from 'rc-switch';
+```tsx pure
+import Switch from '@rc-component/switch';
+import '@rc-component/switch/assets/index.css';
 
-export default () => <Switch />;
+export default () => <Switch checkedChildren="On" unCheckedChildren="Off" />;
 ```
 
-## Compatibility
+Online preview: https://switch.react-component.vercel.app/
 
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/electron/electron_48x48.png" alt="Electron" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br>Electron |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| IE11, Edge                                                                                                                                                                                                     | last 2 versions                                                                                                                                                                                                  | last 2 versions                                                                                                                                                                                              | last 2 versions                                                                                                                                                                                              | last 2 versions                                                                                                                                                                                                      |
+## Examples
 
-## API
+Run the local dumi site:
 
-| Property       | Type                     | Default   | Description                                              |
-| -------------- | ------------------------ | --------- | -------------------------------------------------------- |
-| prefixCls      | String                   | rc-switch |                                                          |
-| className      | String                   | ''        | additional class name of root node                       |
-| checked        | boolean                  | false     | whether switch is checked                                |
-| defaultChecked | boolean                  | false     | whether switch is checked on init                        |
-| onChange       | Function(checked, event) |           | called when switch is checked or unchecked               |
-| tabIndex       | number                   |           | tab-index of switch node                                 |
-| onClick        | Function(checked, event) |           | called when switch is clicked                            |
-| autoFocus      | boolean                  |           | get focus when mounts                                    |
-| disabled       | boolean                  | false     | whether switch is disabled                               |
-| loadingIcon    | React.ReactNode          |           | specific the extra node. generally used in loading icon. |
-
-## Development
-
-```
+```bash
 npm install
 npm start
 ```
 
-Online demo: http://react-component.github.io/switch/
+Then open `http://localhost:8000`.
+
+## API
+
+| Name                | Type                                | Default       | Description                                |
+| ------------------- | ----------------------------------- | ------------- | ------------------------------------------ |
+| `autoFocus`         | boolean                             | -             | Focus the switch on mount.                 |
+| `checked`           | boolean                             | -             | Controlled checked state.                  |
+| `checkedChildren`   | React.ReactNode                     | -             | Content shown when checked.                |
+| `className`         | string                              | -             | Additional class name.                     |
+| `classNames`        | `{ content?: string }`              | -             | Semantic class names for internal content. |
+| `defaultChecked`    | boolean                             | false         | Initial checked state.                     |
+| `disabled`          | boolean                             | false         | Disable interaction.                       |
+| `loadingIcon`       | React.ReactNode                     | -             | Extra loading icon node.                   |
+| `onChange`          | `(checked, event) => void`          | -             | Triggered after checked state changes.     |
+| `onClick`           | `(checked, event) => void`          | -             | Triggered after click.                     |
+| `onKeyDown`         | React.KeyboardEventHandler          | -             | Key down handler.                          |
+| `prefixCls`         | string                              | `'rc-switch'` | Prefix class name.                         |
+| `style`             | React.CSSProperties                 | -             | Root style.                                |
+| `styles`            | `{ content?: React.CSSProperties }` | -             | Semantic styles for internal content.      |
+| `tabIndex`          | number                              | -             | Tab index.                                 |
+| `title`             | string                              | -             | Native title attribute.                    |
+| `unCheckedChildren` | React.ReactNode                     | -             | Content shown when unchecked.              |
+
+## Development
+
+```bash
+npm install
+npm start
+npm test
+npm run tsc
+npm run compile
+npm run build
+```
+
+The dumi site runs at `http://localhost:8000` by default.
+
+## Release
+
+```bash
+npm run prepublishOnly
+```
+
+The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
 
 ## License
 
-rc-switch is released under the MIT license.
+@rc-component/switch is released under the [MIT](./LICENSE) license.

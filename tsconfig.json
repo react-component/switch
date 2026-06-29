@@ -1,20 +1,49 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "ESNext",
     "moduleResolution": "node",
     "baseUrl": "./",
-    "lib": ["dom", "es2017"],
+    "lib": [
+      "dom",
+      "es2017"
+    ],
     "jsx": "react",
-    "strict": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
     "declaration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
     "paths": {
-      "@rc-component/switch": ["src/"],
-      "@@/*": [".dumi/tmp/*"]
-    }
-  }
+      "@/*": [
+        "src/*"
+      ],
+      "@@/*": [
+        ".dumi/tmp/*"
+      ],
+      "@rc-component/switch": [
+        "src/index.tsx"
+      ],
+      "@rc-component/switch/es": [
+        "src"
+      ],
+      "@rc-component/switch/es/*": [
+        "src/*"
+      ],
+      "@rc-component/switch/assets/*": [
+        "assets/*"
+      ]
+    },
+    "strict": true,
+    "ignoreDeprecations": "5.0"
+  },
+  "include": [
+    ".fatherrc.ts",
+    ".dumirc.ts",
+    "src",
+    "tests",
+    "docs/examples"
+  ],
+  "exclude": [
+    "docs-dist",
+    "lib",
+    "es"
+  ]
 }

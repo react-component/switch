@@ -1,6 +1,6 @@
 ---
 hero:
-  title: rc-switch
+  title: '@rc-component/switch'
   description: React Switch Component
 ---
 
