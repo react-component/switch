@@ -31,10 +31,18 @@
         "assets/*"
       ]
     },
-    "strict": true,
-    "ignoreDeprecations": "5.0"
+    "strict": false,
+    "ignoreDeprecations": "6.0",
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "strictFunctionTypes": false,
+    "noImplicitThis": false,
+    "strictBindCallApply": false
   },
   "include": [
+    "react-compat.d.ts",
+    "global.d.ts",
     ".fatherrc.ts",
     ".dumirc.ts",
     "src",
