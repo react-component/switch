@@ -1,7 +1,6 @@
-import { fireEvent } from '@testing-library/dom';
 import React from 'react';
 import { KeyCode } from '@rc-component/util';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import Switch from '..';
 
 describe('rc-switch', () => {
