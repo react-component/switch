@@ -31,12 +31,6 @@
       ]
     },
     "strict": false,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
-    "strictPropertyInitialization": false,
-    "strictFunctionTypes": false,
-    "noImplicitThis": false,
-    "strictBindCallApply": false,
     "module": "ESNext"
   },
   "include": [
