@@ -30,7 +30,7 @@
         "./assets/*"
       ]
     },
-    "strict": false,
+    "strict": true,
     "module": "ESNext"
   },
   "include": [
