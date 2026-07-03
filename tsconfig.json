@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "moduleResolution": "node",
-    "baseUrl": "./",
+    "moduleResolution": "bundler",
     "lib": [
       "dom",
       "es2017"
@@ -13,28 +12,29 @@
     "esModuleInterop": true,
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
       ],
       "@@/*": [
-        ".dumi/tmp/*"
+        "./.dumi/tmp/*"
       ],
       "@rc-component/switch": [
-        "src/index.tsx"
+        "./src/index.tsx"
       ],
       "@rc-component/switch/es": [
-        "src"
+        "./src"
       ],
       "@rc-component/switch/es/*": [
-        "src/*"
+        "./src/*"
       ],
       "@rc-component/switch/assets/*": [
-        "assets/*"
+        "./assets/*"
       ]
     },
     "strict": true,
-    "ignoreDeprecations": "5.0"
+    "module": "ESNext"
   },
   "include": [
+    "global.d.ts",
     ".fatherrc.ts",
     ".dumirc.ts",
     "src",
