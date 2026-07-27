@@ -8,6 +8,8 @@ updates:
       time: '21:00'
       timezone: Asia/Shanghai
     open-pull-requests-limit: 10
+    cooldown:
+      default-days: 7
     groups:
       npm-dependencies:
         patterns:
@@ -21,6 +23,8 @@ updates:
       time: '21:00'
       timezone: Asia/Shanghai
     open-pull-requests-limit: 10
+    cooldown:
+      default-days: 7
     groups:
       github-actions:
         patterns:
