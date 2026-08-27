@@ -5,7 +5,7 @@ import Switch from '..';
 
 describe('rc-switch', () => {
   function keyDownWithWhich(target, which) {
-    fireEvent.keyDown(target, { keyCode: which });
+    return fireEvent.keyDown(target, { keyCode: which });
   }
 
   function createSwitch(props = {}) {
@@ -32,9 +32,9 @@ describe('rc-switch', () => {
     const switchNode = getByRole('switch');
 
     expect(switchNode.getAttribute('aria-checked')).toBe('false');
-    keyDownWithWhich(switchNode, KeyCode.RIGHT);
+    expect(keyDownWithWhich(switchNode, KeyCode.RIGHT)).toBe(false);
     expect(switchNode.getAttribute('aria-checked')).toBe('true');
-    keyDownWithWhich(switchNode, KeyCode.LEFT);
+    expect(keyDownWithWhich(switchNode, KeyCode.LEFT)).toBe(false);
     expect(switchNode.getAttribute('aria-checked')).toBe('false');
   });
 
