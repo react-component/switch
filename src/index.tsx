@@ -61,7 +61,7 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     ) {
       let mergedChecked = innerChecked;
 
-      if (!disabled) {
+      if (!disabled && newChecked !== innerChecked) {
         mergedChecked = newChecked;
         setInnerChecked(mergedChecked);
         onChange?.(mergedChecked, event);
