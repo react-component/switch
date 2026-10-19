@@ -38,6 +38,43 @@ describe('rc-switch', () => {
     expect(switchNode.getAttribute('aria-checked')).toBe('false');
   });
 
+  it.each([false, true])('does not emit a change for an arrow that retains %s', (checked) => {
+    const onChange = jest.fn();
+    const onKeyDown = jest.fn();
+    const onClick = jest.fn();
+    const { getByRole } = createSwitch({ defaultChecked: checked, onChange, onKeyDown, onClick });
+    const switchNode = getByRole('switch');
+
+    keyDownWithWhich(switchNode, checked ? KeyCode.RIGHT : KeyCode.LEFT);
+    expect(onChange).not.toHaveBeenCalled();
+    expect(onKeyDown).toHaveBeenCalledTimes(1);
+    expect(switchNode).toHaveAttribute('aria-checked', String(checked));
+
+    keyDownWithWhich(switchNode, checked ? KeyCode.LEFT : KeyCode.RIGHT);
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenLastCalledWith(
+      !checked,
+      expect.objectContaining({ type: 'keydown' }),
+    );
+    fireEvent.click(switchNode);
+    expect(onChange).toHaveBeenCalledTimes(2);
+    expect(onClick).toHaveBeenCalledWith(checked, expect.objectContaining({ type: 'click' }));
+  });
+
+  it('retains controlled change requests while skipping an unchanged checked value', () => {
+    const onChange = jest.fn();
+    const { getByRole, rerender } = createSwitch({ checked: false, onChange });
+    const switchNode = getByRole('switch');
+
+    keyDownWithWhich(switchNode, KeyCode.RIGHT);
+    expect(onChange).toHaveBeenCalledWith(true, expect.objectContaining({ type: 'keydown' }));
+    expect(switchNode).toHaveAttribute('aria-checked', 'false');
+    rerender(<Switch checked onChange={onChange} />);
+    onChange.mockClear();
+    keyDownWithWhich(switchNode, KeyCode.RIGHT);
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
   it('should change from an initial checked state of true to false on click', () => {
     const onChange = jest.fn();
     const { getByRole } = createSwitch({ defaultChecked: true, onChange });
