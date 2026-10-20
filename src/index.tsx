@@ -72,8 +72,10 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
 
     function onInternalKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
       if (e.which === KeyCode.LEFT) {
+        e.preventDefault();
         triggerChange(false, e);
       } else if (e.which === KeyCode.RIGHT) {
+        e.preventDefault();
         triggerChange(true, e);
       }
       onKeyDown?.(e);
